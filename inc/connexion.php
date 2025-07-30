@@ -4,7 +4,7 @@
         static $connect = null;
         if($connect === null)
         {
-            $connect = mysqli_connect('localhost', 'root', '', 'learn_JS');
+            $connect = mysqli_connect('localhost', 'root', '', 's_forum');
 
             if(!$connect)
             {

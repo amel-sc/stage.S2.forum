@@ -1,33 +1,35 @@
 <?php
     require('connexion.php');
-
-    function getAll($nom_table)
+    require("gen_function.php");
+    
+    // navigation link functions
+    // function to create links
+    function navigation_link($value)
     {
-        $sql = "select * from %s";
-        $sql = sprintf($sql, $nom_table);
-        $query = mysqli_query(dbconnect(), $sql);
-        $result = [];
-        while($row = mysqli_fetch_assoc($query))
+        $link = 'model.php?';
+        for ($i = 0; $i < count($value); $i++)
         {
-            $result[] = $row;
+            if ($i > 0) {
+                $link = $link . '&';
+            }
+    
+            $link = $link . $value[$i]['key'] . '=' . $value[$i]['value'];
         }
-        mysqli_free_result($query);
-
-        return $result;
+    
+        return $link;
     }
-
-    function getTravail($id_personne)
+    // function to get the index of one motif in value
+    function get_index($value, $key)
     {
-        $sql = "select * from Travail where id_personne = %s";
-        $sql = sprintf($sql, $id_personne);
-        $query = mysqli_query(dbconnect(), $sql);
-        $result = [];
-        while($row = mysqli_fetch_assoc($query))
+        $index = null;
+        for ($i = 0; $i < count($value); $i++)
         {
-            $result[] = $row;
+            if ($value[$i]['key'] == $key)
+            {
+                $index = $i;
+            }
         }
-        mysqli_free_result($query);
 
-        return $result;
-    }
+        return $index;
+    }   
 ?>

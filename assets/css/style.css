@@ -2,8 +2,23 @@
     font-family: sans-serif;
 }
 
+.inputs_container {
+    width: 100%;
+    min-height: 100vh;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.inputs_div {
+    margin: auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px 15px 20px 15px;
+    box-shadow: 0px 0px 10px #999999;
+}
+
 /* buttons design */
-button[type=button] {
+button[type=submit] {
     border: none;
     border-radius: 4px;
     padding: 8px 20px 8px 20px;
@@ -15,12 +30,5 @@ button[type=button] {
 
 button[type=button]:hover {
     background-color: #005ce6;
-}
-
-img {
-    width: 100px;
-    height: 100px;
-    animation-name: roll;
-    animation-duration: 1.5s;
 }
 

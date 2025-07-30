@@ -1,5 +1,6 @@
 <?php
     require('../inc/function.php'); 
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,11 +16,11 @@
 </head>
 <body>
     <main class="container">
+        <!-- page getted -->
+        <?php $page = $_GET['page']; ?>
         <?php   
-            include('home.php');
+            include($page);
             ?>
     </main>
-    <!-- script -->
-    <script src="../assets/js/script.js"></script>
 </body>
 </html>
