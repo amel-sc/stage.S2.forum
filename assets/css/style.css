@@ -28,7 +28,7 @@ button[type=submit] {
     box-sizing: border-box;
 }
 
-button[type=button]:hover {
+button[type=submit]:hover {
     background-color: #005ce6;
 }
 
@@ -40,10 +40,6 @@ button[type=button]:hover {
 
 .post-content {
     padding: 0px 0px 0px 30px;
-}
-
-.card-post {
-    box-shadow: -1px 1px 10px #999999;
 }
 
 /* comment design */

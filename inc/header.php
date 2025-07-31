@@ -1,0 +1,46 @@
+<?php
+    // naviagtion link
+    $link = array();
+    $link[] = array('key' => 'page', 'value' => null);
+    $page_index = get_index($link, "page");
+?>
+
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #e6e6e6;" data-bs-theme="light">
+        <div class="container-fluid">
+            <?php if ($page != "login.php" && $page != "sign.php") { ?>
+                <?php $link[$page_index]['value'] = "home.php"; ?>
+                <a class="navbar-brand" href="<?= navigation_link($link) ?>">Forum</a>
+            <?php } else { ?>
+                <a class="navbar-brand" href="#">Forum</a>
+            <?php } ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <?php if ($page != "login.php" && $page != "sign.php") { ?> 
+                        <li class="nav-item">
+                            <?php $link[$page_index]['value'] = "home.php"; ?>
+                            <a class="nav-link" href="<?= navigation_link($link) ?>">Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">User</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Connexion
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php $link[$page_index]['value'] = "login.php"; ?>
+                                <li><a class="dropdown-item" href="<?= navigation_link($link) ?>">Log in</a></li>
+                                <?php $link[$page_index]['value'] = "sign.php"; ?>
+                                <li><a class="dropdown-item" href="<?= navigation_link($link) ?>">Sign in</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

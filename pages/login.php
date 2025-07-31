@@ -19,10 +19,13 @@
             $link = array();
             $link[] = $link[] = array('key' => 'page', 'value' => "sign.php");
         ?>
-        <div class="d-flex justify-content-end">
-            <a href="<?= navigation_link($link) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                Sign in
-            </a>
+        <div class="text-center">
+            <p class="m-0">
+                Don't have an account?
+                <a href="<?= navigation_link($link) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    Sign in
+                </a>
+            </p>
         </div>
     </div>
 </section>

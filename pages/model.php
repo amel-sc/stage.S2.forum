@@ -12,12 +12,13 @@
     <!-- bootstrap -->
     <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
-    <title>Document</title>
+    <title>Forum</title>
 </head>
 <body>
+    <?php $page = $_GET['page']; ?>
+    <?php include('../inc/header.php'); ?>
     <main class="container">
         <!-- page getted -->
-        <?php $page = $_GET['page']; ?>
         <?php   
             include($page);
             ?>

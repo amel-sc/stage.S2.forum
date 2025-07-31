@@ -38,10 +38,13 @@
             $link = array();
             $link[] = $link[] = array('key' => 'page', 'value' => "login.php");
         ?>
-        <div class="d-flex justify-content-end">
-            <a href="<?= navigation_link($link) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                Log in
-            </a>
+        <div class="text-center">
+            <p class="m-0">
+                Already an account?
+                <a href="<?= navigation_link($link) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    Log in
+                </a>
+            </p>
         </div>
     </div>
 </section>

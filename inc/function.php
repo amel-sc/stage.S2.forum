@@ -46,4 +46,13 @@
         return $result;
     }
 
+    // function to get the current date
+    function get_current_date()
+    {
+        $sql = "SELECT NOW() as date_now";
+        $result = one_query($sql);
+
+        return $result;
+    }
+
 ?>
