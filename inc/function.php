@@ -32,4 +32,18 @@
 
         return $index;
     }   
+
+
+
+
+    // function to get comment by forum_subject
+    function get_comment_by_subject($subject_id)
+    {
+        $sql = "SELECT *  FROM comment WHERE subject_id = %s";
+        $sql = sprintf($sql, $subject_id);
+        $result = array_query($sql); 
+
+        return $result;
+    }
+
 ?>
