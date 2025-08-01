@@ -29,8 +29,8 @@
         <div class="card-body">
             <!-- sender info (user img, name , sended_date) -->
             <div class="post-info d-flex align-items-center gap-2 mb-2">
-                <a href="<?= navigation_link($link) ?>" class="return-button rounded-circle">
-                    <img src="../assets/images/return-arrow.png" alt="" style="width: 20px; height: 20px; margin: 0;">
+                <a href="<?= navigation_link($link) ?>" class="m-0 return-button rounded-circle">
+                    <img src="../assets/images/return-arrow.png" alt="" style="width: 20px;">
                 </a>
                 <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
                 <div class="">

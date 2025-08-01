@@ -3,6 +3,8 @@
     $link = array();
     $link[] = array('key' => 'page', 'value' => null);
     $page_index = get_index($link, "page");
+
+    $user_header = get_user_by_id($_SESSION['current_user']['user_id']);
 ?>
 
 <header>
@@ -21,7 +23,9 @@
                     </li>
                     <li class="nav-item">
                         <?php $link[$page_index]['value'] = "profile.php"; ?>
-                        <a class="nav-link" href="<?= navigation_link($link) ?>">Profile</a>
+                        <a class="rounded-circle header-link" href="<?= navigation_link($link) ?>">
+                            <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                        </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

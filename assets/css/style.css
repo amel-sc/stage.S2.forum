@@ -131,3 +131,17 @@ button[type=submit]:hover {
 .div-container {
     margin-top: 75px;
 }
+
+/* header */
+.header-link {
+    text-decoration: none;
+    display: block;
+    padding: 4px 4px 4px 4px;
+    background-color: white;
+}
+.header-link:hover {
+    background-color: #dbe4e9;
+}
+.header-link:active {
+    background-color: #c9d7de;
+}
