@@ -13,7 +13,7 @@
     $subject_id_index = get_index($link, "subject_id");
 ?>
 
-<section class="d_container" style="margin-top: 65px;">
+<section class="div-container">
     <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
     <?php foreach ($subject as $item) { ?>
         <!-- link to comment  -->
@@ -28,7 +28,7 @@
                         <div class="">
                             <p class="m-0">
                                 <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
-                                <span class="dot"></span>
+                                <span class="dot">&#x2022;</span>
                                 <span style="color: #595959;"><?= $item['s_date'] ?></span>
                             </p>
                         </div>

@@ -14,7 +14,6 @@
     width: 100%;
     max-width: 500px;
     padding: 20px 15px 20px 15px;
-    box-shadow: 0px 0px 10px #999999;
 }
 
 /* buttons design
@@ -55,7 +54,7 @@ button[type=submit]:hover {
     padding: 0px 0px 0px 50px;
 }
 
-.comment-button {
+.comment-button, .password-button {
     border: none;
     border-radius: 4px;
     padding: 5px 10px 5px 10px;
@@ -63,10 +62,10 @@ button[type=submit]:hover {
     background-color:  #43494d;
     box-sizing: border-box;
 }
-.comment-button:hover {
+.comment-button:hover, .password-button:hover {
     background-color: #32373a;
 }
-.comment-button:active {
+.comment-button:active, .password-button:active {
     background-color: #212527;
 }
 
@@ -103,11 +102,7 @@ button[type=submit]:hover {
 
 /* dot */
 .dot {
-    height: 8px;
-    width: 8px;
-    background-color: #595959;
-    border-radius: 50%;
-    display: inline-block;
+    color: #595959;
 }
 
 /* not or is link element */
@@ -124,10 +119,15 @@ button[type=submit]:hover {
     padding: 20px 10px 20px 10px;
 }
 
-.general-info {
+.general-info, .security-info {
     padding: 15px 15px 15px 15px;
 }
 
 .info-div {
     padding: 5px 0px 5px 10px;
+}
+
+/* container conflict header rectification */
+.div-container {
+    margin-top: 75px;
 }

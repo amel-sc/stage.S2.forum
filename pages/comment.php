@@ -23,7 +23,7 @@
     }
 ?>
 
-<section class="p_container" style="margin-top: 65px;">
+<section class="div-container">
     <!-- post's card -->
     <div class="card card-post-selected col-12 col-lg-9 mb-1 m-auto border-0 rounded-4">
         <div class="card-body">
@@ -36,7 +36,7 @@
                 <div class="">
                     <p class="m-0">
                         <span class="fw-bold"><?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?></span> 
-                        <span class="dot"></span>
+                        <span class="dot">&#x2022;</span>
                         <span style="color: #595959;"><?= $subject[0]['s_date'] ?></span>
                     </p>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="">
                         <p class="m-0">
                             <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
-                            <span class="dot"></span>
+                            <span class="dot">&#x2022;</span>
                             <span style="color: #595959;"><?= $item['c_date'] ?></span>
                         </p>
                     </div>

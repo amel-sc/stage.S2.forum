@@ -9,12 +9,12 @@
     <nav class="navbar navbar-expand-lg fixed-top border-bottom border-dark-subtle" style="background-color: white;" data-bs-theme="light">
         <div class="container-fluid">
             <?php $link[$page_index]['value'] = "home.php"; ?>
-            <a class="navbar-brand fw-bold" href="<?= navigation_link($link) ?>">Forum</a>
+            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link) ?>">Forum</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <?php $link[$page_index]['value'] = "home.php"; ?>
                         <a class="nav-link" href="<?= navigation_link($link) ?>">Posts</a>
