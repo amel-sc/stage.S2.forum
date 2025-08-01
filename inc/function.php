@@ -34,8 +34,6 @@
     }   
 
 
-
-
     // function to get comment by forum_subject
     function get_comment_by_subject($subject_id)
     {

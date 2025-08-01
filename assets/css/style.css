@@ -51,6 +51,10 @@ button[type=submit]:hover {
     padding: 10px 10px 5px 10px;
 }
 
+.comment-content {
+    padding: 0px 0px 0px 50px;
+}
+
 .comment-button {
     border: none;
     border-radius: 4px;
@@ -59,9 +63,37 @@ button[type=submit]:hover {
     background-color:  #43494d;
     box-sizing: border-box;
 }
-
 .comment-button:hover {
+    background-color: #32373a;
+}
+.comment-button:active {
     background-color: #212527;
+}
+
+.comment-link {
+    text-decoration: none;
+    display: block;
+    padding: 4px 13px 4px 13px;
+    background-color: #e5ebee;
+}
+.comment-link:hover {
+    background-color: #dbe4e9;
+}
+.comment-link:active {
+    background-color: #c9d7de;
+}
+
+.return-button {
+    text-decoration: none;
+    display: block;
+    padding: 4px 6px 4px 6px;
+    background-color: #e5ebee;
+}
+.return-button:hover {
+    background-color: #dbe4e9;
+}
+.return-button:active {
+    background-color: #c9d7de;
 }
 
 /* hr */
@@ -76,4 +108,13 @@ button[type=submit]:hover {
     background-color: #595959;
     border-radius: 50%;
     display: inline-block;
+}
+
+/* not or is link element */
+.not-link {
+    pointer-events: none;
+}
+
+.is-link {
+    pointer-events: auto;
 }

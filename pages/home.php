@@ -16,6 +16,8 @@
 <section class="d_container" style="margin-top: 75px;">
     <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
     <?php foreach ($subject as $item) { ?>
+        <!-- link to comment  -->
+        <?php $link[$subject_id_index]['value'] = $item['subject_id']; ?>
         <!-- post's card -->
         <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4">
             <div class="card-body">
@@ -39,13 +41,10 @@
                 <div class="post-comment mt-3 d-flex justify-content-between align-items-center">
                     <!-- commment number -->
                     <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                    <a href="">
-                        <img src="" alt="">
+                    <a href="<?= navigation_link($link) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link">
+                        <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
+                        <span class="text-black fw-bold"><?= count($comments_number) ?></span>
                     </a>
-                    <p class="m-0"><span class="fw-bold"><?= count($comments_number) ?></span> Comments</p>
-                    <!-- link to comment  -->
-                    <?php $link[$subject_id_index]['value'] = $item['subject_id']; ?>
-                    <a href="<?= navigation_link($link) ?>" class="btn btn-primary">Comment</a>
                 </div>
             </div>
         </div>
