@@ -17,14 +17,17 @@
     <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
     <?php foreach ($subject as $item) { ?>
         <!-- post's card -->
-        <div class="card card-post col-12 col-lg-9 mb-3 m-auto border-1 rounded-1">
+        <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4">
             <div class="card-body">
                 <!-- sender info (user img, name , sended_date) -->
-                <div class="post-info d-flex mb-3">
-                    <img src="<?= $item['u_image'] ?>" alt="" style="width: 65px; height: 65px">
-                    <div class="sender-info d-flex flex-column justify-content-between">
-                        <p class="m-0 fw-medium"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></p>
-                        <p class="m-0"><?= $item['s_date'] ?></p>
+                <div class="post-info d-flex align-items-center gap-2 mb-3">
+                    <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                    <div class="">
+                        <p class="m-0">
+                            <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
+                            <span class="dot"></span>
+                            <span style="color: #595959;"><?= $item['s_date'] ?></span>
+                        </p>
                     </div>
                 </div>
                 <!-- post content -->
@@ -36,6 +39,9 @@
                 <div class="post-comment mt-3 d-flex justify-content-between align-items-center">
                     <!-- commment number -->
                     <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
+                    <a href="">
+                        <img src="" alt="">
+                    </a>
                     <p class="m-0"><span class="fw-bold"><?= count($comments_number) ?></span> Comments</p>
                     <!-- link to comment  -->
                     <?php $link[$subject_id_index]['value'] = $item['subject_id']; ?>
@@ -43,5 +49,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- separator -->
+        <hr class="hr-design col-12 col-lg-9">
+
     <?php } ?>
 </section>

@@ -25,7 +25,7 @@
 
 <section class="p_container mb-2" style="margin-top: 75px;">
     <!-- post's card -->
-    <div class="card card-post-selected col-12 col-lg-9 mb-3 m-auto border-1 rounded-1">
+    <div class="card card-post-selected col-12 col-lg-9 mb-3 m-auto border-0 rounded-4">
         <div class="card-body">
             <!-- sender info (user img, name , sended_date) -->
             <div class="post-info d-flex mb-3">
@@ -51,11 +51,11 @@
             <!-- input comment -->
             <div class="input-comment mb-3 border rounded-3">
                 <form action="traitement_comment.php" method="get">
-                    <textarea class="form-control mb-2" id="exampleFormControlTextarea1" name="c_content" rows="2" style="resize: none;"></textarea>
+                    <textarea class="form-control mb-2" id="" name="c_content" rows="2" style="resize: none;" required></textarea>
                     <!-- hidden values to send -->
                     <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="rounded-pill">Send</button>
+                        <button type="submit" class="rounded-pill comment-button">Send</button>
                     </div>
                 </form>
             </div>
@@ -66,7 +66,7 @@
 <!-- comments -->
 <section class="comment_container">
     <?php $comment_number = count($comments); ?>
-    <h2 class="w-75 m-auto"><span class="fw-bold"><?= $comment_number ?></span> Comments</h2>
+    <h2 class="col-12 col-lg-9 m-auto"><span class="fw-bold"><?= $comment_number ?></span> Comments</h2>
     <?php foreach ($comments as $item) { ?>
         <div class="card card-comment col-12 col-lg-9 mb-3 rounded-1 m-auto">
             <div class="card-body">
