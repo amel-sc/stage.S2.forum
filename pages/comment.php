@@ -23,14 +23,14 @@
     }
 ?>
 
-<section class="p_container" style="margin-top: 75px;">
+<section class="p_container" style="margin-top: 65px;">
     <!-- post's card -->
     <div class="card card-post-selected col-12 col-lg-9 mb-1 m-auto border-0 rounded-4">
         <div class="card-body">
             <!-- sender info (user img, name , sended_date) -->
             <div class="post-info d-flex align-items-center gap-2 mb-2">
                 <a href="<?= navigation_link($link) ?>" class="return-button rounded-circle">
-                    <img src="../assets/images/return-arrow.png" alt="" style="width: 20px; height: 20px;">
+                    <img src="../assets/images/return-arrow.png" alt="" style="width: 20px; height: 20px; margin: 0;">
                 </a>
                 <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
                 <div class="">
@@ -78,11 +78,11 @@
     <hr class="hr-design col-12 col-lg-9">
 
     <?php foreach ($comments as $item) { ?>
-        <div class="card card-comment col-12 col-lg-9 border-0 mb-2 m-auto">
+        <div class="card card-comment col-12 col-lg-9 border-0 mb-0 m-auto">
             <div class="card-body">
                 <!-- sender info (user img, name , sended_date) -->
                 <div class="comment-info d-flex align-items-center gap-2 mb-1">
-                    <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                    <img src="<?= $item['u_image'] ?>" alt="" style="width: 35px; height: 35px">
                     <div class="">
                         <p class="m-0">
                             <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 

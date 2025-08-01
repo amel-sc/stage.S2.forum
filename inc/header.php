@@ -9,7 +9,7 @@
     <nav class="navbar navbar-expand-lg fixed-top border-bottom border-dark-subtle" style="background-color: white;" data-bs-theme="light">
         <div class="container-fluid">
             <?php $link[$page_index]['value'] = "home.php"; ?>
-            <a class="navbar-brand" href="<?= navigation_link($link) ?>">Forum</a>
+            <a class="navbar-brand fw-bold" href="<?= navigation_link($link) ?>">Forum</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,7 +20,8 @@
                         <a class="nav-link" href="<?= navigation_link($link) ?>">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">User</a>
+                        <?php $link[$page_index]['value'] = "profile.php"; ?>
+                        <a class="nav-link" href="<?= navigation_link($link) ?>">Profile</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

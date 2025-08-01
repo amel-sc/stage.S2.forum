@@ -13,41 +13,43 @@
     $subject_id_index = get_index($link, "subject_id");
 ?>
 
-<section class="d_container" style="margin-top: 75px;">
+<section class="d_container" style="margin-top: 65px;">
     <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
     <?php foreach ($subject as $item) { ?>
         <!-- link to comment  -->
         <?php $link[$subject_id_index]['value'] = $item['subject_id']; ?>
         <!-- post's card -->
-        <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4">
-            <div class="card-body">
-                <!-- sender info (user img, name , sended_date) -->
-                <div class="post-info d-flex align-items-center gap-2 mb-3">
-                    <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
-                    <div class="">
-                        <p class="m-0">
-                            <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
-                            <span class="dot"></span>
-                            <span style="color: #595959;"><?= $item['s_date'] ?></span>
-                        </p>
+        <a href="<?= navigation_link($link) ?>" class="text-decoration-none text-black">
+            <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4">
+                <div class="card-body">
+                    <!-- sender info (user img, name , sended_date) -->
+                    <div class="post-info d-flex align-items-center gap-2 mb-3">
+                        <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                        <div class="">
+                            <p class="m-0">
+                                <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
+                                <span class="dot"></span>
+                                <span style="color: #595959;"><?= $item['s_date'] ?></span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- post content -->
+                    <div class="post-content">
+                        <h4 class="card-title fw-bold"><?= $item['s_title'] ?></h4>
+                        <p class="card-text"><?= $item['s_content'] ?></p>
+                    </div>
+                    <!-- comment number and button to comment -->
+                    <div class="post-comment mt-3 d-flex align-items-start">
+                        <!-- commment number -->
+                        <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
+                        <a href="<?= navigation_link($link) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link">
+                            <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
+                            <span class="text-black fw-bold"><?= count($comments_number) ?></span>
+                        </a>
                     </div>
                 </div>
-                <!-- post content -->
-                <div class="post-content">
-                    <h4 class="card-title fw-bold"><?= $item['s_title'] ?></h4>
-                    <p class="card-text"><?= $item['s_content'] ?></p>
-                </div>
-                <!-- comment number and button to comment -->
-                <div class="post-comment mt-3 d-flex justify-content-between align-items-center">
-                    <!-- commment number -->
-                    <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                    <a href="<?= navigation_link($link) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link">
-                        <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
-                        <span class="text-black fw-bold"><?= count($comments_number) ?></span>
-                    </a>
-                </div>
             </div>
-        </div>
+        </a>
 
         <!-- separator -->
         <hr class="hr-design col-12 col-lg-9">
