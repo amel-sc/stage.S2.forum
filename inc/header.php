@@ -25,6 +25,7 @@
                         <?php $link[$page_index]['value'] = "profile.php"; ?>
                         <a class="rounded-circle header-link" href="<?= navigation_link($link) ?>">
                             <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                            <p class="d-block d-lg-none">Texte visible uniquement ≤ 992px</p>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
