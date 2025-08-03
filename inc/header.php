@@ -16,27 +16,43 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-lg-center">
                     <li class="nav-item">
                         <?php $link[$page_index]['value'] = "home.php"; ?>
-                        <a class="nav-link" href="<?= navigation_link($link) ?>">Posts</a>
+                        <a class="d-flex d-lg-block align-items-center gap-3 header-link" href="<?= navigation_link($link) ?>"> 
+                            <img class="d-block d-lg-none" src="../assets/images/home.png" alt="" style="width: 35px; height: 35px">
+                            <img class="d-none d-lg-block" src="../assets/images/home.png" alt="" style="width: 25px; height: 25px">
+                            <span class="text-black fs-6 d-block d-lg-none">Home</span>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <?php $link[$page_index]['value'] = "profile.php"; ?>
-                        <a class="rounded-circle header-link" href="<?= navigation_link($link) ?>">
-                            <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
-                            <p class="d-block d-lg-none">Texte visible uniquement ≤ 992px</p>
+                        <?php $link[$page_index]['value'] = "home.php"; ?>
+                        <a class="d-flex d-lg-block align-items-center gap-3 header-link" href="#"> 
+                            <img class="d-block d-lg-none" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px">
+                            <img class="d-none d-lg-block" src="../assets/images/plus.png" alt="" style="width: 25px; height: 25px">
+                            <span class="text-black fs-6 d-block d-lg-none">Create</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Connexion
-                        </a>
-                        <ul class="dropdown-menu">
-                            <?php $link[$page_index]['value'] = "login.php"; ?>
-                            <li><a class="dropdown-item" href="<?= navigation_link($link) ?>">Log in</a></li>
-                            <?php $link[$page_index]['value'] = "sign.php"; ?>
-                            <li><a class="dropdown-item" href="<?= navigation_link($link) ?>">Sign in</a></li>
+                        <button type="button" class="d-flex d-lg-block align-items-center gap-3 header-link" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
+                            <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                            <span class="text-black fs-6 d-block d-lg-none">Profil</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li>
+                                <?php $link[$page_index]['value'] = "profile.php"; ?>
+                                <a class="d-flex align-items-center gap-3 header-link" href="<?= navigation_link($link) ?>">
+                                    <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                    <span class="text-black fs-6 d-block">Profil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <?php $link[$page_index]['value'] = "profile.php"; ?>
+                                <a class="d-flex align-items-center gap-3 header-link" href="#">
+                                    <img src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px">
+                                    <span class="text-black fs-6 d-block">Log out</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
