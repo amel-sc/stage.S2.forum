@@ -19,41 +19,79 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-lg-center">
                     <li class="nav-item">
                         <?php $link[$page_index]['value'] = "home.php"; ?>
-                        <a class="d-flex d-lg-block align-items-center gap-3 header-link" href="<?= navigation_link($link) ?>"> 
-                            <img class="d-block d-lg-none" src="../assets/images/home.png" alt="" style="width: 35px; height: 35px">
-                            <img class="d-none d-lg-block" src="../assets/images/home.png" alt="" style="width: 25px; height: 25px">
-                            <span class="text-black fs-6 d-block d-lg-none">Home</span>
-                        </a>
+                        <div class="d-block d-lg-none">
+                            <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                                <img class="" src="../assets/images/home.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                <span class="text-black d-block d-lg-none">Home</span>
+                            </a>
+                        </div>
+                        <div class="d-none d-lg-block">
+                            <a class="rounded-circle d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                                <img class="" src="../assets/images/home.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                <span class="text-black d-block d-lg-none">Home</span>
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <?php $link[$page_index]['value'] = "home.php"; ?>
-                        <a class="d-flex d-lg-block align-items-center gap-3 header-link" href="#"> 
-                            <img class="d-block d-lg-none" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px">
-                            <img class="d-none d-lg-block" src="../assets/images/plus.png" alt="" style="width: 25px; height: 25px">
-                            <span class="text-black fs-6 d-block d-lg-none">Create</span>
-                        </a>
+                        <div class="d-block d-lg-none">
+                            <a class="d-flex align-items-center header-link gap-2" href="#"> 
+                                <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                <span class="text-black d-block d-lg-none">Create</span>
+                            </a>
+                        </div>
+                        <div class="d-none d-lg-block">
+                             <a class="rounded-pill d-flex align-items-center header-link gap-2" href="#"> 
+                                <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                <span class="text-black d-block d-lg-none">Create</span>
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <button type="button" class="d-flex d-lg-block align-items-center gap-3 header-link" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
-                            <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
-                            <span class="text-black fs-6 d-block d-lg-none">Profil</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li>
-                                <?php $link[$page_index]['value'] = "profile.php"; ?>
-                                <a class="d-flex align-items-center gap-3 header-link" href="<?= navigation_link($link) ?>">
-                                    <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
-                                    <span class="text-black fs-6 d-block">Profil</span>
-                                </a>
-                            </li>
-                            <li>
-                                <?php $link[$page_index]['value'] = "profile.php"; ?>
-                                <a class="d-flex align-items-center gap-3 header-link" href="#">
-                                    <img src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px">
-                                    <span class="text-black fs-6 d-block">Log out</span>
-                                </a>
-                            </li>
-                        </ul>
+                        <div class="d-block d-lg-none">
+                            <button type="button" class="d-flex align-items-center header-link gap-2" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
+                                <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                <span class="text-black d-block d-lg-none">Profile</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" style="min-width: 250px;">
+                                <li>
+                                    <?php $link[$page_index]['value'] = "profile.php"; ?>
+                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>" style="padding: 10px 0px 10px 16px;">
+                                        <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                        <span class="text-black d-block">View Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <?php $link[$page_index]['value'] = "profile.php"; ?>
+                                    <a class="d-flex align-items-center header-link gap-2" href="#" style="padding: 10px 0px 10px 16px;">
+                                        <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                        <span class="text-black d-block">Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="d-none d-lg-block">
+                            <button type="button" class="rounded-circle d-flex align-items-center header-link gap-2" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
+                                <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                <span class="text-black d-block d-lg-none">Profile</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-lg-end" style="min-width: 250px;">
+                                <li>
+                                    <?php $link[$page_index]['value'] = "profile.php"; ?>
+                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>" style="padding: 10px 0px 10px 16px;">
+                                        <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                        <span class="text-black d-block">View Profil</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <?php $link[$page_index]['value'] = "login.php"; ?>
+                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>" style="padding: 10px 0px 10px 16px;">
+                                        <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                        <span class="text-black d-block">Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
