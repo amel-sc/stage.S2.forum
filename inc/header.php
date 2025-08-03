@@ -33,15 +33,15 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <?php $link[$page_index]['value'] = "home.php"; ?>
+                        <?php $link[$page_index]['value'] = "create_post.php"; ?>
                         <div class="d-block d-lg-none">
-                            <a class="d-flex align-items-center header-link gap-2" href="#"> 
+                            <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
                                 <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                 <span class="text-black d-block d-lg-none">Create</span>
                             </a>
                         </div>
                         <div class="d-none d-lg-block">
-                             <a class="rounded-pill d-flex align-items-center header-link gap-2" href="#"> 
+                             <a class="rounded-pill d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
                                 <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                 <span class="text-black d-block d-lg-none">Create</span>
                             </a>

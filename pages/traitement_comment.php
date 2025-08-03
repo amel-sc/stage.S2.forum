@@ -3,9 +3,9 @@
     session_start();
 
     // values getted
-    $content = $_GET['c_content'];
+    $content = $_POST['c_content'];
     $user_id = $_SESSION['current_user']['user_id'];
-    $subject_id = $_GET['subject_id'];
+    $subject_id = $_POST['subject_id'];
     $c_date = get_current_date()['date_now'];
 
     // naviagtion link
@@ -24,5 +24,4 @@
 
     // header to comment.php page
     header('Location: ' . navigation_link($link));
-
 ?>

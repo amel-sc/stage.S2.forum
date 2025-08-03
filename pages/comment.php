@@ -58,8 +58,8 @@
             </div>
             <!-- input comment -->
             <div class="input-comment mb-3 border border-dark-subtle rounded-3">
-                <form action="traitement_comment.php" method="get">
-                    <textarea class="form-control mb-2" id="comment-textarea" name="c_content" rows="2" style="resize: none;" required></textarea>
+                <form action="traitement_comment.php" method="post">
+                    <textarea class="form-control mb-2" id="comment-textarea" name="c_content" rows="2" style="resize: none;" placeholder="Join the conversation" required></textarea>
                     <!-- hidden values to send -->
                     <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
                     <div class="d-flex justify-content-end">

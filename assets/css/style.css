@@ -146,5 +146,7 @@ button[type=submit]:hover {
     background-color: #c9d7de;
 }
 
-.header-link span {
+/* create post */
+.border-dotted {
+    border: 2px dotted #00000033;
 }
