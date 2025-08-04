@@ -2,7 +2,17 @@
     // subject 
     // forum subject list condition
     $other_condition = [];
-    $other_condition[] = "ORDER BY s_date DESC";
+    $order_name = null;
+    if (isset($_GET['order']))
+    {
+        $other_condition[] = "ORDER BY s_date " . $_GET['order'];
+        $order_name = $_GET['order'];
+    }
+    else 
+    {
+        $other_condition[] = "ORDER BY s_date DESC";
+        $order_name = "DESC";
+    }
     // forum subject list
     $subject = select_table("v_subject_user", null, $other_condition);
 
@@ -16,10 +26,46 @@
     $link_profil[] = array('key' => 'page', 'value' => "profile.php");
     $link_profil[] = array('key' => 'user_id', 'value' => null);
     $user_id_index = get_index($link_profil, "user_id");
+    // order link for post
+    $link_order = array();
+    $link_order[] = array('key' => 'page', 'value' => "home.php");
+    $link_order[] = array('key' => 'order', 'value' => null);
+    $order_index = get_index($link_order, "order");
 ?>
 
 <section class="div-container">
     <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
+    <!-- sort by -->
+    <div class="d-block col-12 col-lg-9 m-auto dropdown">
+        <button class="dropdown-toggle header-link rounded-pill px-2 py-2 custom-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+            <?php
+                if ($order_name == "DESC")
+                {
+                    echo "New";
+                }
+                else 
+                {
+                    echo "Old";
+                }
+            ?>
+        </button>
+        <ul class="dropdown-menu" style="min-width: 100px;">
+            <li>
+                <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
+            </li>
+            <li>
+                <?php $link_order[$order_index]['value'] = "DESC" ?>
+                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
+            </li>
+            <li>
+                <?php $link_order[$order_index]['value'] = "ASC" ?>
+                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
+            </li>
+        </ul>
+    </div>
+    <!-- separator -->
+    <hr class="hr-design col-12 col-lg-9">
+
     <?php foreach ($subject as $item) { ?>
         <!-- link to comment  -->
         <?php $link[$subject_id_index]['value'] = $item['subject_id']; ?>

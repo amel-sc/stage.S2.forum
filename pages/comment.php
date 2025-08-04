@@ -10,7 +10,17 @@
 
         // comment list other condition
         $comment_other_condition = [];
-        $comment_other_condition[] = "ORDER BY c_date DESC";
+        $order_name = null;
+        if (isset($_GET['order']))
+        {
+            $comment_other_condition[] = "ORDER BY c_date " . $_GET['order'];
+            $order_name = $_GET['order'];
+        }
+        else 
+        {
+            $comment_other_condition[] = "ORDER BY c_date DESC";
+            $order_name = "DESC";
+        }
         // comment list condition
         $comment_condition = array();
         $comment_condition[] = array('key' => 'subject_id', 'value' => $_GET['subject_id']);
@@ -25,6 +35,12 @@
         $link_profil[] = array('key' => 'page', 'value' => "profile.php");
         $link_profil[] = array('key' => 'user_id', 'value' => null);
         $user_id_index = get_index($link_profil, "user_id");
+        // order link for order
+        $link_order = array();
+        $link_order[] = array('key' => 'page', 'value' => "comment.php");
+        $link_order[] = array('key' => 'subject_id', 'value' => $_GET['subject_id']);
+        $link_order[] = array('key' => 'order', 'value' => null);
+        $order_index = get_index($link_order, "order");
     }
 ?>
 
@@ -86,7 +102,7 @@
                     <!-- hidden values to send -->
                     <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="rounded-pill comment-button fw-bold">Send</button>
+                        <button type="submit" class="rounded-pill comment-button fw-bold">Comment</button>
                     </div>
                 </form>
             </div>
@@ -97,6 +113,37 @@
 <!-- comments -->
 <section class="comment_container mb-3">
     <h2 class="col-12 col-lg-9 m-auto" style="padding: 0px 0px 0px 25px;"><span class="fw-bold"><?= count($comments) ?></span> Comments</h2>
+    <!-- sort by -->
+    <div class="col-12 col-lg-9 m-auto d-flex align-items-center gap-2" style="padding: 0px 0px 0px 25px;>
+        <p class="m-0">Sort by:</p>
+        <div class="dropdown">
+            <button class="dropdown-toggle header-link rounded-pill px-2 py-2 custom-btn fw-bold" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+                <?php
+                    if ($order_name == "DESC")
+                    {
+                        echo "New";
+                    }
+                    else 
+                    {
+                        echo "Old";
+                    }
+                ?>
+            </button>
+            <ul class="dropdown-menu" style="min-width: 100px;">
+                <li>
+                    <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
+                </li>
+                <li>
+                    <?php $link_order[$order_index]['value'] = "DESC" ?>
+                    <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
+                </li>
+                <li>
+                    <?php $link_order[$order_index]['value'] = "ASC" ?>
+                    <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- separator -->
     <hr class="hr-design col-12 col-lg-9">
 
