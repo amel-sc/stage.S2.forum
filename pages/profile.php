@@ -1,5 +1,14 @@
 <?php
-    $user = get_user_by_id($_SESSION['current_user']['user_id']);
+    $current_user = $_SESSION['current_user'];
+
+    if (isset($_GET['user_id']))
+    {
+        $user = get_user_by_id($_GET['user_id']);
+    }
+    else 
+    {
+        $user = get_user_by_id($current_user['user_id']);
+    }
 ?>
 
 <section class="div-container">
@@ -9,10 +18,12 @@
         <div class="border border-dark-subtle rounded-3 col-12 col-lg-2 d-flex flex-column align-items-center justify-content-center img_name-div">
             <img src="<?= $user['u_image'] ?>" alt="" class="mb-3" style="width: 80px; height: 80px;">
             <p class="m-0 fw-bold"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#change-profil">
-                Change profil
-            </button>
+            <?php if ($user['user_id'] == $current_user['user_id']) { ?>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#change-profil">
+                    Change profil
+                </button>
+            <?php } ?>
         </div>
         <!-- other information -->
         <div class="d-flex flex-column border border-dark-subtle rounded-3 mb-4 col">
@@ -59,33 +70,35 @@
                     </div>
                 </div>
             </div>
-            <hr class="m-0">
-            <!-- security -->
-            <div class="security-info rounded-3 col mb-lg-0">
-                <h4 class="mb-3">Security</h4>
-                <div class="row row-cols-1 row-cols-lg-2 g-4">
-                    <div class="col">
-                        <div class="info-div border border-dark-subtle rounded-3">
-                            <small>Email</small>
-                            <p class="m-0 fs-5"><?= $user['u_email'] ?></p>
+            <?php if ($user['user_id'] == $current_user['user_id']) { ?>
+                <hr class="m-0">
+                <!-- security -->
+                <div class="security-info rounded-3 col mb-lg-0">
+                    <h4 class="mb-3">Security</h4>
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="info-div border border-dark-subtle rounded-3">
+                                <small>Email</small>
+                                <p class="m-0 fs-5"><?= $user['u_email'] ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="info-div border border-dark-subtle rounded-3">
-                            <small>password</small>
-                            <?php
-                                $password = $user['u_mdp'];
-                                $dot_mdp = "";
-                                for ($i = 0; $i < strlen($password); $i++)
-                                {
-                                    $dot_mdp = $dot_mdp . "&#x2022;";
-                                }
-                            ?>
-                            <p class="m-0 fs-5"><?= $dot_mdp ?></p>
+                        <div class="col">
+                            <div class="info-div border border-dark-subtle rounded-3">
+                                <small>password</small>
+                                <?php
+                                    $password = $user['u_mdp'];
+                                    $dot_mdp = "";
+                                    for ($i = 0; $i < strlen($password); $i++)
+                                    {
+                                        $dot_mdp = $dot_mdp . "&#x2022;";
+                                    }
+                                ?>
+                                <p class="m-0 fs-5"><?= $dot_mdp ?></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>

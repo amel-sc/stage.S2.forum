@@ -6,11 +6,16 @@
     // forum subject list
     $subject = select_table("v_subject_user", null, $other_condition);
 
-    // navigation link 
+    // navigation link for post
     $link = array();
     $link[] = array('key' => 'page', 'value' => "comment.php");
     $link[] = array('key' => 'subject_id', 'value' => null);
     $subject_id_index = get_index($link, "subject_id");
+    // navigation link for profil
+    $link_profil = array();
+    $link_profil[] = array('key' => 'page', 'value' => "profile.php");
+    $link_profil[] = array('key' => 'user_id', 'value' => null);
+    $user_id_index = get_index($link_profil, "user_id");
 ?>
 
 <section class="div-container">
@@ -27,9 +32,12 @@
                         <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
                         <div class="">
                             <p class="m-0">
-                                <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
-                                <span class="dot">&#x2022;</span>
-                                <span style="color: #595959;"><?= $item['s_date'] ?></span>
+                                <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
+                                <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
+                                    <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
+                                </a>
+                                <span class="dot my-0">•</span>
+                                <span class="post-date"><?= $item['s_date'] ?></span>
                             </p>
                         </div>
                     </div>
