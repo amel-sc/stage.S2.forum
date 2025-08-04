@@ -51,7 +51,7 @@
                     <?php } ?>
                     <li class="nav-item dropdown">
                         <div class="d-block d-lg-none">
-                            <button type="button" class="d-flex align-items-center header-link gap-2" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
+                            <button type="button" class="d-flex align-items-center header-link gap-2 custom-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
                                 <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
                                 <span class="text-black d-block d-lg-none">Profile</span>
                             </button>
@@ -73,7 +73,7 @@
                             </ul>
                         </div>
                         <div class="d-none d-lg-block">
-                            <button type="button" class="rounded-circle d-flex align-items-center header-link gap-2" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
+                            <button type="button" class="rounded-circle d-flex align-items-center header-link gap-2 custom-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
                                 <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
                                 <span class="text-black d-block d-lg-none">Profile</span>
                             </button>

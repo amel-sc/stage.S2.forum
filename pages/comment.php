@@ -117,7 +117,7 @@
     <div class="col-12 col-lg-9 m-auto d-flex align-items-center gap-2" style="padding: 0px 0px 0px 25px;>
         <p class="m-0">Sort by:</p>
         <div class="dropdown">
-            <button class="dropdown-toggle header-link rounded-pill px-2 py-2 custom-btn fw-bold" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+            <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn fw-bold" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
                 <?php
                     if ($order_name == "DESC")
                     {

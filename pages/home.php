@@ -37,7 +37,7 @@
     <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
     <!-- sort by -->
     <div class="d-block col-12 col-lg-9 m-auto dropdown">
-        <button class="dropdown-toggle header-link rounded-pill px-2 py-2 custom-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+        <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
             <?php
                 if ($order_name == "DESC")
                 {

@@ -170,3 +170,12 @@ button[type=submit]:hover {
 .border-dotted {
     border: 2px dotted #00000033;
 }
+
+/* dropdown focus (show) */
+.custom-btn:focus {
+    background-color: #dbe4e9;
+}
+
+.custom-btn:focus:not(:focus-visible) {
+    outline: none;
+}
