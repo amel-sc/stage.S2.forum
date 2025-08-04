@@ -26,7 +26,7 @@
         <!-- post's card -->
         
         <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4 position-relative">
-                <a href="<?= navigation_link($link) ?>" class="text-decoration-none text-black stretched-link" style="">
+            <a href="<?= navigation_link($link) ?>" class="text-decoration-none text-black stretched-link" style="">
                 <div class="card-body">
                     <!-- sender info (user img, name , sended_date) -->
                     <div class="post-info d-flex align-items-center gap-2 mb-3">
@@ -38,7 +38,7 @@
                                     <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
                                 </a>
                                 <span class="dot my-0">•</span>
-                                <span class="post-date"><?= duration($item['s_date']) ?></span>
+                                <span class="post-date"><?= $item['s_date'] ?></span>
                             </p>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </a>
-            </div>
+        </div>
 
         <!-- separator -->
         <hr class="hr-design col-12 col-lg-9">

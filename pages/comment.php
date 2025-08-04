@@ -45,7 +45,7 @@
                             <?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?>
                         </a>
                         <span class="dot my-0">•</span>
-                        <span class="post-date"><?= duration($subject[0]['s_date']) ?></span>
+                        <span class="post-date"><?= $subject[0]['s_date'] ?></span>
                     </p>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                                 <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
                             </a>
                             <span class="dot my-0">•</span>
-                            <span class="post-date"><?= duration($item['c_date']) ?></span>
+                            <span class="post-date"><?= $item['c_date'] ?></span>
                         </p>
                     </div>
                 </div>

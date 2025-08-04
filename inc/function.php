@@ -170,6 +170,6 @@
             $years = floor($diff / 29030400);
             return $years . ' year' . ($years > 1 ? 's' : '') . " ago";
         }
-}
+    }
 
 ?>
