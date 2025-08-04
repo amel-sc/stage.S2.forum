@@ -99,8 +99,8 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <video autoplay muted loop playsinline class="img-fluid">
-                                        <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
+                                    <video autoplay muted loop playsinline>
+                                        <source class="img-fluid" src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
                                         Votre navigateur ne supporte pas la lecture vidéo.
                                     </video>
                                 </div>

@@ -77,7 +77,7 @@
                         <?php } else { ?>
                             <div class="d-flex align-items-center justify-content-center">
                                 <video autoplay muted loop playsinline>
-                                    <source src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
+                                    <source class="img-fluid" src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
                                     Votre navigateur ne supporte pas la lecture vidéo.
                                 </video>
                             </div>
