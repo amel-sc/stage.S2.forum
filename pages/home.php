@@ -95,11 +95,11 @@
                         <?php if ($item['s_media'] != "empty") { ?>
                             <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <img class="img-fluid" src="<?= $item['s_media'] ?>" alt="..." style="object-fit: contain;">
+                                    <img class="img-fluid" src="<?= $item['s_media'] ?>" alt="..." style="object-fit: contain;" style="position: relative; z-index: 10;">
                                 </div>
                             <?php } else { ?>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <video autoplay muted loop playsinline>
+                                    <video controls style="position: relative; z-index: 10;">
                                         <source class="img-fluid" src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
                                         Votre navigateur ne supporte pas la lecture vidéo.
                                     </video>
