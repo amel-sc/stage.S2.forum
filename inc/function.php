@@ -150,25 +150,25 @@
         $diff = $now - $timestamp;
 
         if ($diff < 60) {
-            return 'il y a ' . $diff . ' sec';
+            return $diff . ' sec.' . " ago";
         } elseif ($diff < 3600) {
             $minutes = floor($diff / 60);
-            return 'il y a ' . $minutes . ' min';
+            return $minutes . ' min.' . " ago";
         } elseif ($diff < 86400) {
             $hours = floor($diff / 3600);
-            return 'il y a ' . $hours . ' h';
+            return $hours . ' hr.' . " ago";
         } elseif ($diff < 604800) {
             $days = floor($diff / 86400);
-            return 'il y a ' . $days . ' jour' . ($days > 1 ? 's' : '');
+            return $days . ' day' . ($days > 1 ? 's' : '') . " ago";
         } elseif ($diff < 2419200) {
             $weeks = floor($diff / 604800);
-            return 'il y a ' . $weeks . ' semaine' . ($weeks > 1 ? 's' : '');
+            return $weeks . ' week' . ($weeks > 1 ? 's' : '') . " ago";
         } elseif ($diff < 29030400) {
             $months = floor($diff / 2419200);
-            return 'il y a ' . $months . ' mois';
+            return $months . ' month' . ($months > 1 ? 's' : '') . " ago";
         } else {
             $years = floor($diff / 29030400);
-            return 'il y a ' . $years . ' an' . ($years > 1 ? 's' : '');
+            return $years . ' year' . ($years > 1 ? 's' : '') . " ago";
         }
 }
 

@@ -17,7 +17,7 @@
         <!-- image and name -->
         <div class="border border-dark-subtle rounded-3 col-12 col-lg-2 d-flex flex-column align-items-center justify-content-center img_name-div">
             <img src="<?= $user['u_image'] ?>" alt="" class="mb-3" style="width: 80px; height: 80px;">
-            <p class="m-0 fw-bold"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+            <p class="m-0 fw-bold" style="white-space: nowrap;"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
             <?php if ($user['user_id'] == $current_user['user_id']) { ?>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#change-profil">
