@@ -63,10 +63,50 @@
         return $result;
     }
 
-    // function uplaod image
+    // function uplaod image for profil
     function upload_image($file)
     {
         $upload_dir = dirname(__DIR__).'/assets/images/';
+        $max_size = 500 * 1024 * 1024;
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            die('Erreur lors de l’upload : ' . $file['error']);
+        }
+
+        // Vérifie la taille
+        if ($file['size'] > $max_size) {
+            die('Le fichier est trop volumineux.');
+        }
+
+        // Vérifie le type MIME avec `finfo`
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        if (!in_array($mime, $allowedMimeTypes)) {
+            die('Type de fichier non autorisé : ' . $mime);
+        }
+
+        // renommer le fichier
+        $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+        $newName = $originalName . '_' . uniqid() . '.' . $extension;
+
+        // Déplace le fichier
+        move_uploaded_file($file['tmp_name'], $upload_dir . $newName);
+
+        //add post in BDD
+        $file_path = '../assets/images/' . $newName;
+        return $file_path;
+    }
+
+
+    // function to upload image and video for post
+    function upload_image_video($file)
+    {
+        $upload_dir = dirname(__DIR__).'/assets/uploads/';
         $max_size = 500 * 1024 * 1024;
         $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'video/mp4'];
 
@@ -98,7 +138,7 @@
         move_uploaded_file($file['tmp_name'], $upload_dir . $newName);
 
         //add post in BDD
-        $file_path = '../assets/images/' . $newName;
+        $file_path = '../assets/uploads/' . $newName;
         return $file_path;
     }
 

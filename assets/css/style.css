@@ -91,7 +91,6 @@ button[type=submit]:hover {
 
 .comment-link {
     text-decoration: none;
-    display: block;
     padding: 4px 13px 4px 13px;
     background-color: #e5ebee;
 }

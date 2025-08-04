@@ -20,6 +20,11 @@
         // navigation link 
         $link = array();
         $link[] = array('key' => 'page', 'value' => "home.php");
+        // navigation link for profil
+        $link_profil = array();
+        $link_profil[] = array('key' => 'page', 'value' => "profile.php");
+        $link_profil[] = array('key' => 'user_id', 'value' => null);
+        $user_id_index = get_index($link_profil, "user_id");
     }
 ?>
 
@@ -35,8 +40,11 @@
                 <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
                 <div class="">
                     <p class="m-0">
-                        <span class="fw-bold"><?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?></span> 
-                        <span class="dot">&#x2022;</span>
+                        <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
+                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
+                            <?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?>
+                        </a>
+                        <span class="dot my-0">•</span>
                         <span style="color: #595959;"><?= $subject[0]['s_date'] ?></span>
                     </p>
                 </div>
@@ -44,6 +52,21 @@
             <!-- post content -->
             <div class="post-content">
                 <h4 class="card-title fw-bold"><?= $subject[0]['s_title'] ?></h4>
+                <!-- video or image of the post -->
+                    <?php if ($subject[0]['s_media'] != "empty") { ?>
+                        <?php if(strpos($subject[0]['s_media'], ".mp4") == false) { ?>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img class="img-fluid" src="<?= $subject[0]['s_media'] ?>" alt="..." style="object-fit: contain;">
+                            </div>
+                        <?php } else { ?>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <video autoplay muted loop playsinline>
+                                    <source src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
+                                    Votre navigateur ne supporte pas la lecture vidéo.
+                                </video>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
                 <p class="card-text"><?= $subject[0]['s_content'] ?></p>
             </div>
             <!-- comment number and button to comment -->
@@ -85,8 +108,11 @@
                     <img src="<?= $item['u_image'] ?>" alt="" style="width: 35px; height: 35px">
                     <div class="">
                         <p class="m-0">
-                            <span class="fw-bold"><?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?></span> 
-                            <span class="dot">&#x2022;</span>
+                            <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
+                            <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
+                                <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
+                            </a>
+                            <span class="dot my-0">•</span>
                             <span style="color: #595959;"><?= $item['c_date'] ?></span>
                         </p>
                     </div>

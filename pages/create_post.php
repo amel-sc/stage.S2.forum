@@ -9,14 +9,12 @@
             <div class="mb-3">
                 <label for="image" class="border-dotted" style="width: 100%; border-radius: 22px;">
                     <div class="d-flex align-items-center justify-content-center gap-2" style="padding: 55px;">
-                        <span>Upload media</span>
-                        <img src="../assets/images/upload.png" alt="" class="rounded-circle header-link" style="width: 35px; height: 35px; padding: 5px;">
+                        <input type="file" class="form-control"  id="image" name="s_media" accept="image/jpeg, image/png, image/jpg, video/mp4">
                     </div>
                 </label>
-                <input type="file" class="" id="image" name="image" accept="image/*" required hidden>
             </div>
             <div class="mb-3">
-                <textarea class="form-control" id="title" name="s_title" rows="6" style="resize: none; border-radius: 22px; border: 1px solid #00000033" placeholder="Body text (optional)" required></textarea>
+                <textarea class="form-control" id="content" name="s_content" rows="6" style="resize: none; border-radius: 22px; border: 1px solid #00000033" placeholder="Body text (optional)"></textarea>
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="comment-button fw-bold" style="border-radius: 20px;padding: 8px 14px 8px 14px;">Post</button>

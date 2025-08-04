@@ -32,21 +32,23 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <?php $link[$page_index]['value'] = "create_post.php"; ?>
-                        <div class="d-block d-lg-none">
-                            <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
-                                <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
-                                <span class="text-black d-block d-lg-none">Create</span>
-                            </a>
-                        </div>
-                        <div class="d-none d-lg-block">
-                             <a class="rounded-pill d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
-                                <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
-                                <span class="text-black d-block d-lg-none">Create</span>
-                            </a>
-                        </div>
-                    </li>
+                    <?php if ($_SESSION['current_user']['u_statut'] != 0 ) { ?>
+                        <li class="nav-item">
+                            <?php $link[$page_index]['value'] = "create_post.php"; ?>
+                            <div class="d-block d-lg-none">
+                                <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                                    <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                    <span class="text-black d-block d-lg-none">Create</span>
+                                </a>
+                            </div>
+                            <div class="d-none d-lg-block">
+                                <a class="rounded-pill d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                                    <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                    <span class="text-black d-block d-lg-none">Create</span>
+                                </a>
+                            </div>
+                        </li>
+                    <?php } ?>
                     <li class="nav-item dropdown">
                         <div class="d-block d-lg-none">
                             <button type="button" class="d-flex align-items-center header-link gap-2" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">

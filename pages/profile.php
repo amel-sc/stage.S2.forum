@@ -114,7 +114,7 @@
             <div class="modal-body">
                 <form action="traitement_image_profil.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input type="file" class="form-control" id="" name="image" accept="image/*" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                        <input type="file" class="form-control" id="" name="image" accept="image/jpeg, image/png, image/jpg" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                     </div>
                     <div class="d-flex align-items-center justify-content-end gap-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
