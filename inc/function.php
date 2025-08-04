@@ -66,7 +66,7 @@
     // function uplaod image for profil
     function upload_image($file)
     {
-        $upload_dir = dirname(__DIR__).'/assets/images/';
+        $upload_dir = dirname(__DIR__).'/assets/uploads/';
         $max_size = 500 * 1024 * 1024;
         $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
@@ -98,7 +98,7 @@
         move_uploaded_file($file['tmp_name'], $upload_dir . $newName);
 
         //add post in BDD
-        $file_path = '../assets/images/' . $newName;
+        $file_path = '../assets/uploads/' . $newName;
         return $file_path;
     }
 
@@ -141,5 +141,35 @@
         $file_path = '../assets/uploads/' . $newName;
         return $file_path;
     }
+
+
+    // post duration
+    function duration($datetime) {
+        $timestamp = strtotime($datetime);
+        $now = time();
+        $diff = $now - $timestamp;
+
+        if ($diff < 60) {
+            return 'il y a ' . $diff . ' sec';
+        } elseif ($diff < 3600) {
+            $minutes = floor($diff / 60);
+            return 'il y a ' . $minutes . ' min';
+        } elseif ($diff < 86400) {
+            $hours = floor($diff / 3600);
+            return 'il y a ' . $hours . ' h';
+        } elseif ($diff < 604800) {
+            $days = floor($diff / 86400);
+            return 'il y a ' . $days . ' jour' . ($days > 1 ? 's' : '');
+        } elseif ($diff < 2419200) {
+            $weeks = floor($diff / 604800);
+            return 'il y a ' . $weeks . ' semaine' . ($weeks > 1 ? 's' : '');
+        } elseif ($diff < 29030400) {
+            $months = floor($diff / 2419200);
+            return 'il y a ' . $months . ' mois';
+        } else {
+            $years = floor($diff / 29030400);
+            return 'il y a ' . $years . ' an' . ($years > 1 ? 's' : '');
+        }
+}
 
 ?>
