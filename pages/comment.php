@@ -28,8 +28,8 @@
         $comments = select_table("v_comment_user", $comment_condition, $comment_other_condition);
 
         // navigation link 
-        $link = array();
-        $link[] = array('key' => 'page', 'value' => "home.php");
+        $link_home = array();
+        $link_home[] = array('key' => 'page', 'value' => "home.php");
         // navigation link for profil
         $link_profil = array();
         $link_profil[] = array('key' => 'page', 'value' => "profile.php");
@@ -50,7 +50,7 @@
         <div class="card-body">
             <!-- sender info (user img, name , sended_date) -->
             <div class="post-info d-flex align-items-center gap-2 mb-2">
-                <a href="<?= navigation_link($link) ?>" class="m-0 return-button rounded-circle">
+                <a href="<?= navigation_link($link_home) ?>" class="m-0 return-button rounded-circle">
                     <img src="../assets/images/return-arrow.png" alt="" style="width: 20px;">
                 </a>
                 <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
@@ -76,8 +76,8 @@
                             </div>
                         <?php } else { ?>
                             <div class="d-flex align-items-center justify-content-center">
-                                <video controls>
-                                    <source class="img-fluid" src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
+                                <video controls class="img-fluid">
+                                    <source src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
                                     Votre navigateur ne supporte pas la lecture vidéo.
                                 </video>
                             </div>

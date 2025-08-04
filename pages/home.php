@@ -17,10 +17,10 @@
     $subject = select_table("v_subject_user", null, $other_condition);
 
     // navigation link for post
-    $link = array();
-    $link[] = array('key' => 'page', 'value' => "comment.php");
-    $link[] = array('key' => 'subject_id', 'value' => null);
-    $subject_id_index = get_index($link, "subject_id");
+    $link_comment = array();
+    $link_comment[] = array('key' => 'page', 'value' => "comment.php");
+    $link_comment[] = array('key' => 'subject_id', 'value' => null);
+    $subject_id_index = get_index($link_comment, "subject_id");
     // navigation link for profil
     $link_profil = array();
     $link_profil[] = array('key' => 'page', 'value' => "profile.php");
@@ -68,11 +68,11 @@
 
     <?php foreach ($subject as $item) { ?>
         <!-- link to comment  -->
-        <?php $link[$subject_id_index]['value'] = $item['subject_id']; ?>
+        <?php $link_comment[$subject_id_index]['value'] = $item['subject_id']; ?>
         <!-- post's card -->
         
         <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4 position-relative">
-            <a href="<?= navigation_link($link) ?>" class="text-decoration-none text-black stretched-link" style="">
+            <a href="<?= navigation_link($link_comment) ?>" class="text-decoration-none text-black stretched-link" style="">
                 <div class="card-body">
                     <!-- sender info (user img, name , sended_date) -->
                     <div class="post-info d-flex align-items-center gap-2 mb-3">
@@ -99,8 +99,8 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <video controls style="position: relative; z-index: 10;">
-                                        <source class="img-fluid" src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
+                                    <video controls style="position: relative; z-index: 10;" class="img-fluid">
+                                        <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
                                         Votre navigateur ne supporte pas la lecture vidéo.
                                     </video>
                                 </div>
@@ -112,7 +112,7 @@
                     <div class="post-comment mt-3 d-flex align-items-start">
                         <!-- commment number -->
                         <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                        <a href="<?= navigation_link($link) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 10;">
+                        <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 10;">
                             <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
                             <span class="text-black fw-bold"><?= count($comments_number) ?></span>
                         </a>

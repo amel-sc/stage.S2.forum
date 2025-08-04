@@ -102,7 +102,6 @@
             }
         }
         // execute the request
-        echo $sql;
         $result = array_query($sql);
 
         return $result;

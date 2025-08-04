@@ -1,5 +1,17 @@
+<?php 
+    // navigation link 
+    $link_home = array();
+    $link_home[] = array('key' => 'page', 'value' => "home.php");
+?>
 <section class="div-container">
-    <h1 class="fw-medium m-auto col-12 col-lg-7 mb-3">Create Post</h1>
+    <div class="m-auto col-12 col-lg-7">
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <a href="<?= navigation_link($link_home) ?>" class="m-0 return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="" style="width: 20px;">
+            </a>
+            <h1 class="fw-medium m-0">Create Post</h1>
+        </div>
+    </div>
     <div class="m-auto col-12 col-lg-7">
         <form action="traitement_create_post.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">

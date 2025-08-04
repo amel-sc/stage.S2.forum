@@ -1,8 +1,8 @@
 <?php
     // naviagtion link
-    $link = array();
-    $link[] = array('key' => 'page', 'value' => null);
-    $page_index = get_index($link, "page");
+    $link_header = array();
+    $link_header[] = array('key' => 'page', 'value' => null);
+    $page_index = get_index($link_header, "page");
 
     $user_header = get_user_by_id($_SESSION['current_user']['user_id']);
 ?>
@@ -10,23 +10,23 @@
 <header>
     <nav class="navbar navbar-expand-lg fixed-top border-bottom border-dark-subtle" style="background-color: white;" data-bs-theme="light">
         <div class="container-fluid">
-            <?php $link[$page_index]['value'] = "home.php"; ?>
-            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link) ?>">Forum</a>
+            <?php $link_header[$page_index]['value'] = "home.php"; ?>
+            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link_header) ?>">Forum</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-lg-center">
                     <li class="nav-item">
-                        <?php $link[$page_index]['value'] = "home.php"; ?>
+                        <?php $link_header[$page_index]['value'] = "home.php"; ?>
                         <div class="d-block d-lg-none">
-                            <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                            <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>"> 
                                 <img class="" src="../assets/images/home.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                 <span class="text-black d-block d-lg-none">Home</span>
                             </a>
                         </div>
                         <div class="d-none d-lg-block">
-                            <a class="rounded-circle d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                            <a class="rounded-circle d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>"> 
                                 <img class="" src="../assets/images/home.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                 <span class="text-black d-block d-lg-none">Home</span>
                             </a>
@@ -34,15 +34,15 @@
                     </li>
                     <?php if ($_SESSION['current_user']['u_statut'] != 0 ) { ?>
                         <li class="nav-item">
-                            <?php $link[$page_index]['value'] = "create_post.php"; ?>
+                            <?php $link_header[$page_index]['value'] = "create_post.php"; ?>
                             <div class="d-block d-lg-none">
-                                <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                                <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>"> 
                                     <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                     <span class="text-black d-block d-lg-none">Create</span>
                                 </a>
                             </div>
                             <div class="d-none d-lg-block">
-                                <a class="rounded-pill d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>"> 
+                                <a class="rounded-pill d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>"> 
                                     <img class="" src="../assets/images/plus.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                     <span class="text-black d-block d-lg-none">Create</span>
                                 </a>
@@ -57,18 +57,17 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end" style="min-width: 250px;">
                                 <li>
-                                    <?php $link[$page_index]['value'] = "profile.php"; ?>
-                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>" style="padding: 10px 0px 10px 16px;">
+                                    <?php $link_header[$page_index]['value'] = "profile.php"; ?>
+                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
                                         <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
                                         <span class="text-black d-block">View Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <?php $link[$page_index]['value'] = "profile.php"; ?>
-                                    <a class="d-flex align-items-center header-link gap-2" href="#" style="padding: 10px 0px 10px 16px;">
+                                    <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#confirmation">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                         <span class="text-black d-block">Log Out</span>
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -79,18 +78,17 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end" style="min-width: 250px;">
                                 <li>
-                                    <?php $link[$page_index]['value'] = "profile.php"; ?>
-                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>" style="padding: 10px 0px 10px 16px;">
+                                    <?php $link_header[$page_index]['value'] = "profile.php"; ?>
+                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
                                         <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
                                         <span class="text-black d-block">View Profil</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <?php $link[$page_index]['value'] = "login.php"; ?>
-                                    <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link) ?>" style="padding: 10px 0px 10px 16px;">
+                                    <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#confirmation">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                         <span class="text-black d-block">Log Out</span>
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -100,3 +98,25 @@
         </div>
     </nav>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-auto" style="padding: 30px 0px 55px 0px;">
+                <p class="mb-4">Are you sure you want to continue?</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <button type="button" class="btn btn-success rounded-1" style="padding: 12px 45px 12px 45px;">
+                        <?php $link_header[$page_index]['value'] = "login.php"; ?>
+                        <a href="<?= navigation_link($link_header) ?>" class="text-white" style="text-decoration: none;" style="display: block;">Yes</a>
+                    </button>
+                    <button type="button" class="btn btn-danger text-white rounded-1" data-bs-dismiss="modal" style="padding: 12px 45px 12px 45px;">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

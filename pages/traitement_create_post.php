@@ -20,8 +20,8 @@
         $s_date = get_current_date()['date_now'];
 
         // naviagtion link
-        $link = array();
-        $link[] = array('key' => 'page', 'value' => "home.php");
+        $link_home = array();
+        $link_home[] = array('key' => 'page', 'value' => "home.php");
 
         // insert values
         $value = array();
@@ -34,6 +34,6 @@
         insert_table("forum_subject", $value);
 
         // header to comment.php page
-        header('Location: ' . navigation_link($link));
+        header('Location: ' . navigation_link($link_home));
     }
 ?>
