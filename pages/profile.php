@@ -61,20 +61,7 @@
                     <div class="col">
                         <div class="info-div border border-dark-subtle rounded-3">
                             <small>Gender</small>
-                            <!-- gender's condition -->
-                            <?php 
-                                $gender = $user['u_gender'];
-                                if ($gender == "M")
-                                {
-                                    $gender = "Male";
-                                } 
-                                else if ($gender == "F")
-                                {
-                                    $gender = "Female";
-                                }
-                            ?>
-    
-                            <p class="m-0 fs-5"><?= $gender ?></p>
+                            <p class="m-0 fs-5"><?= gender_name($user['u_gender']) ?></p>
                         </div>
                     </div>
                 </div>
@@ -94,15 +81,7 @@
                         <div class="col">
                             <div class="info-div border border-dark-subtle rounded-3">
                                 <small>password</small>
-                                <?php
-                                    $password = $user['u_mdp'];
-                                    $dot_mdp = "";
-                                    for ($i = 0; $i < strlen($password); $i++)
-                                    {
-                                        $dot_mdp = $dot_mdp . "&#x2022;";
-                                    }
-                                ?>
-                                <p class="m-0 fs-5"><?= $dot_mdp ?></p>
+                                <p class="m-0 fs-5"><?= mdp_to_dot($user['u_mdp']) ?></p>
                             </div>
                         </div>
                     </div>
