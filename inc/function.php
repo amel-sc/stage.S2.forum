@@ -216,5 +216,21 @@
         return $order_name;
     }
 
+    //user_statut name
+    function statut_name($statut)
+    {
+        $statut_name = null;
+        if ($statut == "1")
+        {
+            $statut_name = "Admin";
+        }
+        else if ($statut == "2")
+        {
+            $statut_name = "Common user";
+        }
+
+        return $statut_name;
+    }
+
 
 ?>

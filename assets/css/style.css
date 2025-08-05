@@ -179,3 +179,5 @@ button[type=submit]:hover {
 .custom-btn:focus:not(:focus-visible) {
     outline: none;
 }
+
+/* user management */

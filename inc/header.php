@@ -32,7 +32,7 @@
                             </a>
                         </div>
                     </li>
-                    <?php if ($_SESSION['current_user']['u_statut'] != 0 ) { ?>
+                    <?php if ($user_header['u_statut'] == 1) { ?>
                         <li class="nav-item">
                             <?php $link_header[$page_index]['value'] = "create_post.php"; ?>
                             <div class="d-block d-lg-none">
@@ -63,6 +63,15 @@
                                         <span class="text-black d-block">View Profile</span>
                                     </a>
                                 </li>
+                                <?php if ($user_header['u_statut'] == 1) { ?>
+                                    <li>
+                                        <?php $link_header[$page_index]['value'] = "user_management.php"; ?>
+                                        <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
+                                            <img class="" src="../assets/images/users.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                            <span class="text-black d-block">Users</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
                                 <li>
                                     <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#confirmation">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
@@ -84,6 +93,15 @@
                                         <span class="text-black d-block">View Profil</span>
                                     </a>
                                 </li>
+                                <?php if ($user_header['u_statut'] == 1) { ?>
+                                    <li>
+                                        <?php $link_header[$page_index]['value'] = "user_management.php"; ?>
+                                        <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
+                                            <img class="" src="../assets/images/users.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
+                                            <span class="text-black d-block">Users</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
                                 <li>
                                     <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#confirmation">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
