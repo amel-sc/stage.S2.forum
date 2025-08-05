@@ -224,7 +224,7 @@
         {
             $statut_name = "Admin";
         }
-        else if ($statut == "2")
+        else if ($statut == "0")
         {
             $statut_name = "Common user";
         }

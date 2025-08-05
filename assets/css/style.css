@@ -181,3 +181,6 @@ button[type=submit]:hover {
 }
 
 /* user management */
+.table>:not(caption)>*>* {
+    padding: 15px !important;
+}
