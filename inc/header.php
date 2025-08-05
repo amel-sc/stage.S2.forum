@@ -110,10 +110,8 @@
             <div class="modal-body m-auto" style="padding: 30px 0px 55px 0px;">
                 <p class="mb-4">Are you sure you want to continue?</p>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-success rounded-1" style="padding: 12px 45px 12px 45px;">
-                        <?php $link_header[$page_index]['value'] = "login.php"; ?>
-                        <a href="<?= navigation_link($link_header) ?>" class="text-white" style="text-decoration: none;" style="display: block;">Yes</a>
-                    </button>
+                    <?php $link_header[$page_index]['value'] = "login.php"; ?>
+                    <a role="button" class="btn btn-success rounded-1" href="<?= navigation_link($link_header) ?>" class="text-white" style="text-decoration: none; padding: 12px 45px 12px 45px;">Yes</a>
                     <button type="button" class="btn btn-danger text-white rounded-1" data-bs-dismiss="modal" style="padding: 12px 45px 12px 45px;">No</button>
                 </div>
             </div>
