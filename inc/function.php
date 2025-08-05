@@ -146,7 +146,7 @@
     // post duration
     function duration($datetime) {
         $timestamp = strtotime($datetime);
-        $now = time();
+        $now = strtotime(get_current_date()['date_now']);
         $diff = $now - $timestamp;
 
         if ($diff < 60) {

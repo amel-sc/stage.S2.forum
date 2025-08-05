@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
                 <label for="image" class="border-dotted" style="width: 100%; border-radius: 22px;">
-                    <div class="d-flex align-items-center justify-content-center gap-2" style="padding: 55px;">
+                    <div class="d-flex align-items-center justify-content-center gap-2" style="padding: 55px 10px 55px 10px;">
                         <input type="file" class="form-control"  id="image" name="s_media" accept="image/jpeg, image/png, image/jpg, video/mp4">
                     </div>
                 </label>
