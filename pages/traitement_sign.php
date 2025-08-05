@@ -36,6 +36,7 @@
         $value[] = array('key' => 'u_email', 'value' => $email);
         $value[] = array('key' => 'u_mdp', 'value' => $mdp);
         $value[] = array('key' => 'u_image', 'value' => "../assets/images/user.png");
+        $value[] = array('key' => 'u_statut', 'value' => 0); 
         // insert values in table
         insert_table("user", $value);
         // navigation link

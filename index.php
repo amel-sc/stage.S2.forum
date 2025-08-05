@@ -1,3 +1,3 @@
 <?php
-    header('Location:pages/model.php?page=sign.php'); 
+    header('Location:pages/model.php?page=login.php'); 
 ?>

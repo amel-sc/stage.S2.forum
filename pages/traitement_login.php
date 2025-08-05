@@ -25,7 +25,8 @@
 
     else 
     {
-        $link[$page_index]['value'] = "inscription";
+        $link[] = array('key' => 'error', 'value' => 0);
+        $link[$page_index]['value'] = "login.php";
         header('Location: ' . navigation_link($link));
     }
 ?>

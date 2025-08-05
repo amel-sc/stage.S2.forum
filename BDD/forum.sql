@@ -49,7 +49,7 @@ INSERT INTO user (user_id, u_first_name, u_last_ame, u_birth_date, u_gender, u_e
 
 -- view subject / user
 create or replace view v_subject_user as 
-(select u.*, s.subject_id, s.s_title, s.s_content, s.s_date from forum_subject s 
+(select u.*, s.subject_id, s.s_title, s.s_content, s.s_date, s.s_media from forum_subject s 
 join user u on s.user_id = u.user_id);
 
 -- view subject / user

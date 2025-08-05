@@ -3,15 +3,15 @@
     session_start();
 
     // values getted
-    $content = $_GET['c_content'];
+    $content = $_POST['c_content'];
     $user_id = $_SESSION['current_user']['user_id'];
-    $subject_id = $_GET['subject_id'];
+    $subject_id = $_POST['subject_id'];
     $c_date = get_current_date()['date_now'];
 
     // naviagtion link
-    $link = array();
-    $link[] = array('key' => 'page', 'value' => "comment.php");
-    $link[] = array('key' => 'subject_id', 'value' => $subject_id);
+    $link_comment = array();
+    $link_comment[] = array('key' => 'page', 'value' => "comment.php");
+    $link_comment[] = array('key' => 'subject_id', 'value' => $subject_id);
 
     // insert values
     $value = array();
@@ -23,6 +23,5 @@
     insert_table("comment", $value);
 
     // header to comment.php page
-    header('Location: ' . navigation_link($link));
-
+    header('Location: ' . navigation_link($link_comment));
 ?>

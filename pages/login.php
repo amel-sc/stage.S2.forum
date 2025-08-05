@@ -1,6 +1,14 @@
 <section class="inputs_container">
-    <div class="inputs_div border border-0 rounded-3">
+    <div class="inputs_div border border-dark-subtle rounded-3">
         <h1 class="fw-bold text-center mb-5">Log in</h1>
+        <?php if (isset($_GET['error'])) { ?>
+             <div class="alert alert-danger d-flex align-items-center" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                 <div>
+                     Email/password is incorrect
+                 </div>
+             </div>
+        <?php } ?>
         <form action="traitement_login.php" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -11,7 +19,7 @@
                 <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
             </div>
             <div class="mb-3 d-grid">
-                <button type="submit">Log in</button>
+                <button type="submit" class="btn btn-primary">Log in</button>
             </div>
         </form>
         <!-- login link -->

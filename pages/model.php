@@ -15,8 +15,14 @@
     <title>Forum</title>
 </head>
 <body>
-    <?php $page = $_GET['page']; ?>
-    <?php include('../inc/header.php'); ?>
+    <?php
+        $page = $_GET['page'];
+        // condition for login and sign in page
+        if ($page != "login.php" && $page != "sign.php")
+        {
+            include('../inc/header.php'); 
+        }
+    ?>
     <main class="container">
         <!-- page getted -->
         <?php   

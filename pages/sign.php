@@ -1,5 +1,5 @@
 <section class="inputs_container">
-    <div class="inputs_div border border-0 rounded-3">
+    <div class="inputs_div border border-dark-subtle rounded-3">
         <h1 class="fw-bold text-center mb-5">Sign in</h1>
         <form action="traitement_sign.php" method="post">
             <div class="mb-3">
@@ -30,7 +30,7 @@
                 <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
             </div>
             <div class="mb-3 d-grid">
-                <button type="submit">Sign in</button>
+                <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
         </form>
         <!-- login link -->

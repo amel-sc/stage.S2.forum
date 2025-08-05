@@ -34,8 +34,6 @@
     }   
 
 
-
-
     // function to get comment by forum_subject
     function get_comment_by_subject($subject_id)
     {
@@ -53,6 +51,125 @@
         $result = one_query($sql);
 
         return $result;
+    }
+
+    // function to get user by id
+    function get_user_by_id($user_id)
+    {
+        $sql = "SELECT * FROM user WHERE user_id = %s";
+        $sql = sprintf($sql, $user_id);
+        $result = one_query($sql);
+
+        return $result;
+    }
+
+    // function uplaod image for profil
+    function upload_image($file)
+    {
+        $upload_dir = dirname(__DIR__).'/assets/uploads/';
+        $max_size = 500 * 1024 * 1024;
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            die('Erreur lors de l’upload : ' . $file['error']);
+        }
+
+        // Vérifie la taille
+        if ($file['size'] > $max_size) {
+            die('Le fichier est trop volumineux.');
+        }
+
+        // Vérifie le type MIME avec `finfo`
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        if (!in_array($mime, $allowedMimeTypes)) {
+            die('Type de fichier non autorisé : ' . $mime);
+        }
+
+        // renommer le fichier
+        $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+        $newName = $originalName . '_' . uniqid() . '.' . $extension;
+
+        // Déplace le fichier
+        move_uploaded_file($file['tmp_name'], $upload_dir . $newName);
+
+        //add post in BDD
+        $file_path = '../assets/uploads/' . $newName;
+        return $file_path;
+    }
+
+
+    // function to upload image and video for post
+    function upload_image_video($file)
+    {
+        $upload_dir = dirname(__DIR__).'/assets/uploads/';
+        $max_size = 500 * 1024 * 1024;
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'video/mp4'];
+
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            die('Erreur lors de l’upload : ' . $file['error']);
+        }
+
+        // Vérifie la taille
+        if ($file['size'] > $max_size) {
+            die('Le fichier est trop volumineux.');
+        }
+
+        // Vérifie le type MIME avec `finfo`
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        if (!in_array($mime, $allowedMimeTypes)) {
+            die('Type de fichier non autorisé : ' . $mime);
+        }
+
+        // renommer le fichier
+        $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+        $newName = $originalName . '_' . uniqid() . '.' . $extension;
+
+        // Déplace le fichier
+        move_uploaded_file($file['tmp_name'], $upload_dir . $newName);
+
+        //add post in BDD
+        $file_path = '../assets/uploads/' . $newName;
+        return $file_path;
+    }
+
+
+    // post duration
+    function duration($datetime) {
+        $timestamp = strtotime($datetime);
+        $now = strtotime(get_current_date()['date_now']);
+        $diff = $now - $timestamp;
+
+        if ($diff < 60) {
+            return $diff . ' sec.' . " ago";
+        } elseif ($diff < 3600) {
+            $minutes = floor($diff / 60);
+            return $minutes . ' min.' . " ago";
+        } elseif ($diff < 86400) {
+            $hours = floor($diff / 3600);
+            return $hours . ' hr.' . " ago";
+        } elseif ($diff < 604800) {
+            $days = floor($diff / 86400);
+            return $days . ' day' . ($days > 1 ? 's' : '') . " ago";
+        } elseif ($diff < 2419200) {
+            $weeks = floor($diff / 604800);
+            return $weeks . ' week' . ($weeks > 1 ? 's' : '') . " ago";
+        } elseif ($diff < 29030400) {
+            $months = floor($diff / 2419200);
+            return $months . ' month' . ($months > 1 ? 's' : '') . " ago";
+        } else {
+            $years = floor($diff / 29030400);
+            return $years . ' year' . ($years > 1 ? 's' : '') . " ago";
+        }
     }
 
 ?>
