@@ -71,12 +71,12 @@
                 <!-- video or image of the post -->
                     <?php if ($subject[0]['s_media'] != "empty") { ?>
                         <?php if(strpos($subject[0]['s_media'], ".mp4") == false) { ?>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <img class="img-fluid" src="<?= $subject[0]['s_media'] ?>" alt="..." style="object-fit: contain;">
+                            <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
+                                <img class="col-12 col-md-7" src="<?= $subject[0]['s_media'] ?>" alt="..." style="object-fit: contain;">
                             </div>
                         <?php } else { ?>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <video controls class="img-fluid">
+                            <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
+                                <video class="col-12 col-md-7" controls style="object-fit: contain;">
                                     <source src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
                                     Votre navigateur ne supporte pas la lecture vidéo.
                                 </video>
