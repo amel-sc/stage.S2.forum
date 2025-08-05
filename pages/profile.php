@@ -13,6 +13,24 @@
     // navigation link 
     $link_home = array();
     $link_home[] = array('key' => 'page', 'value' => "home.php");
+
+    // password hidden
+    $mdp_statut = null;
+    if (isset($_GET['mdp_statut']))
+    {
+        $mdp_statut = $_GET['mdp_statut'];   
+    }
+    else 
+    {
+        $mdp_statut = "hide";
+    }
+
+    // password navigation link
+    $link_password = array();
+    $link_password[] = array('key' => 'page', 'value' => 'profile.php');
+    $link_password[] = array('key' => 'user_id', 'value' => $user['user_id']);
+    $link_password[] = array('key' => 'mdp_statut', 'value' => null);
+    $password_index = get_index($link_password, "mdp_statut");
 ?>
 
 <section class="div-container">
@@ -61,20 +79,7 @@
                     <div class="col">
                         <div class="info-div border border-dark-subtle rounded-3">
                             <small>Gender</small>
-                            <!-- gender's condition -->
-                            <?php 
-                                $gender = $user['u_gender'];
-                                if ($gender == "M")
-                                {
-                                    $gender = "Male";
-                                } 
-                                else if ($gender == "F")
-                                {
-                                    $gender = "Female";
-                                }
-                            ?>
-    
-                            <p class="m-0 fs-5"><?= $gender ?></p>
+                            <p class="m-0 fs-5"><?= gender_name($user['u_gender']) ?></p>
                         </div>
                     </div>
                 </div>
@@ -94,15 +99,21 @@
                         <div class="col">
                             <div class="info-div border border-dark-subtle rounded-3">
                                 <small>password</small>
-                                <?php
-                                    $password = $user['u_mdp'];
-                                    $dot_mdp = "";
-                                    for ($i = 0; $i < strlen($password); $i++)
-                                    {
-                                        $dot_mdp = $dot_mdp . "&#x2022;";
-                                    }
-                                ?>
-                                <p class="m-0 fs-5"><?= $dot_mdp ?></p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <?php if ($mdp_statut == "hide") { ?>
+                                        <p class="m-0 fs-5"><?= mdp_to_dot($user['u_mdp']) ?></p>
+                                        <?php $link_password[$password_index]['value'] = "show"; ?>
+                                        <a href="<?= navigation_link($link_password) ?>" class="header-link rounded-circle">
+                                            <img src="../assets/images/hide.png" alt="" style="width: 25px; height: 25px">
+                                        </a>
+                                    <?php } else if ($mdp_statut == "show") { ?>
+                                        <p class="m-0 fs-5"><?= $user['u_mdp'] ?></p>
+                                        <?php $link_password[$password_index]['value'] = "hide"; ?>
+                                        <a href="<?= navigation_link($link_password) ?>" class="header-link rounded-circle">
+                                            <img src="../assets/images/show.png" alt="" style="width: 25px; height: 25px">
+                                        </a>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>

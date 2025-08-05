@@ -172,4 +172,49 @@
         }
     }
 
+    // mdp to dot
+    function mdp_to_dot($mdp)
+    {
+        $dot_mdp = "";
+        for ($i = 0; $i < strlen($mdp); $i++)
+        {
+            $dot_mdp = $dot_mdp . "&#x2022;";
+        }
+
+        return $dot_mdp;
+    }
+
+    // gender return
+    function gender_name($gender)
+    {
+        $gender_name = null;
+        if ($gender == "M")
+        {
+            $gender_name = "Male";
+        }
+        else if ($gender == "F")
+        {
+            $gender_name = "Female";
+        }
+
+        return $gender_name;
+    }
+
+    // order return
+    function order_name($order)
+    {
+        $order_name = null;
+        if ($order == "DESC")
+        {
+            $order_name = "New";
+        }
+        else if ($order == "ASC")
+        {
+            $order_name = "Old";
+        }
+
+        return $order_name;
+    }
+
+
 ?>

@@ -114,20 +114,11 @@
 <section class="comment_container mb-3">
     <h2 class="col-12 col-lg-9 m-auto" style="padding: 0px 0px 0px 25px;"><span class="fw-bold"><?= count($comments) ?></span> Comments</h2>
     <!-- sort by -->
-    <div class="col-12 col-lg-9 m-auto d-flex align-items-center gap-2" style="padding: 0px 0px 0px 25px;>
+    <div class="col-12 col-lg-9 m-auto d-flex align-items-center gap-2" style="padding: 0px 0px 0px 25px;">
         <p class="m-0">Sort by:</p>
         <div class="dropdown">
             <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn fw-bold" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
-                <?php
-                    if ($order_name == "DESC")
-                    {
-                        echo "New";
-                    }
-                    else 
-                    {
-                        echo "Old";
-                    }
-                ?>
+                <?= order_name($order_name) ?>
             </button>
             <ul class="dropdown-menu" style="min-width: 100px;">
                 <li>

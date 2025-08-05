@@ -38,16 +38,7 @@
     <!-- sort by -->
     <div class="d-block col-12 col-lg-9 m-auto dropdown">
         <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
-            <?php
-                if ($order_name == "DESC")
-                {
-                    echo "New";
-                }
-                else 
-                {
-                    echo "Old";
-                }
-            ?>
+            <?= order_name($order_name) ?>
         </button>
         <ul class="dropdown-menu" style="min-width: 100px;">
             <li>
