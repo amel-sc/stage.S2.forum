@@ -94,9 +94,9 @@
                         <td><?= statut_name($user['u_statut']) ?></td>
                         <td class="text-center">
                             <div class="d-flex align-items-center justify-content-evenly">
-                                <a class="rounded-pill d-flex align-items-center header-link" href="#"> 
+                                <button class="rounded-pill d-flex align-items-center border-0 header-link" data-bs-toggle="modal" data-bs-target="<?= "#" . $user['user_id'] ?>"> 
                                     <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
-                                </a>
+                                </button>
                                 <a class="rounded-pill d-flex align-items-center header-link" href="#">
                                     <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
                                 </a>
@@ -107,6 +107,63 @@
                             <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none;padding: 2px 12px 2px 12px;">Login</a>
                         </td>
                     </tr>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="<?= $user['user_id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?= $user['user_id'] . "label" ?>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <img src="<?= $user['u_image'] ?>" alt="User profile" class="img-profile" style="width: 90px; height: 90px;">
+                                    </div>
+                                    <div class="user-info">
+                                        <form action="" method="post">
+                                            <div class="mb-3">
+                                                <div class="">
+                                                    <label for="last_name" class="form-label">Last name</label>
+                                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Name" required>
+                                                </div>
+                                                <div class="">
+                                                    <label for="first_name" class="form-label">First name</label>
+                                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" required>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="birth_date" class="form-label">Birthday</label>
+                                                <input type="date" class="form-control" id="birth_date" name="birth_date" placeholder="Birthday" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gender" class="form-label">Gender</label>
+                                                <select name="gender" id="gender" class="form-select">
+                                                    <option value="M">Male</option>
+                                                    <option value="F">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="mdp" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
+                                            </div>
+                                            <div class="mb-3 d-grid">
+                                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <?php } ?>
             </tbody>
         </table>
