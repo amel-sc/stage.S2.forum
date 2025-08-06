@@ -1,4 +1,9 @@
 <?php 
+    // user / admin list navigation link
+    $user_controls_link = array();
+    $user_controls_link[] = array('key' => 'page', 'value' => "user_management.php");
+    $user_controls_link[] = array('key' => 'user_statut', 'value' => null);
+    $user_statut_index = get_index($user_controls_link, "user_statut");
     // get user type 
     $user_list_condition = [];
     if (isset($_GET['user_statut']))
@@ -11,14 +16,12 @@
         $user_list_condition[] = array('key' => 'u_statut', 'value' => 0);
         $user_statut = 0;
     }
+
+    $user_list_other_condition[] = "ORDER by u_last_name ASC";
+
     // all user list
     $user_list = select_table("user", $user_list_condition, null);
 
-    // user / admin list navigation link
-    $user_statut_link = array();
-    $user_statut_link[] = array('key' => 'page', 'value' => "user_management.php");
-    $user_statut_link[] = array('key' => 'user_statut', 'value' => null);
-    $user_statut_index = get_index($user_statut_link, "user_statut");
     // login user navigation link
     $login_link = array();
     $login_link[] = array('key' => 'page', 'value' => "traitement_login.php");
@@ -26,18 +29,19 @@
     $login_link[] = array('key' => 'admin_login', 'value' => 1);
     $login_index = get_index($login_link, 'user_id');
 ?>
+
 <section class="div-container">
     <!-- user management navigation link -->
     <?php if ($user_statut == 0) { ?>
         <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
             <ul class="nav nav-underline">
                 <li class="nav-item text-center">
-                    <?php $user_statut_link[$user_statut_index]['value'] = 0; ?>
-                    <a class="nav-link active" href="<?= navigation_link($user_statut_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
+                    <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
+                    <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
                 </li>
                 <li class="nav-item">
-                    <?php $user_statut_link[$user_statut_index]['value'] = 1 ?>
-                    <a class="nav-link" href="<?= navigation_link($user_statut_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
+                    <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
+                    <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
                 </li>
             </ul>
         </div>
@@ -45,19 +49,23 @@
         <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
             <ul class="nav nav-underline">
                 <li class="nav-item text-center">
-                    <?php $user_statut_link[$user_statut_index]['value'] = 0; ?>
-                    <a class="nav-link" href="<?= navigation_link($user_statut_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
+                    <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
+                    <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
                 </li>
                 <li class="nav-item">
-                    <?php $user_statut_link[$user_statut_index]['value'] = 1 ?>
-                    <a class="nav-link active" href="<?= navigation_link($user_statut_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
+                    <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
+                    <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
                 </li>
             </ul>
         </div>
     <?php } ?>
     <!-- user management header -->
     <div class="ms-4 d-flex align-items-center gap-4 management_header mb-3">
-        <h1>Users</h1>
+        <?php if ($user_statut == 0) { ?>
+            <h1>Users</h1>
+        <?php } else if ($user_statut == 1) { ?>
+            <h1>Admins</h1>
+        <?php } ?> 
         <button class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</button>
     </div>
     <!-- user list -->
@@ -66,7 +74,9 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Photo</th>
-                    <th scope="col">User name</th>
+                    <th scope="col">
+                        User name
+                    </th>
                     <th scope="col">Email</th>
                     <th scope="col">Status</th>
                     <th scope="col" class="text-center">Operation</th>

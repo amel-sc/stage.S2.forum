@@ -5,7 +5,6 @@
     $link = array();
     $link[] = array('key' => 'page', 'value' => null);
     $page_index = get_index($link, "page");
-    var_dump($_GET);
 
     // condition admin login or common user login
     if (isset($_GET['admin_login']))
@@ -21,7 +20,7 @@
         // session and header location
         $_SESSION['current_user'] = $user[0];
         $link[$page_index]['value'] = "home.php";
-        header('Location' . navigation_link($link));
+        header('Location: ' . navigation_link($link));
     }
     else 
     {
