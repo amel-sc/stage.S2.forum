@@ -184,3 +184,19 @@ button[type=submit]:hover {
 .table>:not(caption)>*>* {
     padding: 15px !important;
 }
+.table tbody tr:last-child td,
+.table tbody tr:last-child th {
+    border-bottom: none;
+}
+
+.nav-link {
+    color: #5c6c74 !important;
+}
+.nav-link:hover {
+    color: black !important;
+    border-bottom-color: #0d6efd !important;
+}
+.nav-link.active {
+    color: black !important;
+    border-bottom-color: #0d6efd !important;
+}

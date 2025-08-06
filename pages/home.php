@@ -86,11 +86,11 @@
                         <?php if ($item['s_media'] != "empty") { ?>
                             <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
                                 <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
-                                    <img class="col-12 col-md-7" src="<?= $item['s_media'] ?>" alt="..." style="object-fit: contain; position: relative; z-index: 10;">
+                                    <img class="col-12 col-md-7 object-fit-contain" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 10;">
                                 </div>
                             <?php } else { ?>
                                 <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
-                                    <video class="col-12 col-md-7" controls style="position: relative; z-index: 10; object-fit: contain;">
+                                    <video class="col-12 col-md-7 object-fit-contain" controls style="z-index: 10;">
                                         <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
                                         Votre navigateur ne supporte pas la lecture vidéo.
                                     </video>
