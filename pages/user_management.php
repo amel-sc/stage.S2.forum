@@ -19,6 +19,12 @@
     $user_statut_link[] = array('key' => 'page', 'value' => "user_management.php");
     $user_statut_link[] = array('key' => 'user_statut', 'value' => null);
     $user_statut_index = get_index($user_statut_link, "user_statut");
+    // login user navigation link
+    $login_link = array();
+    $login_link[] = array('key' => 'page', 'value' => "traitement_login.php");
+    $login_link[] = array('key' => 'user_id', 'value' => null);
+    $login_link[] = array('key' => 'admin_login', 'value' => 1);
+    $login_index = get_index($login_link, 'user_id');
 ?>
 <section class="div-container">
     <!-- user management navigation link -->
@@ -87,7 +93,8 @@
                             </div>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-primary fw-bold rounded-1" style="padding: 2px 12px 2px 12px;">Login</button>
+                            <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
+                            <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none;padding: 2px 12px 2px 12px;">Login</a>
                         </td>
                     </tr>
                 <?php } ?>
