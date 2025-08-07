@@ -3,7 +3,7 @@
     require("gen_function.php");
     
     // navigation link functions
-    // function to create links
+    // function to create links with model
     function navigation_link($value)
     {
         $link = 'model.php?';
@@ -14,6 +14,29 @@
             }
     
             $link = $link . $value[$i]['key'] . '=' . $value[$i]['value'];
+        }
+    
+        return $link;
+    }
+    // function to create link without model
+    function custom_navigation_link($value)
+    {
+        $page_index = get_index($value, 'page');
+        $link = $value[$page_index]['value'] . '?';
+
+        // count for '&'
+        $count = 0;
+        for ($i = 0; $i < count($value); $i++)
+        {
+            if ($value[$i]['key'] != 'page')
+            {
+                if ($count > 0) {
+                    $link = $link . '&';
+                }
+        
+                $link = $link . $value[$i]['key'] . '=' . $value[$i]['value'];
+                $count++;
+            }
         }
     
         return $link;
@@ -214,6 +237,22 @@
         }
 
         return $order_name;
+    }
+
+    //user_statut name
+    function statut_name($statut)
+    {
+        $statut_name = null;
+        if ($statut == "1")
+        {
+            $statut_name = "Admin";
+        }
+        else if ($statut == "0")
+        {
+            $statut_name = "Common user";
+        }
+
+        return $statut_name;
     }
 
 

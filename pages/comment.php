@@ -72,11 +72,11 @@
                     <?php if ($subject[0]['s_media'] != "empty") { ?>
                         <?php if(strpos($subject[0]['s_media'], ".mp4") == false) { ?>
                             <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
-                                <img class="col-12 col-md-7" src="<?= $subject[0]['s_media'] ?>" alt="..." style="object-fit: contain;">
+                                <img class="col-12 col-md-7 object-fit-contain" src="<?= $subject[0]['s_media'] ?>" alt="..." style="">
                             </div>
                         <?php } else { ?>
                             <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
-                                <video class="col-12 col-md-7" controls style="object-fit: contain;">
+                                <video class="col-12 col-md-7 object-fit-contain" controls style="">
                                     <source src="<?= htmlspecialchars($subject[0]['s_media']) ?>" type="video/mp4">
                                     Votre navigateur ne supporte pas la lecture vidéo.
                                 </video>
@@ -98,7 +98,7 @@
             <!-- input comment -->
             <div class="input-comment mb-3 border border-dark-subtle rounded-3">
                 <form action="traitement_comment.php" method="post">
-                    <textarea class="form-control mb-2" id="comment-textarea" name="c_content" rows="2" style="resize: none;" placeholder="Join the conversation" required></textarea>
+                    <textarea class="form-control mb-2" id="comment-textarea" name="c_content" rows="2" style="resize: none;" placeholder="Join the conversation" required pattern=".*\S.*"></textarea>
                     <!-- hidden values to send -->
                     <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
                     <div class="d-flex justify-content-end">
