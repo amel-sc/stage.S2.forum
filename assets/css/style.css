@@ -219,10 +219,11 @@ body {
     z-index: 2000;
     top: 70px;
     left: 0;
-    background-color: #111;
+    background-color: white;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .sidenav a {

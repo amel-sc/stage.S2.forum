@@ -33,14 +33,6 @@
     $order_index = get_index($link_order, "order");
 ?>
 
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-</div>
-
 <section class="div-container">
 
     <div class="content px-lg-5">
@@ -130,13 +122,25 @@
 </section>
 <!-- script offcanvas -->
 <script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
+
+function updatePadding() {
+  const box = document.getElementById("myBox");
+  const width = window.innerWidth;
+
+  if (width < 576) {
+    box.style.padding = "10px";
+  } else if (width < 768) {
+    box.style.padding = "20px";
+  } else if (width < 992) {
+    box.style.padding = "30px";
+  } else {
+    box.style.padding = "40px";
+  }
 }
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
+// Appeler au chargement
+updatePadding();
+
+// Mettre à jour lors du redimensionnement
+window.addEventListener('resize', updatePadding);
 </script>
