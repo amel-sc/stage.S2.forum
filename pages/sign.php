@@ -1,43 +1,46 @@
+<?php 
+    // login link
+    $link = array();
+    $link[] = $link[] = array('key' => 'page', 'value' => "login.php");
+?>
+
 <section class="inputs_container">
-    <div class="inputs_div border border-dark-subtle rounded-3">
-        <h1 class="fw-bold text-center mb-5">Sign in</h1>
+    <div class="inputs_div rounded-4">
+        <h1 class="fw-bold text-center mb-4" style="color: #0d6efd;">Sign in</h1>
         <form action="traitement_sign.php" method="post">
-            <div class="mb-3">
-                <label for="last_name" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Name" required>
+            <div class="name_div mb-3 d-flex align-items-center justify-content-between gap-3">
+                <div class="last_name">
+                    <label for="last_name" class="form-label fw-bold">Last name</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last name" required>
+                </div>
+                <div class="first_name">
+                    <label for="first_name" class="form-label fw-bold">First name</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" required>
+                </div>
             </div>
             <div class="mb-3">
-                <label for="first_name" class="form-label">First name</label>
-                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" required>
-            </div>
-            <div class="mb-3">
-                <label for="birth_date" class="form-label">Birthday</label>
+                <label for="birth_date" class="form-label fw-bold">Birthday</label>
                 <input type="date" class="form-control" id="birth_date" name="birth_date" placeholder="Birthday" required>
             </div>
             <div class="mb-3">
-                <label for="gender" class="form-label">Gender</label>
+                <label for="gender" class="form-label fw-bold">Gender</label>
                 <select name="gender" id="gender" class="form-select">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                 </select>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label fw-bold">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="mb-3">
-                <label for="mdp" class="form-label">Password</label>
+                <label for="mdp" class="form-label fw-bold">Password</label>
                 <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
             </div>
             <div class="mb-3 d-grid">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="input_button btn btn-primary fw-bold rounded-3">Sign in</button>
             </div>
         </form>
-        <!-- login link -->
-        <?php 
-            $link = array();
-            $link[] = $link[] = array('key' => 'page', 'value' => "login.php");
-        ?>
         <div class="text-center">
             <p class="m-0">
                 Already an account?

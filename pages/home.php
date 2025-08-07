@@ -33,87 +33,110 @@
     $order_index = get_index($link_order, "order");
 ?>
 
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
 <section class="div-container">
-    <h1 class="text-center fw-bold"><?= count($subject) ?> Posts</h1>
-    <!-- sort by -->
-    <div class="d-block col-12 col-lg-9 m-auto dropdown">
-        <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
-            <?= order_name($order_name) ?>
-        </button>
-        <ul class="dropdown-menu" style="min-width: 100px;">
-            <li>
-                <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
-            </li>
-            <li>
-                <?php $link_order[$order_index]['value'] = "DESC" ?>
-                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
-            </li>
-            <li>
-                <?php $link_order[$order_index]['value'] = "ASC" ?>
-                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
-            </li>
-        </ul>
-    </div>
-    <!-- separator -->
-    <hr class="hr-design col-12 col-lg-9">
 
-    <?php foreach ($subject as $item) { ?>
-        <!-- link to comment  -->
-        <?php $link_comment[$subject_id_index]['value'] = $item['subject_id']; ?>
-        <!-- post's card -->
-        
-        <div class="card card-post col-12 col-lg-9 m-auto border-0 rounded-4 position-relative">
-            <a href="<?= navigation_link($link_comment) ?>" class="text-decoration-none text-black stretched-link" style="">
-                <div class="card-body">
-                    <!-- sender info (user img, name , sended_date) -->
-                    <div class="post-info d-flex align-items-center gap-2 mb-3">
-                        <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
-                        <div class="">
-                            <p class="m-0">
-                                <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
-                                <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 10;">
-                                    <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
-                                </a>
-                                <span class="dot my-0">•</span>
-                                <span class="post-date"><?= $item['s_date'] ?></span>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- post content -->
-                    <div class="post-content">
-                        <h4 class="card-title fw-bold"><?= $item['s_title'] ?></h4>
-                        <!-- video or image of the post -->
-                        <?php if ($item['s_media'] != "empty") { ?>
-                            <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
-                                <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
-                                    <img class="col-12 col-md-7 object-fit-contain" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 10;">
-                                </div>
-                            <?php } else { ?>
-                                <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
-                                    <video class="col-12 col-md-7 object-fit-contain" controls style="z-index: 10;">
-                                        <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
-                                        Votre navigateur ne supporte pas la lecture vidéo.
-                                    </video>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
-                        <p class="card-text"><?= $item['s_content'] ?></p>
-                    </div>
-                    <!-- comment number and button to comment -->
-                    <div class="post-comment mt-3 d-flex align-items-start">
-                        <!-- commment number -->
-                        <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                        <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 10;">
-                            <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
-                            <span class="text-black fw-bold"><?= count($comments_number) ?></span>
-                        </a>
-                    </div>
+    <div class="content px-lg-5">
+        <div class="post_container rounded-4 mb-2" id="main">
+            <!-- sort by -->
+            <div class="d-flex align-items-center gap-1 mb-3">
+                <p class="m-0">Sort by : </p>
+                <div class="d-block dropdown">
+                    <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+                        <?= order_name($order_name) ?>
+                    </button>
+                    <ul class="dropdown-menu" style="min-width: 100px;">
+                        <li>
+                            <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
+                        </li>
+                        <li>
+                            <?php $link_order[$order_index]['value'] = "DESC" ?>
+                            <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
+                        </li>
+                        <li>
+                            <?php $link_order[$order_index]['value'] = "ASC" ?>
+                            <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
+                        </li>
+                    </ul>
                 </div>
-            </a>
+            </div>
+        
+         
+            <?php foreach ($subject as $item) { ?>
+                <!-- link to comment  -->
+                <?php $link_comment[$subject_id_index]['value'] = $item['subject_id']; ?>
+                <!-- post's card -->
+                 
+                <div class="card card-post border-top-0 border-end-0 border-start-0 rounded-4 position-relative">
+                    <a href="<?= navigation_link($link_comment) ?>" class="text-decoration-none text-black stretched-link" style="">
+                        <div class="card-body">
+                            <!-- sender info (user img, name , sended_date) -->
+                            <div class="post-info d-flex align-items-center gap-2 mb-3">
+                                <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                                <div class="">
+                                    <p class="m-0">
+                                        <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
+                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 10;">
+                                            <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
+                                        </a>
+                                        <span class="dot my-0">•</span>
+                                        <span class="post-date"><?= $item['s_date'] ?></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- post content -->
+                            <div class="post-content">
+                                <h4 class="card-title fw-bold"><?= $item['s_title'] ?></h4>
+                                <!-- video or image of the post -->
+                                <?php if ($item['s_media'] != "empty") { ?>
+                                    <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
+                                        <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
+                                            <img class="col-12 col-md-7 object-fit-contain" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 10;">
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="d-flex align-items-center justify-content-center" style="margin: auto;">
+                                            <video class="col-12 col-md-7 object-fit-contain" controls style="z-index: 10;">
+                                                <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
+                                                Votre navigateur ne supporte pas la lecture vidéo.
+                                            </video>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                                <p class="card-text"><?= $item['s_content'] ?></p>
+                            </div>
+                            <!-- comment number and button to comment -->
+                            <div class="post-comment mt-3 d-flex align-items-start">
+                                <!-- commment number -->
+                                <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
+                                <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 10;">
+                                    <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
+                                    <span class="text-black fw-bold"><?= count($comments_number) ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+         
+            <?php } ?>
         </div>
-
-        <!-- separator -->
-        <hr class="hr-design col-12 col-lg-9">
-
-    <?php } ?>
+    </div>
 </section>
+<!-- script offcanvas -->
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>

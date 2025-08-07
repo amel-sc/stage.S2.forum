@@ -8,10 +8,11 @@
 ?>
 
 <header>
-    <nav class="navbar navbar-expand-lg fixed-top border-bottom border-dark-subtle" style="background-color: white;" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="light" style="height: 70px;">
         <div class="container-fluid">
             <?php $link_header[$page_index]['value'] = "home.php"; ?>
-            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link_header) ?>">Forum</a>
+            <span class="me-2" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link_header) ?>" style="color: #0d6efd;">Forum</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
