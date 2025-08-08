@@ -1,6 +1,6 @@
 <?php
     // subject 
-    // forum subject list condition
+    // forum subject list other condition
     $other_condition = [];
     $order_name = null;
     if (isset($_GET['order']))
@@ -13,7 +13,7 @@
         $other_condition[] = "ORDER BY s_date DESC";
         $order_name = "DESC";
     }
-    // forum subject list
+    // forum subject
     $subject = select_table("v_subject_user", null, $other_condition);
 
     // navigation link for post
@@ -115,7 +115,6 @@
                         </div>
                     </a>
                 </div>
-         
             <?php } ?>
         </div>
     </div>

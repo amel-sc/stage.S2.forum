@@ -7,6 +7,11 @@
         // result
         $user = select_table('user', $user_condition, null)[0];
     }
+
+    //navigation link to user_management.php
+    $return_link = array();
+    $return_link[] = array('key' => 'page', 'value' => null);
+    $return_page_index = get_index($return_link, 'page'); 
 ?>
 <section class="div-container">
     <div class="content m-auto mb-3" style="max-width: 600px;">
@@ -41,12 +46,25 @@
                         <?php if ($user['u_gender'] == "M") { ?>
                             <option value="M" selected>Male</option>
                             <option value="F">Female</option>
-                        <?php } else if ($user['u_gender']) { ?>
+                        <?php } else if ($user['u_gender'] == "F") { ?>
                             <option value="M">Male</option>
                             <option value="F" selected>Female</option>
                         <?php } ?>
                     </select>
                     <small style="color: #5c6c74;"><?= gender_name($user['u_gender']) ?></small>
+                </div>
+                <div class="mb-3">
+                    <label for="statut" class="form-label fw-bold">Statut</label>
+                    <select name="statut" id="statut" class="form-select">
+                        <?php if ($user['u_statut'] == "1") { ?>
+                            <option value="0">Common user</option>
+                            <option value="1" selected>Admin</option>
+                        <?php } else if ($user['u_statut'] == "0") { ?>
+                            <option value="0" selected>Common user</option>
+                            <option value="1">Admin</option>
+                        <?php } ?>
+                    </select>
+                    <small style="color: #5c6c74;"><?= statut_name($user['u_statut']) ?></small>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label fw-bold">Email</label>
@@ -60,7 +78,8 @@
                 </div>
                 <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
                 <div class="d-flex align-items-center justify-content-center gap-4">
-                    <button type="" class="btn btn-secondary fw-bold rounded-1" style="padding: 8px 20px 8px 20px;">Cancel</button>
+                    <?php $return_link[$return_page_index]['value'] = 'user_management.php'; ?>
+                    <a href="<?= navigation_link($return_link) ?>" class="btn btn-secondary rounded-1 text-white" style="text-decoration: none; padding: 8px 20px 8px 20px;">Cancel</a>
                     <button type="submit" class="btn btn-primary fw-bold rounded-1" style="padding: 8px 20px 8px 20px;">Validate</button>
                 </div>
             </form>

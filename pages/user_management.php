@@ -33,6 +33,10 @@
     $edit_profile_link[] = array('key' => 'page', 'value' => "edit_profile.php");
     $edit_profile_link[] = array('key' => 'user_id', 'value' => null);
     $edit_profile_index = get_index($edit_profile_link, 'user_id');
+    // create user navigation link
+    $create_user_link = array();
+    $create_user_link[] = array('key' => 'page', 'value' => null);
+    $create_user_index = get_index($create_user_link, "page");
 ?>
 
 <section class="div-container">
@@ -73,7 +77,8 @@
                 <?php } else if ($user_statut == 1) { ?>
                     <h1>Admins</h1>
                 <?php } ?> 
-                <button class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</button>
+                <?php $create_user_link[$create_user_index]['value'] = 'create_user.php'; ?> 
+                <a href="<?= navigation_link($create_user_link) ?>" class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</a>
             </div>
             <!-- user list -->
             <div class="table-responsive" style="">
@@ -114,7 +119,7 @@
                                 </td>
                                 <td class="text-center">
                                     <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
-                                    <a href="#" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">View profil</a>
+                                    <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
                                 </td>
                             </tr>
                         <?php } ?>

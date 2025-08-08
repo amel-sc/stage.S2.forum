@@ -107,6 +107,41 @@
         return $result;
     }
 
+    // function to select table with operator
+    function select_table_operation($table, $condition, $other_condition)
+    {
+        $sql = 'SELECT * FROM %s ';
+        $sql = sprintf($sql, $table);
+        // set condition
+        if ($condition != null)
+        {
+            $sql = $sql . ' WHERE ';
+            for ($i = 0; $i < count($condition); $i++)
+            {
+                if ($i == count($condition) - 1)
+                {
+                    $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '"';
+                }
+                else
+                {
+                    $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '" AND ';
+                }
+            }
+        }
+        // set other condition
+        if ($other_condition != null)
+        {
+            for ($i = 0; $i < count($other_condition); $i++)
+            {
+                $sql = $sql . ' ' . $other_condition[$i]. ' ';
+            }
+        }
+        // execute the request
+        $result = array_query($sql);
+
+        return $result;
+    }
+
     // function to count request result
     function count_request_result($sql)
     {

@@ -14,6 +14,7 @@
         $first_name = $_POST['first_name'];
         $birth_date = $_POST['birth_date'];
         $gender = $_POST['gender'];
+        $statut = $_POST['statut'];
         $email = $_POST['email'];
         $mdp = $_POST['mdp'];
         // update values
@@ -22,6 +23,7 @@
         $column[] = array('key' => 'u_first_name', 'value' => $first_name);
         $column[] = array('key' => 'u_birth_date', 'value' => $birth_date);
         $column[] = array('key' => 'u_gender', 'value' => $gender);
+        $column[] = array('key' => 'u_statut', 'value' => $statut);
         $column[] = array('key' => 'u_email', 'value' => $email);
         $column[] = array('key' => 'u_mdp', 'value' => $mdp);
         // update condition
