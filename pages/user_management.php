@@ -31,85 +31,88 @@
 ?>
 
 <section class="div-container">
-    <!-- user management navigation link -->
-    <?php if ($user_statut == 0) { ?>
-        <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
-            <ul class="nav nav-underline">
-                <li class="nav-item text-center">
-                    <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
-                    <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
-                </li>
-                <li class="nav-item">
-                    <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
-                    <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
-                </li>
-            </ul>
+    <div class="content col-12 col-lg-9 m-auto mb-3">
+        <div class="user-management-container rounded-4">
+            <!-- user management navigation link -->
+            <?php if ($user_statut == 0) { ?>
+                <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
+                    <ul class="nav nav-underline">
+                        <li class="nav-item text-center">
+                            <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
+                            <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
+                            <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php } else if ($user_statut == 1) { ?>
+                <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
+                    <ul class="nav nav-underline">
+                        <li class="nav-item text-center">
+                            <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
+                            <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
+                            <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php } ?>
+            <!-- user management header -->
+            <div class="ms-4 d-flex align-items-center gap-4 management_header mb-3">
+                <?php if ($user_statut == 0) { ?>
+                    <h1>Users</h1>
+                <?php } else if ($user_statut == 1) { ?>
+                    <h1>Admins</h1>
+                <?php } ?> 
+                <button class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</button>
+            </div>
+            <!-- user list -->
+            <div class="table-responsive" style="">
+                <table class="table m-0 align-middle" style="white-space: nowrap;">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Photo</th>
+                            <th scope="col">
+                                User name
+                            </th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" class="text-center">Operation</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($user_list as $user) { ?> 
+                            <tr style="border-style: hidden;">
+                                <td class="text-center">
+                                    <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 35px; height: 35px;">
+                                </td>
+                                <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
+                                <td><?= $user['u_email'] ?></td>
+                                <td><?= statut_name($user['u_statut']) ?></td>
+                                <td class="text-center">
+                                    <div class="d-flex align-items-center justify-content-evenly">
+                                        <a class="rounded-pill d-flex align-items-center border-0 header-link" href="#"> 
+                                            <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
+                                        </a>
+                                        <a class="rounded-pill d-flex align-items-center header-link" href="#">
+                                            <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
+                                    <a href="#" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">View profil</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    <?php } else if ($user_statut == 1) { ?>
-        <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
-            <ul class="nav nav-underline">
-                <li class="nav-item text-center">
-                    <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
-                    <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
-                </li>
-                <li class="nav-item">
-                    <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
-                    <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
-                </li>
-            </ul>
-        </div>
-    <?php } ?>
-    <!-- user management header -->
-    <div class="ms-4 d-flex align-items-center gap-4 management_header mb-3">
-        <?php if ($user_statut == 0) { ?>
-            <h1>Users</h1>
-        <?php } else if ($user_statut == 1) { ?>
-            <h1>Admins</h1>
-        <?php } ?> 
-        <button class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</button>
-    </div>
-    <!-- user list -->
-    <div class="table-responsive" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;">
-        <table class="table m-0 align-middle" style="white-space: nowrap;">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">Photo</th>
-                    <th scope="col">
-                        User name
-                    </th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" class="text-center">Operation</th>
-                    <th scope="col" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($user_list as $user) { ?> 
-                    <tr>
-                        <td class="text-center">
-                            <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 35px; height: 35px;">
-                        </td>
-                        <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
-                        <td><?= $user['u_email'] ?></td>
-                        <td><?= statut_name($user['u_statut']) ?></td>
-                        <td class="text-center">
-                            <div class="d-flex align-items-center justify-content-evenly">
-                                <a class="rounded-pill d-flex align-items-center border-0 header-link" href="#"> 
-                                    <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
-                                </a>
-                                <a class="rounded-pill d-flex align-items-center header-link" href="#">
-                                    <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
-                                </a>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
-                            <a href="#" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none;padding: 2px 12px 2px 12px;">Login</a>
-                        </td>
-                    </tr>
-
-                <?php } ?>
-            </tbody>
-        </table>
     </div>
 </section>

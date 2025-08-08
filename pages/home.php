@@ -35,8 +35,8 @@
 
 <section class="div-container">
 
-    <div class="content px-lg-5">
-        <div class="post_container rounded-4 mb-2" id="main">
+    <div class="content col-12 col-lg-9 m-auto mb-3">
+        <div class="post_container rounded-4">
             <!-- sort by -->
             <div class="d-flex align-items-center gap-1 mb-3">
                 <p class="m-0">Sort by : </p>
@@ -120,27 +120,3 @@
         </div>
     </div>
 </section>
-<!-- script offcanvas -->
-<script>
-
-function updatePadding() {
-  const box = document.getElementById("myBox");
-  const width = window.innerWidth;
-
-  if (width < 576) {
-    box.style.padding = "10px";
-  } else if (width < 768) {
-    box.style.padding = "20px";
-  } else if (width < 992) {
-    box.style.padding = "30px";
-  } else {
-    box.style.padding = "40px";
-  }
-}
-
-// Appeler au chargement
-updatePadding();
-
-// Mettre à jour lors du redimensionnement
-window.addEventListener('resize', updatePadding);
-</script>

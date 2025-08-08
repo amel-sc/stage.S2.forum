@@ -21,7 +21,6 @@
         if ($page != "login.php" && $page != "sign.php")
         {
             include('../inc/header.php'); 
-            include('../inc/offcanvas.php');
         }
     ?>
     <main class="container-fluid">
@@ -30,7 +29,5 @@
             include($page);
             ?>
     </main>
-    <script src="../assets/js/offcanvas.js"></script>
-    <script src="../assets/js/content-padding.js"></script>
 </body>
 </html>
