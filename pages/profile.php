@@ -49,7 +49,7 @@
                     <p class="m-0 fw-bold" style="white-space: nowrap;"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
                     <?php if ($user['user_id'] == $current_user['user_id']) { ?>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#change-profil">
+                        <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#change-profil">
                             Change profil
                         </button>
                     <?php } ?>

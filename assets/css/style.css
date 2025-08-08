@@ -37,7 +37,11 @@ body {
 }
 
 /* post design */
-.post_container, .post-comment-container, .profile-container, .user-management-container{
+.post_container, 
+.post-comment-container, 
+.profile-container, 
+.user-management-container,
+.edit-profile-container {
     background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     padding: 20px;

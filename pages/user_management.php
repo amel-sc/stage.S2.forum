@@ -28,6 +28,11 @@
     $login_link[] = array('key' => 'user_id', 'value' => null);
     $login_link[] = array('key' => 'admin_login', 'value' => 1);
     $login_index = get_index($login_link, 'user_id');
+    // edit profile navigation link
+    $edit_profile_link = array();
+    $edit_profile_link[] = array('key' => 'page', 'value' => "edit_profile.php");
+    $edit_profile_link[] = array('key' => 'user_id', 'value' => null);
+    $edit_profile_index = get_index($edit_profile_link, 'user_id');
 ?>
 
 <section class="div-container">
@@ -80,6 +85,7 @@
                                 User name
                             </th>
                             <th scope="col">Email</th>
+                            <th scope="col">Inscription date</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="text-center">Operation</th>
                             <th scope="col" class="text-center">Action</th>
@@ -93,10 +99,12 @@
                                 </td>
                                 <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
                                 <td><?= $user['u_email'] ?></td>
+                                <td><?= $user['u_inscription_date'] ?></td>
                                 <td><?= statut_name($user['u_statut']) ?></td>
                                 <td class="text-center">
                                     <div class="d-flex align-items-center justify-content-evenly">
-                                        <a class="rounded-pill d-flex align-items-center border-0 header-link" href="#"> 
+                                        <?php $edit_profile_link[$edit_profile_index]['value'] = $user['user_id']; ?>
+                                        <a class="rounded-pill d-flex align-items-center border-0 header-link" href="<?= navigation_link($edit_profile_link) ?>"> 
                                             <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
                                         </a>
                                         <a class="rounded-pill d-flex align-items-center header-link" href="#">

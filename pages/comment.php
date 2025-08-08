@@ -92,7 +92,7 @@
                         <!-- commment number -->
                         <?php $comments_number = get_comment_by_subject($subject[0]['subject_id']); ?>
                         <!-- link to comment  -->
-                        <label class="d-flex align-items-center gap-2 rounded-pill comment-link" for="comment-textarea">
+                        <label class="d-flex align-items-center gap-2 rounded-pill comment-link" for="comment-textarea" style="cursor: pointer;">
                             <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
                             <span class="text-black fw-bold"><?= count($comments_number) ?></span>
                         </label>
