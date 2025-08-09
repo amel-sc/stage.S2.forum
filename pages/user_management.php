@@ -37,6 +37,17 @@
     $create_user_link = array();
     $create_user_link[] = array('key' => 'page', 'value' => null);
     $create_user_index = get_index($create_user_link, "page");
+    // delete user navigation link
+    $delete_user_link = array();
+    $delete_user_link[] = array('key' => 'page', 'value' => 'traitement_delete_user.php');
+    $delete_user_link[] = array('key' => 'user_id', 'value' => null);
+    $delete_user_index = get_index($delete_user_link, "user_id");
+    // reset user navigation link
+    $reset_user_link = array();
+    $reset_user_link[] = array('key' => 'page', 'value' => 'traitement_reset_user.php');
+    $reset_user_link[] = array('key' => 'user_id', 'value' => null);
+    $reset_user_index = get_index($reset_user_link, "user_id");
+    
 ?>
 
 <section class="div-container">
@@ -54,6 +65,10 @@
                             <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
                             <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
                         </li>
+                        <li class="nav-item">
+                            <?php $user_controls_link[$user_statut_index]['value'] = -1 ?>
+                            <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Deleted</a>
+                        </li>
                     </ul>
                 </div>
             <?php } else if ($user_statut == 1) { ?>
@@ -67,16 +82,33 @@
                             <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
                             <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
                         </li>
+                        <li class="nav-item">
+                            <?php $user_controls_link[$user_statut_index]['value'] = -1 ?>
+                            <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Deleted</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php } else if ($user_statut == -1) { ?>
+                <div class="nav_management rounded-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; display: inline-block; padding: 0px 20px 0px 20px;">
+                    <ul class="nav nav-underline">
+                        <li class="nav-item text-center">
+                            <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
+                            <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php $user_controls_link[$user_statut_index]['value'] = 1 ?>
+                            <a class="nav-link" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Admins</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php $user_controls_link[$user_statut_index]['value'] = -1 ?>
+                            <a class="nav-link active" href="<?= navigation_link($user_controls_link) ?>" style="padding: 20px 15px 15px 15px;">Deleted</a>
+                        </li>
                     </ul>
                 </div>
             <?php } ?>
             <!-- user management header -->
             <div class="ms-4 d-flex align-items-center gap-4 management_header mb-3">
-                <?php if ($user_statut == 0) { ?>
-                    <h1>Users</h1>
-                <?php } else if ($user_statut == 1) { ?>
-                    <h1>Admins</h1>
-                <?php } ?> 
+                <h1><?= statut_name_management($user_statut) ?></h1>
                 <?php $create_user_link[$create_user_index]['value'] = 'create_user.php'; ?> 
                 <a href="<?= navigation_link($create_user_link) ?>" class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</a>
             </div>
@@ -106,20 +138,38 @@
                                 <td><?= $user['u_email'] ?></td>
                                 <td><?= $user['u_inscription_date'] ?></td>
                                 <td><?= statut_name($user['u_statut']) ?></td>
-                                <td class="text-center">
-                                    <div class="d-flex align-items-center justify-content-evenly">
-                                        <?php $edit_profile_link[$edit_profile_index]['value'] = $user['user_id']; ?>
-                                        <a class="rounded-pill d-flex align-items-center border-0 header-link" href="<?= navigation_link($edit_profile_link) ?>"> 
-                                            <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
-                                        </a>
-                                        <a class="rounded-pill d-flex align-items-center header-link" href="#">
-                                            <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
-                                        </a>
-                                    </div>
-                                </td>
+
+                                <?php if ($user_statut == -1) { ?>
+                                    <td class="text-center">
+                                        <div class="d-flex align-items-center justify-content-evenly">
+                                            <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
+                                            <a class="rounded-pill d-flex align-items-center header-link" href="<?= custom_navigation_link($reset_user_link) ?>">
+                                                <img src="../assets/images/reset.png" alt="Reset profile" style="width: 35px; height: 35px; padding: 2px;">
+                                            </a>
+                                        </div>
+                                    </td>
+                                <?php } else { ?>
+                                    <td class="text-center">
+                                        <div class="d-flex align-items-center justify-content-evenly">
+                                            <?php $edit_profile_link[$edit_profile_index]['value'] = $user['user_id']; ?>
+                                            <a class="rounded-pill d-flex align-items-center border-0 header-link" href="<?= navigation_link($edit_profile_link) ?>"> 
+                                                <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
+                                            </a>
+                                            <?php $delete_user_link[$delete_user_index]['value'] = $user['user_id']; ?>
+                                            <a class="rounded-pill d-flex align-items-center header-link" href="<?= custom_navigation_link($delete_user_link) ?>">
+                                                <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
+                                            </a>
+                                        </div>
+                                    </td>
+                                <?php } ?>
+
                                 <td class="text-center">
                                     <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
-                                    <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
+                                    <?php if ($user_statut == -1) { ?>
+                                        <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white disabled" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
+                                    <?php } else { ?>
+                                        <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php } ?>

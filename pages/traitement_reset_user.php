@@ -10,7 +10,7 @@
         // value getted
         $user_id = $_GET['user_id'];
         // commmon value for update
-        $user_column[] = array('key' => 'custom', 'value' => -1);
+        $user_column[] = array('key' => 'custom', 'value' => 0);
         $user_condition[] = array('key' => 'user_id', 'value' => $user_id);
         $column_index = get_index($user_column, 'custom');
 
