@@ -51,6 +51,12 @@
     $reset_user_link[] = array('key' => 'page', 'value' => 'traitement_reset_user.php');
     $reset_user_link[] = array('key' => 'user_id', 'value' => null);
     $reset_user_index = get_index($reset_user_link, "user_id");
+
+    // corbeille user navigation link
+    $corbeille_link = array();
+    $corbeille_link[] = array('key' => 'page', 'value' => 'traitement_corbeille.php');
+    $corbeille_link[] = array('key' => 'user_id', 'value' => null);
+    $corbeille_user_index = get_index($corbeille_link, "user_id");
     
 ?>
 
@@ -177,10 +183,11 @@
                                 <?php } ?>
 
                                 <td class="text-center">
-                                    <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
                                     <?php if ($user_statut == -1) { ?>
-                                        <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white disabled" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
+                                        <?php $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'] ?>
+                                        <a href="<?= custom_navigation_link($corbeille_link) ?>" class="btn btn-danger fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Delete</a>
                                     <?php } else { ?>
+                                        <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
                                         <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
                                     <?php } ?>
                                 </td>

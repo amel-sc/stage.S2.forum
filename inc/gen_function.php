@@ -72,6 +72,30 @@
         return $sql;
     }
 
+    //function delete table
+    function delete_table($table, $condition)
+    {
+        $sql = 'DELETE FROM %s';
+        $sql = sprintf($sql, $table);
+        // set condition
+        $sql = $sql . ' WHERE ';
+        for ($i = 0; $i < count($condition); $i++)
+        {
+            if ($i == count($condition) - 1)
+            {
+                $sql = $sql . $condition[$i]['key'] . ' = "' . $condition[$i]['value'] . '"';
+            }
+            else
+            {
+                $sql = $sql . $condition[$i]['key'] . ' = "' . $condition[$i]['value'] . '" and ';
+            }
+        }
+        // execute the request
+        $query = mysqli_query(dbconnect(), $sql);
+
+        return $sql;
+    }
+
     // function to select table
     function select_table($table, $condition, $other_condition)
     {
