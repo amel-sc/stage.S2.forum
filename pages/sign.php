@@ -7,6 +7,33 @@
 <section class="inputs_container">
     <div class="inputs_div rounded-4">
         <h1 class="fw-bold text-center mb-4" style="color: #0d6efd;">Sign in</h1>
+        <!-- user already exist -->
+        <?php if (isset($_GET['user_exist'])) { ?>
+             <div class="alert alert-danger d-flex align-items-center" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                 <div>
+                     Email already exist.
+                 </div>
+             </div>
+        <?php } ?>
+        <!-- user deleted -->
+        <?php if (isset($_GET['deleted'])) { ?>
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                 <div>
+                     User is deleted
+                 </div>
+             </div>
+        <?php } ?>
+        <!-- sign in succes -->
+         <?php if (isset($_GET['success'])) { ?>
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                 <img src="../assets/images/success.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                 <div>
+                     Success! Your account has been created
+                 </div>
+             </div>
+        <?php } ?>
         <form action="traitement_sign.php" method="post">
             <div class="name_div mb-3 d-flex align-items-center justify-content-between gap-3">
                 <div class="last_name">

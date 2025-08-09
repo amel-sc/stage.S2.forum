@@ -118,7 +118,7 @@ body {
 .return-button {
     text-decoration: none;
     display: block;
-    padding: 4px 6px 4px 6px;
+    padding: 5px;
     background-color: #e5ebee;
 }
 .return-button:hover {
@@ -132,6 +132,7 @@ body {
 .hr-design {
     margin: 25px auto 25px auto;
 }
+
 
 /* dot */
 .dot {

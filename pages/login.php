@@ -6,11 +6,21 @@
 <section class="inputs_container">
     <div class="inputs_div rounded-4">
         <h1 class="fw-bold text-center mb-4" style="color: #0d6efd;">Log in</h1>
+        <!-- error email or mdp -->
         <?php if (isset($_GET['error'])) { ?>
              <div class="alert alert-danger d-flex align-items-center" role="alert">
                  <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
                  <div>
                      Email/password is incorrect
+                 </div>
+             </div>
+        <?php } ?>
+        <!-- user deleted -->
+        <?php if (isset($_GET['deleted'])) { ?>
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                 <div>
+                     User is deleted
                  </div>
              </div>
         <?php } ?>

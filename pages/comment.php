@@ -27,9 +27,10 @@
         // comment list
         $comments = select_table("v_comment_user", $comment_condition, $comment_other_condition);
 
-        // navigation link 
-        $link_home = array();
-        $link_home[] = array('key' => 'page', 'value' => "home.php");
+        //return link 
+        $return_link = array();
+        $return_link[] = array('key' => 'page', 'value' => null);
+        $return_page_index = get_index($return_link, 'page');
         // navigation link for profil
         $link_profil = array();
         $link_profil[] = array('key' => 'page', 'value' => "profile.php");
@@ -52,8 +53,9 @@
                 <div class="card-body" style="padding: 0;">
                     <!-- sender info (user img, name , sended_date) -->
                     <div class="post-info d-flex align-items-center gap-2 mb-2">
-                        <a href="<?= navigation_link($link_home) ?>" class="m-0 return-button rounded-circle">
-                            <img src="../assets/images/return-arrow.png" alt="" style="width: 20px;">
+                        <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+                        <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                            <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
                         </a>
                         <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
                         <div class="">

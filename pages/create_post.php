@@ -1,15 +1,17 @@
 <?php 
-    // navigation link 
-    $link_home = array();
-    $link_home[] = array('key' => 'page', 'value' => "home.php");
+    //return link 
+    $return_link = array();
+    $return_link[] = array('key' => 'page', 'value' => null);
+    $return_page_index = get_index($return_link, 'page');
 ?>
 <section class="div-container">
     <div class="m-auto col-12 col-lg-9">
-        <div class="d-flex align-items-center gap-2 mb-2">
-            <a href="<?= navigation_link($link_home) ?>" class="m-0 return-button rounded-circle">
-                <img src="../assets/images/return-arrow.png" alt="" style="width: 20px;">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
             </a>
-            <h1 class="fw-medium m-0">Create Post</h1>
+            <h1 class="m-0" style="">Create post</h1>
         </div>
     </div>
     <div class="m-auto col-12 col-lg-9">

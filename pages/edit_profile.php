@@ -1,4 +1,4 @@
-<?php 
+<?php
     if (isset($_GET['user_id']))
     {
         // user_condition
@@ -8,13 +8,20 @@
         $user = select_table('user', $user_condition, null)[0];
     }
 
-    //navigation link to user_management.php
+    // navigation link to user_management.php
     $return_link = array();
     $return_link[] = array('key' => 'page', 'value' => null);
     $return_page_index = get_index($return_link, 'page'); 
 ?>
 <section class="div-container">
     <div class="content m-auto mb-3" style="max-width: 600px;">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'user_management.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
+            </a>
+            <h1 class="m-0" style="">Edit Profile</h1>
+        </div>
         <div class="edit-profile-container rounded-4">
             <div class="d-flex flex-column align-items-center justify-content-center gap-2 mb-3">
                 <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 100px; height: 100px;">
@@ -73,7 +80,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="mdp" class="form-label fw-bold">Password</label>
-                    <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Change password" required>
+                    <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Change password or not">
                     <small style="color: #5c6c74;"><?= $user['u_mdp'] ?></small>
                 </div>
                 <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">

@@ -1,4 +1,8 @@
 <?php 
+    //return link 
+    $return_link = array();
+    $return_link[] = array('key' => 'page', 'value' => null);
+    $return_page_index = get_index($return_link, 'page');
     // user / admin list navigation link
     $user_controls_link = array();
     $user_controls_link[] = array('key' => 'page', 'value' => "user_management.php");
@@ -52,6 +56,13 @@
 
 <section class="div-container">
     <div class="content col-12 col-lg-9 m-auto mb-3">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
+            </a>
+            <h1 class="m-0" style="">User management</h1>
+        </div>
         <div class="user-management-container rounded-4">
             <!-- user management navigation link -->
             <?php if ($user_statut == 0) { ?>
@@ -109,8 +120,10 @@
             <!-- user management header -->
             <div class="ms-4 d-flex align-items-center gap-4 management_header mb-3">
                 <h1><?= statut_name_management($user_statut) ?></h1>
-                <?php $create_user_link[$create_user_index]['value'] = 'create_user.php'; ?> 
-                <a href="<?= navigation_link($create_user_link) ?>" class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</a>
+                <?php if($user_statut != -1) { ?>
+                    <?php $create_user_link[$create_user_index]['value'] = 'create_user.php'; ?> 
+                    <a href="<?= navigation_link($create_user_link) ?>" class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</a>
+                <?php } ?>
             </div>
             <!-- user list -->
             <div class="table-responsive" style="">

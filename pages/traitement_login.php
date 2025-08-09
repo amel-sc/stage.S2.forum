@@ -16,11 +16,21 @@
         $user_condition[] = array('key' => 'user_id', 'value' => $user_id);
         // request
         $user = select_table("user", $user_condition, null);
-
-        // session and header location
-        $_SESSION['current_user'] = $user[0];
-        $link[$page_index]['value'] = "home.php";
-        header('Location: ' . navigation_link($link));
+        
+        // verify if user is deleted/not
+        if ($user[0]['u_statut'] == -1)
+        {
+            $link[] = array('key' => 'deleted', 'value' => 0);
+            $link[$page_index]['value'] = "login.php";
+            header('Location: ' . navigation_link($link));
+        }
+        else 
+        {
+            // session and header location
+            $_SESSION['current_user'] = $user[0];
+            $link[$page_index]['value'] = "home.php";
+            header('Location: ' . navigation_link($link));
+        }
     }
     else 
     {
@@ -36,9 +46,19 @@
         $result = select_table("user", $condition, null);
         if (count($result) > 0)
         {
-            $_SESSION['current_user'] = $result[0];
-            $link[$page_index]['value'] = "home.php";
-            header('Location: ' . navigation_link($link));
+            // verify if user is deleted/not
+            if ($result[0]['u_statut'] == -1)
+            {
+                $link[] = array('key' => 'deleted', 'value' => 0);
+                $link[$page_index]['value'] = "login.php";
+                header('Location: ' . navigation_link($link));
+            }
+            else 
+            {
+                $_SESSION['current_user'] = $result[0];
+                $link[$page_index]['value'] = "home.php";
+                header('Location: ' . navigation_link($link));
+            }
         }
     
         else 

@@ -6,13 +6,38 @@
 ?>
 <section class="div-container">
     <div class="content m-auto mb-3" style="max-width: 600px;">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'user_management.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
+            </a>
+            <h1 class="m-0" style="">Create user</h1>
+        </div>
         <div class="edit-profile-container rounded-4">
-            <h1 class="text-center mb-5 fw-bold" style="color: #0d6efd;">Create user</h1>
+            <!-- user deleted -->
+            <?php if (isset($_GET['deleted'])) { ?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                    <div>
+                        User is deleted
+                    </div>
+                </div>
+            <?php } ?>
+            <!-- user already exist -->
             <?php if (isset($_GET['user_exist'])) { ?>
                 <div class="alert alert-danger d-flex align-items-center" role="alert">
                  <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
                  <div>
                      Email already exist.
+                 </div>
+             </div>
+            <?php } ?>
+            <!-- creation successful -->
+            <?php if (isset($_GET['success'])) { ?>
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                 <img src="../assets/images/success.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+                 <div>
+                     Success! Your account has been created
                  </div>
              </div>
             <?php } ?>

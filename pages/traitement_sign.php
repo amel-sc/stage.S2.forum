@@ -26,9 +26,18 @@
         $result = select_table('user', $condition, null);
         if (count($result) > 0)
         {
-            $link[] = array('key' => 'user_exist', 'value' => 1);
-            $link[$page_index]['value'] = 'create_user.php';
-            header('Location: ' . navigation_link($link));
+            if ($result[0]['u_statut'] == -1)
+            {
+                $link[] = array('key' => 'deleted', 'value' => 1);
+                $link[$page_index]['value'] = 'create_user.php';
+                header('Location: ' . navigation_link($link));
+            }
+            else 
+            {
+                $link[] = array('key' => 'user_exist', 'value' => 1);
+                $link[$page_index]['value'] = 'create_user.php';
+                header('Location: ' . navigation_link($link));
+            }
         }
 
         else
@@ -47,7 +56,8 @@
             // insert values in table
             insert_table("user", $value);
             // navigation link
-            $link[$page_index]['value'] = "user_management.php";
+            $link[] = array('key' => 'success', 'value' => 1);
+            $link[$page_index]['value'] = "create_user.php";
             header('Location: ' . navigation_link($link));
         }
     }
@@ -70,8 +80,19 @@
         $result = select_table("user", $condition, null);
         if (count($result) > 0)
         {
-            $link[$page_index]['value'] = "login.php";
-            header('Location: ' . navigation_link($link));
+            // verify is user is deleted/not
+            if ($result[0]['u_statut'] == -1)
+            {
+                $link[] = array('key' => 'deleted', 'value' => 0);
+                $link[$page_index]['value'] = "sign.php";
+                header('Location: ' . navigation_link($link));
+            }
+            else
+            {
+                $link[] = array('key' => 'user_exist', 'value' => 0);
+                $link[$page_index]['value'] = "sign.php";
+                header('Location: ' . navigation_link($link));
+            }
         }
     
         else 
@@ -90,7 +111,8 @@
             // insert values in table
             insert_table("user", $value);
             // navigation link
-            $link[$page_index]['value'] = "login.php";
+            $link[] = array('key' => 'success', 'value' => 0);
+            $link[$page_index]['value'] = "sign.php";
             header('Location: ' . navigation_link($link));
         }
     }

@@ -9,6 +9,9 @@
     if(isset($_POST['user_id']))
     {
         $user_id = $_POST['user_id'];
+        // 
+        // old information
+        $old_info = get_user_by_id($user_id);
         // values posted
         $last_name = $_POST['last_name'];
         $first_name = $_POST['first_name'];
@@ -17,6 +20,13 @@
         $statut = $_POST['statut'];
         $email = $_POST['email'];
         $mdp = $_POST['mdp'];
+
+        // password change or not
+        if ($mdp == "")
+        {
+            $mdp = $old_info['u_mdp'];
+        }
+        
         // update values
         $column = array();
         $column[] = array('key' => 'u_last_name', 'value' => $last_name);

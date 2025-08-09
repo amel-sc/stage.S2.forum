@@ -10,9 +10,10 @@
         $user = get_user_by_id($current_user['user_id']);
     }
 
-    // navigation link 
-    $link_home = array();
-    $link_home[] = array('key' => 'page', 'value' => "home.php");
+    //return link 
+    $return_link = array();
+    $return_link[] = array('key' => 'page', 'value' => null);
+    $return_page_index = get_index($return_link, 'page');
 
     // password hidden
     $mdp_statut = null;
@@ -35,13 +36,14 @@
 
 <section class="div-container">
     <div class="content col-12 col-lg-9 m-auto mb-3">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
+            </a>
+            <h1 class="m-0" style="">User profile</h1>
+        </div>
         <div class="profile-container rounded-4">
-            <div class="d-flex align-items-center gap-2 mb-2">
-                <a href="<?= navigation_link($link_home) ?>" class="m-0 return-button rounded-circle">
-                    <img src="../assets/images/return-arrow.png" alt="" style="width: 20px;">
-                </a>
-                <h1 class="fw-medium m-0">User profile</h1>
-            </div>
             <div class="user-profile d-flex flex-column flex-lg-row align-items-lg-start gap-4">
                 <!-- image and name -->
                 <div class="border border-dark-subtle rounded-3 col-12 col-lg-2 d-flex flex-column align-items-center justify-content-center img_name-div">
