@@ -30,6 +30,7 @@
         $value[] = array('key' => 's_title', 'value' => $title);
         $value[] = array('key' => 's_date', 'value' => $s_date);
         $value[] = array('key' => 's_media', 'value' => $media);
+        $value[] = array('key' => 's_statut', 'value' => 0);
         // insert values in tables comment
         insert_table("forum_subject", $value);
 

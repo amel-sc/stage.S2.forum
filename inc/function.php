@@ -56,7 +56,15 @@
         return $index;
     }   
 
+    // function to get the current date
+    function get_current_date()
+    {
+        $sql = "SELECT NOW() as date_now";
+        $result = one_query($sql);
 
+        return $result;
+    }
+    
     // function to get comment by forum_subject
     function get_comment_by_subject($subject_id)
     {
@@ -67,14 +75,6 @@
         return $result;
     }
 
-    // function to get the current date
-    function get_current_date()
-    {
-        $sql = "SELECT NOW() as date_now";
-        $result = one_query($sql);
-
-        return $result;
-    }
 
     // function to get user by id
     function get_user_by_id($user_id)
@@ -250,6 +250,30 @@
         else if ($statut == "0")
         {
             $statut_name = "Common user";
+        }
+        else if ($statut == "-1")
+        {
+            $statut_name = "Deleted";
+        }
+
+        return $statut_name;
+    }
+
+    // user_statut name for management
+    function statut_name_management($statut)
+    {
+        $statut_name = null;
+        if ($statut == 1)
+        {
+            $statut_name = "Admins";
+        }
+        else if ($statut == 0)
+        {
+            $statut_name = "Users";
+        }
+        else if ($statut == -1)
+        {
+            $statut_name ="Deleted";
         }
 
         return $statut_name;

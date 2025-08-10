@@ -19,6 +19,7 @@
     $value[] = array('key' => 'user_id', 'value' => $user_id);
     $value[] = array('key' => 'subject_id', 'value' => $subject_id);
     $value[] = array('key' => 'c_date', 'value' => $c_date);
+    $value[] = array('key' => 'c_statut', 'value' => 0);
     // insert values in tables comment
     insert_table("comment", $value);
 

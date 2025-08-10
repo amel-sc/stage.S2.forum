@@ -23,7 +23,7 @@
             include('../inc/header.php'); 
         }
     ?>
-    <main class="container">
+    <main class="container-fluid">
         <!-- page getted -->
         <?php   
             include($page);

@@ -8,15 +8,15 @@
 ?>
 
 <header>
-    <nav class="navbar navbar-expand-lg fixed-top border-bottom border-dark-subtle" style="background-color: white;" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="light" style="height: 70px;">
         <div class="container-fluid">
             <?php $link_header[$page_index]['value'] = "home.php"; ?>
-            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link_header) ?>">Forum</a>
+            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link_header) ?>" style="color: #0d6efd;">Forum</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-lg-center">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2 align-items-lg-center">
                     <li class="nav-item">
                         <?php $link_header[$page_index]['value'] = "home.php"; ?>
                         <div class="d-block d-lg-none">
@@ -129,7 +129,7 @@
                 <p class="mb-4">Are you sure you want to continue?</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <?php $link_header[$page_index]['value'] = "login.php"; ?>
-                    <a role="button" class="btn btn-success rounded-1" href="<?= navigation_link($link_header) ?>" class="text-white" style="text-decoration: none; padding: 12px 45px 12px 45px;">Yes</a>
+                    <a role="button" class="btn btn-success rounded-1 text-white" href="<?= navigation_link($link_header) ?>" style="text-decoration: none; padding: 12px 45px 12px 45px;">Yes</a>
                     <button type="button" class="btn btn-danger text-white rounded-1" data-bs-dismiss="modal" style="padding: 12px 45px 12px 45px;">No</button>
                 </div>
             </div>

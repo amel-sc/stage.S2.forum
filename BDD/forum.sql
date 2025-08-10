@@ -22,6 +22,18 @@ create table forum_subject (
     Constraint fk_user_subject foreign key (user_id) references
     user(user_id)
 );
+-- add cascade for forum_subject
+-- delete foreign key
+ALTER TABLE forum_subject
+DROP FOREIGN KEY fk_user_subject,
+-- new foreign key
+ALTER TABLE forum_subject
+ADD CONSTRAINT fk_user_subject
+    FOREIGN KEY (user_id)
+    REFERENCES user(user_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
 
 create table comment (
     comment_id int auto_increment primary key,
@@ -34,6 +46,24 @@ create table comment (
     Constraint fk_subject_comment foreign key (subject_id) references
     forum_subject(subject_id)
 );
+-- add cascade for comment
+-- delete foreign key
+ALTER TABLE comment
+DROP FOREIGN KEY fk_user_comment,
+DROP FOREIGN KEY fk_subject_comment,
+-- new foreign key
+ALTER TABLE comment 
+ADD CONSTRAINT fk_user_comment
+    FOREIGN KEY (user_id)
+    REFERENCES user(user_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+ADD CONSTRAINT fk_subject_comment
+    FOREIGN KEY (subject_id)
+    REFERENCES forum_subject(subject_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
 
 -- subject default values
 INSERT INTO forum_subject (s_title, s_content, user_id, s_date) VALUES

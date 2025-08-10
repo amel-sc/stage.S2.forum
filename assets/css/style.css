@@ -1,7 +1,15 @@
 * {
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    background: #f5f6f8 !important;
+}
+
+/* inputs */
 .inputs_container {
     width: 100%;
     min-height: 100vh;
@@ -13,36 +21,43 @@
     margin: auto;
     width: 100%;
     max-width: 500px;
-    padding: 20px 15px 20px 15px;
+    padding: 40px 25px 40px 25px;
+    background: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* buttons design
-button[type=submit] {
-    border: none;
-    border-radius: 4px;
-    padding: 8px 20px 8px 20px;
-    color: white;
-    background-color:  #0066ff;
-    transition: 0.5s;
-    box-sizing: border-box;
+.input_button {
+    padding: 8px 0px 8px 0px !important;
 }
 
-button[type=submit]:hover {
-    background-color: #005ce6;
-} */
-
+/* header */
+.navbar {
+    background: white !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
 
 /* post design */
-.sender-info {
-    padding: 0px 0px 0px 0px ;
+.post_container, 
+.post-comment-container, 
+.profile-container, 
+.user-management-container,
+.edit-profile-container,
+.create-post_container {
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 20px;
 }
 
-.post-content {
-    padding: 0px 0px 0px 0px;
+.card-post {
+    background-color: white;
+    border-bottom: 1px solid #f0f0f0 !important;
+    transition: all 0.2s ease;
 }
 
 .card-post:hover {
-    background-color: #f7f7f7;
+    background-color: #f9fbfe;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
 }
 
 .profile-link {
@@ -71,7 +86,7 @@ button[type=submit]:hover {
 }
 
 .comment-content {
-    padding: 0px 0px 0px 50px;
+    padding: 0px 0px 0px 35px;
 }
 
 .comment-button, .password-button {
@@ -104,7 +119,7 @@ button[type=submit]:hover {
 .return-button {
     text-decoration: none;
     display: block;
-    padding: 4px 6px 4px 6px;
+    padding: 5px;
     background-color: #e5ebee;
 }
 .return-button:hover {
@@ -116,8 +131,9 @@ button[type=submit]:hover {
 
 /* hr */
 .hr-design {
-    margin: 6px auto 6px auto;
+    margin: 25px auto 25px auto;
 }
+
 
 /* dot */
 .dot {
@@ -149,7 +165,7 @@ button[type=submit]:hover {
 
 /* container conflict header rectification */
 .div-container {
-    margin-top: 75px;
+    margin-top: 80px;
 }
 
 /* header */
@@ -182,7 +198,7 @@ button[type=submit]:hover {
 
 /* user management */
 .table>:not(caption)>*>* {
-    padding: 15px !important;
+    padding: 10px !important;
 }
 .table tbody tr:last-child td,
 .table tbody tr:last-child th {
@@ -201,6 +217,6 @@ button[type=submit]:hover {
     border-bottom-color: #0d6efd !important;
 }
 
-.modal {
-    --bs-modal-width : 800px !important;
+th {
+    background: #f0f2f5 !important;
 }
