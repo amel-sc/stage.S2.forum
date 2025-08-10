@@ -34,7 +34,7 @@
 ?>
 
 <section class="div-container">
-
+    
     <div class="content col-12 col-lg-9 m-auto mb-3">
         <div class="post_container rounded-4">
             <!-- sort by -->
