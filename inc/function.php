@@ -278,6 +278,4 @@
 
         return $statut_name;
     }
-
-
 ?>

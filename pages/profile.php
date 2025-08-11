@@ -43,6 +43,8 @@
             </a>
             <h1 class="m-0" style="">User profile</h1>
         </div>
+        
+
         <div class="profile-container rounded-4">
             <div class="user-profile d-flex flex-column flex-lg-row align-items-lg-start gap-4">
                 <!-- image and name -->
