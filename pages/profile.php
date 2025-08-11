@@ -43,7 +43,51 @@
             </a>
             <h1 class="m-0" style="">User profile</h1>
         </div>
-        
+        <div>
+            <div class="profile-photo d-flex align-items-center justify-content-between bg-white rounded-4 p-3 mb-3">
+                <div class="d-flex align-items-center gap-4">
+                    <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 85px; height: 85px;">
+                    <div class="photo-text d-flex flex-column gap-3">
+                        <p class="m-0 fw-bold"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+                        <small class="m-0 badge rounded-pill text-bg-primary w-50"><?= statut_name($user['u_statut']) ?></small>
+                    </div>
+                </div>
+                <div>
+                    <button class="d-none d-lg-block rounded-pill btn btn-primary fw-bold gap-1 d-flex align-items-center">
+                        <span class="">Edit</span>
+                        <img src="../assets/images/write.png" alt="Edit" style="width: 20px; height: 20px;">
+                    </button>
+                    <button class="d-block d-lg-none rounded-circle btn btn-primary fw-bold d-flex align-items-center" style="padding: 5px;">
+                        <img src="../assets/images/write.png" alt="Edit" style="width: 20px; height: 20px;">
+                    </button>
+                </div>
+            </div>
+
+            <div class="general-info bg-white rounded-4 p-3 mb-3">
+                <div class="mb-4">
+                    <h5 class="fw-bold">General Information</h5>
+                </div>
+                <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                    <div class="col">
+                        <p class="mb-2">Last name</p>
+                        <div><?= $user['u_last_name'] ?></div>
+                    </div>
+                    <div class="col">
+                        <p class="mb-2">First name</p>
+                        <div><?= $user['u_first_name'] ?></div>
+                    </div>
+                    <div class="col">
+                        <p class="mb-2">Birthday</p>
+                        <div><?= $user['u_birth_date'] ?></div>
+                    </div>
+                    <div class="col">
+                        <p class="mb-2">Gender</p>
+                        <div><?= $user['u_gender'] ?></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
 
         <div class="profile-container rounded-4">
             <div class="user-profile d-flex flex-column flex-lg-row align-items-lg-start gap-4">
