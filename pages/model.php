@@ -29,5 +29,6 @@
             include($page);
             ?>
     </main>
+    <script src="../assets/js/profile.js"></script>
 </body>
 </html>

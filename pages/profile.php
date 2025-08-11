@@ -43,8 +43,8 @@
             </a>
             <h1 class="m-0" style="">User profile</h1>
         </div>
-        <div>
-            <div class="profile-photo d-flex align-items-center justify-content-between bg-white rounded-4 p-3 mb-3">
+        <div class="profile-container rounded-4 d-flex flex-column gap-3" style="padding: 0;">
+            <div class="profile-photo d-flex align-items-center justify-content-between bg-white rounded-4 p-3">
                 <div class="d-flex align-items-center gap-4">
                     <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 85px; height: 85px;">
                     <div class="photo-text d-flex flex-column gap-3">
@@ -53,123 +53,74 @@
                     </div>
                 </div>
                 <div>
-                    <button class="d-none d-lg-block rounded-pill btn btn-primary fw-bold gap-1 d-flex align-items-center">
-                        <span class="">Edit</span>
-                        <img src="../assets/images/write.png" alt="Edit" style="width: 20px; height: 20px;">
-                    </button>
-                    <button class="d-block d-lg-none rounded-circle btn btn-primary fw-bold d-flex align-items-center" style="padding: 5px;">
-                        <img src="../assets/images/write.png" alt="Edit" style="width: 20px; height: 20px;">
-                    </button>
+                    <div class="div-existence d-none d-md-block">
+                        <button class="rounded-pill btn btn-primary gap-1 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#change-profil">
+                            <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
+                            <span class="fw-bold" style="">Edit</span>
+                        </button>
+                    </div>
+                    <div class="div-ecistence d-md-none d-block">
+                        <button class="rounded-circle btn btn-primary fw-bold d-flex align-items-center" style="padding: 8px;" data-bs-toggle="modal" data-bs-target="#change-profil">
+                            <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="general-info bg-white rounded-4 p-3 mb-3">
+            <div class="general-info bg-white rounded-4 p-3">
                 <div class="mb-4">
                     <h5 class="fw-bold">General Information</h5>
                 </div>
-                <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                <div class="row row-cols-1 row-cols-md-2 g-3">
                     <div class="col">
-                        <p class="mb-2">Last name</p>
-                        <div><?= $user['u_last_name'] ?></div>
+                        <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
+                            <p class="mb-1 opacity-75 fw-bold">Last name</p>
+                            <input type="text" class="text-black bg-white" value="<?= $user['u_last_name'] ?>" style="outline: none; border: none;" disabled>
+                        </div>
                     </div>
                     <div class="col">
-                        <p class="mb-2">First name</p>
-                        <div><?= $user['u_first_name'] ?></div>
+                        <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
+                            <p class="mb-1 opacity-75 fw-bold">First name</p>
+                            <input type="text" class="text-black bg-white" value="<?= $user['u_first_name'] ?>" style="outline: none; border: none;" disabled>
+                        </div>
                     </div>
                     <div class="col">
-                        <p class="mb-2">Birthday</p>
-                        <div><?= $user['u_birth_date'] ?></div>
+                        <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
+                            <p class="mb-1 opacity-75 fw-bold">Birthday</p>
+                            <input type="text" class="text-black bg-white" value="<?= $user['u_birth_date'] ?>" style="outline: none; border: none;" disabled>
+                        </div>
                     </div>
                     <div class="col">
-                        <p class="mb-2">Gender</p>
-                        <div><?= $user['u_gender'] ?></div>
+                        <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
+                            <p class="mb-1 opacity-75 fw-bold">Gender</p>
+                            <input type="text" class="text-black bg-white" value="<?= gender_name($user['u_gender']) ?>" style="outline: none; border: none;" disabled>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
-
-        <div class="profile-container rounded-4">
-            <div class="user-profile d-flex flex-column flex-lg-row align-items-lg-start gap-4">
-                <!-- image and name -->
-                <div class="border border-dark-subtle rounded-3 col-12 col-lg-2 d-flex flex-column align-items-center justify-content-center img_name-div">
-                    <img src="<?= $user['u_image'] ?>" alt="" class="mb-3" style="width: 80px; height: 80px;">
-                    <p class="m-0 fw-bold" style="white-space: nowrap;"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-                    <?php if ($user['user_id'] == $current_user['user_id']) { ?>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#change-profil">
-                            Change profil
-                        </button>
-                    <?php } ?>
-                </div>
-                <!-- other information -->
-                <div class="d-flex flex-column border border-dark-subtle rounded-3 col">
-                    <!-- general information -->
-                    <div class="general-info rounded-3 col">
-                        <h4 class="mb-3">General information</h4>
-                        <div class="row row-cols-1 row-cols-lg-2 g-4">
-                            <div class="col">
-                                <div class="info-div border border-dark-subtle rounded-3">
-                                    <small>First name</small>
-                                    <p class="m-0 fs-5"><?= $user['u_first_name'] ?></p>
-                                </div>
+            <?php if ($user['user_id'] == $current_user['user_id']) { ?>
+                <div class="security-info bg-white rounded-4 p-3">
+                    <div class="mb-4">
+                        <h5 class="fw-bold">Security</h5>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                        <div class="col">
+                            <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
+                                <p class="mb-1 opacity-75 fw-bold">Email</p>
+                                <input type="text" class="text-black bg-white" value="<?= $user['u_email'] ?>" style="outline: none; border: none;" disabled>
                             </div>
-                            <div class="col">
-                                <div class="info-div border border-dark-subtle rounded-3">
-                                    <small>Last name</small>
-                                    <p class="m-0 fs-5"><?= $user['u_last_name'] ?></p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-div border border-dark-subtle rounded-3">
-                                    <small>Birthday</small>
-                                    <p class="m-0 fs-5"><?= $user['u_birth_date'] ?></p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-div border border-dark-subtle rounded-3">
-                                    <small>Gender</small>
-                                    <p class="m-0 fs-5"><?= gender_name($user['u_gender']) ?></p>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
+                                <p class="mb-1 opacity-75 fw-bold">Password</p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <input type="password" id="password" class="text-black bg-white" value="<?= $user['u_mdp'] ?>" style="outline: none; border: none;" disabled>
+                                    <img src="../assets/images/show.png" alt="hide/show password" id="password_button" style="width: 25px; height: 25px; cursor: pointer;">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php if ($user['user_id'] == $current_user['user_id']) { ?>
-                        <hr class="m-0">
-                        <!-- security -->
-                        <div class="security-info rounded-3 col mb-lg-0">
-                            <h4 class="mb-3">Security</h4>
-                            <div class="row row-cols-1 row-cols-lg-2 g-4">
-                                <div class="col">
-                                    <div class="info-div border border-dark-subtle rounded-3">
-                                        <small>Email</small>
-                                        <p class="m-0 fs-5"><?= $user['u_email'] ?></p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="info-div border border-dark-subtle rounded-3">
-                                        <small>password</small>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <?php if ($mdp_statut == "hide") { ?>
-                                                <p class="m-0 fs-5"><?= mdp_to_dot($user['u_mdp']) ?></p>
-                                                <?php $link_password[$password_index]['value'] = "show"; ?>
-                                                <a href="<?= navigation_link($link_password) ?>" class="header-link rounded-circle">
-                                                    <img src="../assets/images/hide.png" alt="" style="width: 25px; height: 25px">
-                                                </a>
-                                            <?php } else if ($mdp_statut == "show") { ?>
-                                                <p class="m-0 fs-5"><?= $user['u_mdp'] ?></p>
-                                                <?php $link_password[$password_index]['value'] = "hide"; ?>
-                                                <a href="<?= navigation_link($link_password) ?>" class="header-link rounded-circle">
-                                                    <img src="../assets/images/show.png" alt="" style="width: 25px; height: 25px">
-                                                </a>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -180,7 +131,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Change profil</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit profil</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
