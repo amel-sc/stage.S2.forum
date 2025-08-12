@@ -88,4 +88,4 @@
     </div>
 </div>
 
-<script src="../assets/js/edit-user_modal.js"></script>
+<script src="../assets/js/user_management.js"></script>
