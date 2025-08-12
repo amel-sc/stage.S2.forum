@@ -42,9 +42,9 @@
         // update to table user
         $update_user = update_table('user', $column, $condition);
 
-        // redirect to edit_profile page
-        $link[] = array('key' => 'user_id', 'value' => $user_id);
-        $link[$page_index]['value'] = 'edit_profile.php';
+        // redirect to user_management page
+        $link[] = array('key' => 'user_statut', 'value' => $statut);
+        $link[$page_index]['value'] = 'user_management.php';
         header('Location: ' . navigation_link($link));
     }
 ?>

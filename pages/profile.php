@@ -148,3 +148,5 @@
         </div>
     </div>
 </div>
+
+<script src="../assets/js/profile.js"></script>

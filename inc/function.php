@@ -258,24 +258,4 @@
 
         return $statut_name;
     }
-
-    // user_statut name for management
-    function statut_name_management($statut)
-    {
-        $statut_name = null;
-        if ($statut == 1)
-        {
-            $statut_name = "Admins";
-        }
-        else if ($statut == 0)
-        {
-            $statut_name = "Users";
-        }
-        else if ($statut == -1)
-        {
-            $statut_name ="Deleted";
-        }
-
-        return $statut_name;
-    }
 ?>
