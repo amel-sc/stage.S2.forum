@@ -13,7 +13,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit profile</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('<?= $edit_user['user_id'] ?>')"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('<?= $edit_user['user_id'] ?>', '_edit_form', '_image_name')"></button>
             </div>
             <div class="modal-body">
                 <form action="traitement_edit_profile.php" id="<?= $edit_user['user_id'] ?>_edit_form" method="post" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
                             Change profil
                         </label>
                         <div class="d-none">
-                            <input type="file" id="<?= $edit_user['user_id'] ?>_image" name="image" onchange="input_file_name('<?= $edit_user['user_id'] ?>')">
+                            <input type="file" id="<?= $edit_user['user_id'] ?>_image" name="image" onchange="input_file_name('<?= $edit_user['user_id'] ?>', '_image', '_image_name')">
                         </div>
                         <small class="fw-bold">Profil: <span id="<?= $edit_user['user_id'] ?>_image_name" class="fw-normal">No file chosen</span></small>
                     </div>
@@ -79,7 +79,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fw-bold rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;" onclick="reset_form('<?= $edit_user['user_id'] ?>')">Cancel</button>
+                <button type="button" class="btn btn-secondary fw-bold rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;" onclick="reset_form('<?= $edit_user['user_id'] ?>', '_edit_form', '_image_name')">Cancel</button>
                 <label type="button" tabindex="0" role="button" for="<?= $edit_user['user_id'] ?>_validate-button" class="btn btn-primary fw-bold rounded-1" style="padding: 8px 20px 8px 20px;" onkeydown="click_button_label('<?= $edit_user['user_id'] ?>', '_validate-button', event)">
                     Validate
                 </label>

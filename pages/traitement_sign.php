@@ -29,13 +29,13 @@
             if ($result[0]['u_statut'] == -1)
             {
                 $link[] = array('key' => 'deleted', 'value' => 1);
-                $link[$page_index]['value'] = 'create_user.php';
+                $link[$page_index]['value'] = 'user_management.php';
                 header('Location: ' . navigation_link($link));
             }
             else 
             {
                 $link[] = array('key' => 'user_exist', 'value' => 1);
-                $link[$page_index]['value'] = 'create_user.php';
+                $link[$page_index]['value'] = 'user_management.php';
                 header('Location: ' . navigation_link($link));
             }
         }
@@ -57,7 +57,8 @@
             insert_table("user", $value);
             // navigation link
             $link[] = array('key' => 'success', 'value' => 1);
-            $link[$page_index]['value'] = "create_user.php";
+            $link[] = array('key' => 'user_statut', 'value' => $statut);
+            $link[$page_index]['value'] = "user_management.php";
             header('Location: ' . navigation_link($link));
         }
     }

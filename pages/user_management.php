@@ -74,8 +74,7 @@
             <div class="management-title d-flex align-items-center justify-content-between mb-3">
                 <h3 class="m-0 fw-bold">Users</h3>
                 <div class="add-new">
-                    <?php $create_user_link[$create_user_index]['value'] = 'create_user.php'; ?> 
-                    <a href="<?= navigation_link($create_user_link) ?>" class="btn btn-primary rounded-1 fw-bold" style="padding: 10px 20px 10px 20px;">Add new</a>
+                    <?php include("../inc/create-user_modal.php"); ?>
                 </div>
             </div>
             <!-- users type choice -->
