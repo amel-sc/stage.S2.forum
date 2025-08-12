@@ -253,9 +253,40 @@
         }
         else if ($statut == "-1")
         {
-            $statut_name = "Deleted";
+            $statut_name = "Deleted user";
         }
 
         return $statut_name;
+    }
+
+    // function for input set/not
+    function check_input_value($new_value, $old_value, $index_value, $input_type)
+    {
+        $result = null;
+        if ($input_type == 'text')
+        {
+            if ($new_value == "")
+            {
+                $result = $old_value[$index_value];
+            }
+            else 
+            {
+                $result = $new_value;
+            }
+        }
+
+        else if ($input_type == 'file')
+        {
+            if ($new_value['name'] == "")
+            {
+                $result = $old_value[$index_value];
+            }
+            else 
+            {
+                $result = $upload_image($new_value);
+            }
+        }
+
+        return $result;
     }
 ?>

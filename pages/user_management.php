@@ -133,8 +133,8 @@
                                     <?php if ($user_statut == -1) { ?>
                                         <div class="d-flex align-items-center justify-content-evenly">
                                             <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
-                                            <a class="rounded-pill d-flex align-items-center" href="<?= custom_navigation_link($reset_user_link) ?>">
-                                                <img src="../assets/images/reset.png" alt="Reset profile" style="width: 35px; height: 35px; padding: 2px;">
+                                            <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
+                                                Restore
                                             </a>
                                         </div>
                                     <?php } else { ?>

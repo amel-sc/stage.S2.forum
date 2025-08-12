@@ -13,66 +13,58 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit profile</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('<?= $edit_user['user_id'] ?>')"></button>
             </div>
             <div class="modal-body">
-                <form action="traitement_edit_profile.php" method="post">
+                <form action="traitement_edit_profile.php" id="<?= $edit_user['user_id'] ?>_edit_form" method="post" enctype="multipart/form-data">
                     <div class="d-flex flex-column align-items-center justify-content-center gap-2 mb-3">
                         <img src="<?= $edit_user['u_image'] ?>" alt="User profile" style="width: 100px; height: 100px;">
-                        <label type="button" for="<?= $edit_user['user_id'] ?>_image" class="btn btn-primary fw-bold rounded-1">
+                        <label type="button" tabindex="0" role="button" for="<?= $edit_user['user_id'] ?>_image" class="btn btn-primary fw-bold rounded-1" onkeydown="click_button_label('<?= $edit_user['user_id'] ?>', '_image', event)">
                             Change profil
                         </label>
                         <div class="d-none">
-                            <input type="file" id="<?= $edit_user['user_id'] ?>_image" onchange="input_file_name(<?= $edit_user['user_id']. '_image' ?>, <?= $edit_user['user_id'] . '_image_name' ?>)" name="image">
+                            <input type="file" id="<?= $edit_user['user_id'] ?>_image" name="image" onchange="input_file_name('<?= $edit_user['user_id'] ?>')">
                         </div>
                         <small class="fw-bold">Profil: <span id="<?= $edit_user['user_id'] ?>_image_name" class="fw-normal">No file chosen</span></small>
                     </div>
                     <div class="name_div mb-3 d-flex align-items-center justify-content-between gap-3">
                         <div class="last_name">
                             <label for="<?= $edit_user['user_id'] ?>_last_name" class="form-label fw-bold">Last name</label>
-                            <input type="text" value="<?= $edit_user['u_last_name'] ?>" class="form-control" id="<?= $edit_user['user_id'] ?>_last_name" name="last_name" placeholder="Last name" required>
+                            <input type="text" class="form-control" id="<?= $edit_user['user_id'] ?>_last_name" name="last_name" placeholder="Last name">
                             <small style="color: #5c6c74;"><?= $edit_user['u_last_name'] ?></small>
                         </div>
                         <div class="first_name">
                             <label for="<?= $edit_user['user_id'] ?>_first_name" class="form-label fw-bold">First name</label>
-                            <input type="text" value="<?= $edit_user['u_first_name'] ?>" class="form-control" id="<?= $edit_user['user_id'] ?>_first_name" name="first_name" placeholder="First name" required>
+                            <input type="text" class="form-control" id="<?= $edit_user['user_id'] ?>_first_name" name="first_name" placeholder="First name">
                             <small style="color: #5c6c74;"><?= $edit_user['u_first_name'] ?></small>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="<?= $edit_user['user_id'] ?>_birth_date" class="form-label fw-bold">Birthday</label>
-                        <input type="date" value="<?= $edit_user['u_birth_date'] ?>" class="form-control" id="<?= $edit_user['user_id'] ?>_birth_date" name="birth_date" placeholder="Birthday" required>
+                        <input type="date" class="form-control" id="<?= $edit_user['user_id'] ?>_birth_date" name="birth_date" placeholder="Birthday">
                         <small style="color: #5c6c74;"><?= $edit_user['u_birth_date'] ?></small>
                     </div>
                     <div class="mb-3">
                         <label for="<?= $edit_user['user_id'] ?>_gender" class="form-label fw-bold">Gender</label>
                         <select id="<?= $edit_user['user_id'] ?>_gender" name="gender" class="form-select">
-                            <?php if ($edit_user['u_gender'] == "M") { ?>
-                                <option value="M" selected>Male</option>
-                                <option value="F">Female</option>
-                            <?php } else if ($edit_user['u_gender'] == "F") { ?>
-                                <option value="M">Male</option>
-                                <option value="F" selected>Female</option>
-                            <?php } ?>
+                            <option value="" selected>--Gender--</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
                         </select>
                         <small style="color: #5c6c74;"><?= gender_name($edit_user['u_gender']) ?></small>
                     </div>
                     <div class="mb-3">
                         <label for="<?= $edit_user['user_id'] ?>_statut" class="form-label fw-bold">Statut</label>
                         <select id="<?= $edit_user['user_id'] ?>_statut" name="statut" class="form-select">
-                            <?php if ($edit_user['u_statut'] == "1") { ?>
-                                <option value="0">Common user</option>
-                                <option value="1" selected>Admin</option>
-                            <?php } else if ($edit_user['u_statut'] == "0") { ?>
-                                <option value="0" selected>Common user</option>
-                                <option value="1">Admin</option>
-                            <?php } ?>
+                            <option value="" selected>--Statut--</option>
+                            <option value="0">Common user</option>
+                            <option value="1">Admin</option>
                         </select>
                         <small style="color: #5c6c74;"><?= statut_name($edit_user['u_statut']) ?></small>
                     </div>
                     <div class="mb-3">
                         <label for="<?= $edit_user['user_id'] ?>_email" class="form-label fw-bold">Email</label>
-                        <input type="email" value="<?= $edit_user['u_email'] ?>" class="form-control" id="<?= $edit_user['user_id'] ?>_email" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control" id="<?= $edit_user['user_id'] ?>_email" name="email" placeholder="Email">
                         <small style="color: #5c6c74;"><?= $edit_user['u_email'] ?></small>
                     </div>
                     <div class="">
@@ -87,11 +79,13 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fw-bold rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;">Cancel</button>
-                <label type="button" for="<?= $edit_user['user_id'] ?>_validate-button" class="btn btn-primary fw-bold rounded-1" style="padding: 8px 20px 8px 20px;">Validate</label>
+                <button type="button" class="btn btn-secondary fw-bold rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;" onclick="reset_form('<?= $edit_user['user_id'] ?>')">Cancel</button>
+                <label type="button" tabindex="0" role="button" for="<?= $edit_user['user_id'] ?>_validate-button" class="btn btn-primary fw-bold rounded-1" style="padding: 8px 20px 8px 20px;" onkeydown="click_button_label('<?= $edit_user['user_id'] ?>', '_validate-button', event)">
+                    Validate
+                </label>
             </div>
         </div>
     </div>
 </div>
 
-<script src="../edit-user_modal.js"></script>
+<script src="../assets/js/edit-user_modal.js"></script>
