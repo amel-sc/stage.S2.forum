@@ -75,7 +75,11 @@
                                     </li>
                                 <?php } ?>
                                 <li>
-                                    <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#confirmation">
+                                    <?php 
+                                        $link_header[$page_index]['value'] = "login.php";
+                                        $modal_confirm = modal_confirmation("Log out confirmation", "log_out_confirmation", navigation_link($link_header)); 
+                                    ?>
+                                    <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                         <span class="text-black d-block">Log Out</span>
                                     </button>
@@ -123,4 +127,4 @@
     </nav>
 </header>
 
-<?php include("confirm_modal.php") ?>
+<?php include("confirm_modal.php"); ?>

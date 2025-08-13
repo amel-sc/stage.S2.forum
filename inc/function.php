@@ -131,7 +131,7 @@
     {
         $upload_dir = dirname(__DIR__).'/assets/uploads/';
         $max_size = 500 * 1024 * 1024;
-        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'video/mp4'];
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'video/mp4'];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
             die('Erreur lors de l’upload : ' . $file['error']);
