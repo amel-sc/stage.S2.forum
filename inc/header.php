@@ -11,7 +11,9 @@
     <nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="light" style="height: 70px;">
         <div class="container-fluid">
             <?php $link_header[$page_index]['value'] = "home.php"; ?>
-            <a class="navbar-brand fw-bold fs-3" href="<?= navigation_link($link_header) ?>" style="color: #0d6efd;">Forum</a>
+            <a class="navbar-brand fw-bold fs-5" href="<?= navigation_link($link_header) ?>" style="">
+                <img src="../assets/images/logo.svg" alt="Logo SPAT">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

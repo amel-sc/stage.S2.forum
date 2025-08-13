@@ -12,10 +12,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Create user</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('', 'create_user_form')"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('', 'create_user_form', 'input_file_text')"></button>
             </div>
             <div class="modal-body">
                 <form action="traitement_sign.php" method="post" id="create_user_form">
+                    <div class="mb-3">
+                        <label for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
+                            <p class="m-0 fw-bold" style="width: 200px;; white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">File: <span class="fw-normal" id="input_file_text">No file chosen</span></p>
+                            <p class="m-0 fw-bold">User profile</p>
+                        </label>
+                        <div class="d-none">
+                            <input type="file" name="image" id="input_file_profile" onchange="input_file_name('', 'input_file_profile', 'input_file_text')">
+                        </div>
+                    </div>
                     <div class="name_div mb-3 d-flex align-items-center justify-content-between gap-3">
                         <div class="last_name">
                             <label for="last_name" class="form-label fw-bold">Last name</label>
@@ -48,7 +57,7 @@
                         <label for="email" class="form-label fw-bold">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="">
                         <label for="mdp" class="form-label fw-bold">Password</label>
                         <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
                     </div>
@@ -59,7 +68,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fw-bold rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;" onclick="reset_form('', 'create_user_form')">Cancel</button>
+                <button type="button" class="btn btn-secondary fw-bold rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;" onclick="reset_form('', 'create_user_form', 'input_file_text')">Cancel</button>
                 <label type="button" tabindex="0" role="button" for="create_user_validate" class="btn btn-primary fw-bold rounded-1" style="padding: 8px 20px 8px 20px;" onkeydown="click_button_label('', 'create_user_validate', event)">
                     Validate
                 </label>
