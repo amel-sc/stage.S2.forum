@@ -283,7 +283,7 @@
             }
             else 
             {
-                $result = $upload_image($new_value);
+                $result = upload_image($new_value);
             }
         }
 
