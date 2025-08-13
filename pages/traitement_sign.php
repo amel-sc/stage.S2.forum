@@ -18,6 +18,15 @@
         $statut = $_POST['statut'];
         $email = $_POST['email'];
         $mdp = $_POST['mdp'];
+        $image = $_FILES['image']['name'];
+        if ($image == "")
+        {
+            $image = "../assets/images/user.png";
+        }
+        else 
+        {
+            $image = upload_image($_FILES['image']);
+        }
 
         // verification if user already exist
         $condition = array();
@@ -51,7 +60,7 @@
             $value[] = array('key' => 'u_statut', 'value' => $statut);
             $value[] = array('key' => 'u_email', 'value' => $email);
             $value[] = array('key' => 'u_mdp', 'value' => $mdp);
-            $value[] = array('key' => 'u_image', 'value' => "../assets/images/user.png");
+            $value[] = array('key' => 'u_image', 'value' => $image);
             $value[] = array('key' => 'u_inscription_date', 'value' => $date_now);
             // insert values in table
             insert_table("user", $value);

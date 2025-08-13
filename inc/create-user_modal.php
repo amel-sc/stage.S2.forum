@@ -15,10 +15,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('', 'create_user_form', 'input_file_text')"></button>
             </div>
             <div class="modal-body">
-                <form action="traitement_sign.php" method="post" id="create_user_form">
+                <form action="traitement_sign.php" method="post" id="create_user_form" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
-                            <p class="m-0 fw-bold" style="width: 200px;; white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">File: <span class="fw-normal" id="input_file_text">No file chosen</span></p>
+                            <p class="m-0 fw-bold col" style="white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">File: <span class="fw-normal" id="input_file_text">No file chosen</span></p>
                             <p class="m-0 fw-bold">User profile</p>
                         </label>
                         <div class="d-none">
