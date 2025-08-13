@@ -105,7 +105,11 @@
                                     </li>
                                 <?php } ?>
                                 <li>
-                                    <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#confirmation">
+                                    <?php 
+                                        $link_header[$page_index]['value'] = "login.php";
+                                        $modal_confirm = modal_confirmation("Log out confirmation", "log_out_confirmation", navigation_link($link_header)); 
+                                    ?>
+                                    <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
                                         <span class="text-black d-block">Log Out</span>
                                     </button>
@@ -119,22 +123,4 @@
     </nav>
 </header>
 
-<!-- Modal -->
-<div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body m-auto" style="padding: 30px 0px 55px 0px;">
-                <p class="mb-4">Are you sure you want to continue?</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <?php $link_header[$page_index]['value'] = "login.php"; ?>
-                    <a role="button" class="btn btn-success rounded-1 text-white" href="<?= navigation_link($link_header) ?>" style="text-decoration: none; padding: 12px 45px 12px 45px;">Yes</a>
-                    <button type="button" class="btn btn-danger text-white rounded-1" data-bs-dismiss="modal" style="padding: 12px 45px 12px 45px;">No</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include("confirm_modal.php") ?>

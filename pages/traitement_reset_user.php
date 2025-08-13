@@ -9,6 +9,8 @@
     {
         // value getted
         $user_id = $_GET['user_id'];
+        // get old info for header
+        $old_info = get_user_by_id($user_id);
         // commmon value for update
         $user_column[] = array('key' => 'custom', 'value' => 0);
         $user_condition[] = array('key' => 'user_id', 'value' => $user_id);
@@ -28,6 +30,7 @@
 
         // header to user_management
         $link[$page_index]['value'] = 'user_management.php';
+        $link[] = array('key' => 'user_statut', 'value' => $old_info['u_statut']);
         header('Location: ' . navigation_link($link));
     }
 ?>

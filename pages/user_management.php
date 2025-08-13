@@ -56,8 +56,7 @@
     $corbeille_link = array();
     $corbeille_link[] = array('key' => 'page', 'value' => 'traitement_corbeille.php');
     $corbeille_link[] = array('key' => 'user_id', 'value' => null);
-    $corbeille_user_index = get_index($corbeille_link, "user_id");
-    
+    $corbeille_user_index = get_index($corbeille_link, "user_id");    
 ?>
 
 <section class="div-container">
@@ -140,20 +139,36 @@
                                         <!-- for user not deleted -->
                                         <div class="d-flex align-items-center justify-content-evenly">
                                             <?php include("../inc/edit-user_modal.php"); ?>
-                                            <?php $delete_user_link[$delete_user_index]['value'] = $user['user_id']; ?>
-                                            <a class="rounded-pill d-flex align-items-center" href="<?= custom_navigation_link($delete_user_link) ?>">
+                                            <?php
+                                                $delete_user_link[$delete_user_index]['value'] = $user['user_id'];
+                                                $modal_confirm = modal_confirmation("Delete confirmation", "first_delete_" . $user['user_id'], custom_navigation_link($delete_user_link));
+                                            ?>
+                                            <button class="rounded-pill d-flex align-items-center border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
                                                 <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
-                                            </a>
+                                            </button>
+                                            <?php include("../inc/confirm_modal.php") ?>
                                         </div>
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
                                     <?php if ($user_statut == -1) { ?>
-                                        <?php $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'] ?>
-                                        <a href="<?= custom_navigation_link($corbeille_link) ?>" class="btn btn-danger fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Delete</a>
+                                        <?php 
+                                            $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'];
+                                            $modal_confirm = modal_confirmation("Delete confirmation", "second_delete_" . $user['user_id'],custom_navigation_link($corbeille_link));
+                                        ?>
+                                        <button class="btn btn-danger fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
+                                            Delete
+                                        </button>
+                                        <?php include("../inc/confirm_modal.php"); ?>
                                     <?php } else { ?>
-                                        <?php $login_link[$login_index]['value'] = $user['user_id']; ?>
-                                        <a href="<?= custom_navigation_link($login_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">Login</a>
+                                        <?php 
+                                            $login_link[$login_index]['value'] = $user['user_id'];
+                                            $modal_confirm = modal_confirmation("Login confirmation", "login_" . $user['user_id'], custom_navigation_link($login_link));
+                                        ?>
+                                        <button class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
+                                            Login
+                                        </button>
+                                        <?php include("../inc/confirm_modal.php"); ?>
                                     <?php } ?>
                                 </td>
                             </tr>

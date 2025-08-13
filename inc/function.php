@@ -289,4 +289,14 @@
 
         return $result;
     }
+
+    // function to create modal confirmation value
+    function modal_confirmation($header, $id, $link)
+    {
+        $result['header'] = $header;
+        $result['id'] = $id;
+        $result['link'] = $link;
+        
+        return $result;
+    }
 ?>

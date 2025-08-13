@@ -22,7 +22,7 @@
                             <p class="m-0 fw-bold">User profile</p>
                         </label>
                         <div class="d-none">
-                            <input type="file" name="image" id="input_file_profile" onchange="input_file_name('', 'input_file_profile', 'input_file_text')">
+                            <input type="file" name="image" id="input_file_profile" onchange="input_file_name('', 'input_file_profile', 'input_file_text')" accept="image/jpeg, image/png, image/jpg">
                         </div>
                     </div>
                     <div class="name_div mb-3 d-flex align-items-center justify-content-between gap-3">

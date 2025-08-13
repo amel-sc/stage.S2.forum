@@ -56,7 +56,7 @@
                     <div class="div-existence d-none d-md-block">
                         <button class="rounded-pill btn btn-primary gap-1 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#change-profil">
                             <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
-                            <span class="fw-bold" style="">Edit</span>
+                            <span class="fw-bold" style="">Edit profile</span>
                         </button>
                     </div>
                     <div class="div-ecistence d-md-none d-block">
@@ -137,11 +137,17 @@
             <div class="modal-body">
                 <form action="traitement_image_profil.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input type="file" class="form-control" id="" name="image" accept="image/jpeg, image/png, image/jpg" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                        <label for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
+                            <p class="m-0 fw-bold col" style="white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">File: <span class="fw-normal" id="input_file_text">No file chosen</span></p>
+                            <p class="m-0 fw-bold">User profile</p>
+                        </label>
+                        <div class="d-none">
+                            <input type="file" name="image" id="input_file_profile" onchange="input_file_name('', 'input_file_profile', 'input_file_text')" accept="image/jpeg, image/png, image/jpg">
+                        </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-end gap-2">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Validate</button>
+                        <button type="button" class="btn btn-secondary rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-1" style="padding: 8px 20px 8px 20px;">Validate</button>
                     </div>
                 </form>
             </div>
@@ -150,3 +156,4 @@
 </div>
 
 <script src="../assets/js/profile.js"></script>
+<script src="../assets/js/user_management.js"></script>

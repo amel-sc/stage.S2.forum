@@ -1,10 +1,13 @@
 <?php
     $edit_modal_id = $user['user_id'] . "edit_profile";
     $edit_user = $user;
+
+    // actual user for disabled the statut change
+    $current_user = $_SESSION['current_user'];
 ?>
 <!-- Button trigger modal -->
 <button class="rounded-pill d-flex align-items-center border-0 bg-transparent"  data-bs-toggle="modal" data-bs-target="<?= "#" . $edit_modal_id ?>"> 
-        <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
+    <img src="../assets/images/edit.png" alt="Edit profile" style="width: 35px; height: 35px; padding: 5px;">
 </button>
 
 <!-- Modal -->
@@ -55,11 +58,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="<?= $edit_user['user_id'] ?>_statut" class="form-label fw-bold">Statut</label>
-                        <select id="<?= $edit_user['user_id'] ?>_statut" name="statut" class="form-select">
-                            <option value="" selected>--Statut--</option>
-                            <option value="0">Common user</option>
-                            <option value="1">Admin</option>
-                        </select>
+                        <?php if($user['user_id'] == $current_user['user_id']) { ?>
+                            <select id="<?= $edit_user['user_id'] ?>_statut" name="statut" class="form-select" disabled>
+                                <option value="" selected>--Statut--</option>
+                                <option value="0">Common user</option>
+                                <option value="1">Admin</option>
+                            </select>
+                        <?php } else { ?>
+                            <select id="<?= $edit_user['user_id'] ?>_statut" name="statut" class="form-select">
+                                <option value="" selected>--Statut--</option>
+                                <option value="0">Common user</option>
+                                <option value="1">Admin</option>
+                            </select>
+                        <?php } ?>
                         <small style="color: #5c6c74;"><?= statut_name($edit_user['u_statut']) ?></small>
                     </div>
                     <div class="mb-3">

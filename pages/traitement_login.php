@@ -5,31 +5,43 @@
     $link = array();
     $link[] = array('key' => 'page', 'value' => null);
     $page_index = get_index($link, "page");
+    // current user info
+    $current_user = $_SESSION['current_user'];
 
     // condition admin login or common user login
     if (isset($_GET['admin_login']))
     {
         // values getted
         $user_id = $_GET['user_id'];
-        // get user clicked
-        $user_condition = array();
-        $user_condition[] = array('key' => 'user_id', 'value' => $user_id);
-        // request
-        $user = select_table("user", $user_condition, null);
-        
-        // verify if user is deleted/not
-        if ($user[0]['u_statut'] == -1)
+        // verify if the user login is not the current user
+        if ($user_id == $current_user['user_id'])
         {
-            $link[] = array('key' => 'deleted', 'value' => 0);
-            $link[$page_index]['value'] = "login.php";
+            $link[$page_index]['value'] = "user_management.php";
+            $link[] = array('key' => 'user_statut', 'value' => $current_user['u_statut']);
             header('Location: ' . navigation_link($link));
         }
         else 
         {
-            // session and header location
-            $_SESSION['current_user'] = $user[0];
-            $link[$page_index]['value'] = "home.php";
-            header('Location: ' . navigation_link($link));
+            // get user clicked
+            $user_condition = array();
+            $user_condition[] = array('key' => 'user_id', 'value' => $user_id);
+            // request
+            $user = select_table("user", $user_condition, null);
+            
+            // verify if user is deleted/not
+            if ($user[0]['u_statut'] == -1)
+            {
+                $link[] = array('key' => 'deleted', 'value' => 0);
+                $link[$page_index]['value'] = "login.php";
+                header('Location: ' . navigation_link($link));
+            }
+            else 
+            {
+                // session and header location
+                $_SESSION['current_user'] = $user[0];
+                $link[$page_index]['value'] = "home.php";
+                header('Location: ' . navigation_link($link));
+            }
         }
     }
     else 
