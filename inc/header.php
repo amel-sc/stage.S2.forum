@@ -62,7 +62,7 @@
                                     <?php $link_header[$page_index]['value'] = "profile.php"; ?>
                                     <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
                                         <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
-                                        <span class="text-black d-block">View Profile</span>
+                                        <span class="text-black d-block">View profile</span>
                                     </a>
                                 </li>
                                 <?php if ($user_header['u_statut'] == 1) { ?>
@@ -81,7 +81,7 @@
                                     ?>
                                     <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
-                                        <span class="text-black d-block">Log Out</span>
+                                        <span class="text-black d-block">Log out</span>
                                     </button>
                                 </li>
                             </ul>
@@ -96,7 +96,7 @@
                                     <?php $link_header[$page_index]['value'] = "profile.php"; ?>
                                     <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
                                         <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
-                                        <span class="text-black d-block">View Profil</span>
+                                        <span class="text-black d-block">View profile</span>
                                     </a>
                                 </li>
                                 <?php if ($user_header['u_statut'] == 1) { ?>
@@ -115,7 +115,7 @@
                                     ?>
                                     <button type="button" class="d-flex align-items-center header-link gap-2 w-100" style="padding: 10px 0px 10px 16px; border: none;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
                                         <img class="" src="../assets/images/log-out.png" alt="" style="width: 35px; height: 35px; padding: 5px;">
-                                        <span class="text-black d-block">Log Out</span>
+                                        <span class="text-black d-block">Log out</span>
                                     </button>
                                 </li>
                             </ul>

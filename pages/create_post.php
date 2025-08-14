@@ -29,7 +29,7 @@
                     <p class="fw-bold mb-2">Image/Video</p>
                     <div class="w-100 rounded-2 d-flex align-items-center" style="border: 1px dashed #00000033; padding: 60px 55px;">
                         <span class="col" id="input_file_text" style="white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">No file chosen</span>
-                        <label for="input_file_post" style="cursor: pointer;" class="d-flex align-items-center return-button rounded-circle p-0">
+                        <label type="button" tabindex="0" role="button" for="input_file_post" style="cursor: pointer;" class="d-flex align-items-center return-button rounded-circle p-0" onkeydown="click_button_label('', 'input_file_post', event)">
                             <img src="../assets/images/upload.png" alt="Upload media" style="width: 35px; height: 35px; padding: 5px;">
                         </label>
                     </div>

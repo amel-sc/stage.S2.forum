@@ -220,3 +220,28 @@ body {
 th {
     background: #f5f6f8  !important;
 }
+
+
+
+/* css for image post */
+.media-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 850px; /* limite sur grand écran */
+  margin-top: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000; /* fond neutre */
+  aspect-ratio: 16 / 9; /* adapte selon le média */
+}
+
+.media-wrapper img,
+.media-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* montre tout le contenu, pas de découpe */
+  display: block;
+}
+
+.ratio-tall { aspect-ratio: 9 / 16; }
+.ratio-wide { aspect-ratio: 16 / 9; }

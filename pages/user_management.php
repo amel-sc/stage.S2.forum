@@ -68,6 +68,57 @@
             </a>
             <h1 class="m-0" style="">User management</h1>
         </div>
+        <!-- user already exist -->
+        <?php if (isset($_GET['user_exist'])) { ?>
+            <div class="alert alert-danger d-flex align-items-start align-items-md-center gap-2 flex-column flex-md-row rounded-1 p-2 p-md-3" role="alert" style="">
+                <div class="d-flex align-items-center gap-2 w-100">
+                    <img src="../assets/images/error.png" alt="Error" style="width: 24px; height: 24px; flex-shrink: 0;">
+                    <div class="">
+                        Email already in use. Try 
+                        <span class="alert-link text-decoration-underline fw-semibold" style="">Logging in</span> 
+                        or use a different email.
+                    </div>
+                </div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style=""></button>
+            </div>
+        <?php } ?>
+        <!-- user deleted -->
+        <?php if (isset($_GET['deleted'])) { ?>
+            <div class="alert alert-danger d-flex align-items-start align-items-md-center gap-2 flex-column flex-md-row rounded-1 p-2 p-md-3" role="alert" style="">
+                <div class="d-flex align-items-center gap-2 w-100">
+                    <img src="../assets/images/error.png" alt="Error" style="width: 24px; height: 24px; flex-shrink: 0;">
+                    <div class="">
+                        User does not exist.
+                    </div>
+                </div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style=""></button>
+            </div>
+        <?php } ?>
+        <!-- sign in succes -->
+         <?php if (isset($_GET['success'])) { ?>
+            <div class="alert alert-success d-flex align-items-start align-items-md-center gap-2 flex-column flex-md-row rounded-1 p-2 p-md-3" role="alert" style="">
+                <div class="d-flex align-items-center gap-2 w-100">
+                    <img src="../assets/images/success.png" alt="Error" style="width: 24px; height: 24px; flex-shrink: 0;">
+                    <div class="">
+                        Success! Your account has been created.
+                    </div>
+                </div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style=""></button>
+            </div>
+        <?php } ?>
+        <!-- delete the current user -->
+         <?php if (isset($_GET['delete_current_user'])) { ?>
+            <div class="alert alert-danger d-flex align-items-start align-items-md-center gap-2 flex-column flex-md-row rounded-1 p-2 p-md-3" role="alert" style="">
+                <div class="d-flex align-items-center gap-2 w-100">
+                    <img src="../assets/images/error.png" alt="Error" style="width: 24px; height: 24px; flex-shrink: 0;">
+                    <div class="">
+                        Error! Cannot delete the current user.
+                    </div>
+                </div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style=""></button>
+            </div>
+        <?php } ?>
+        
         <div class="user-management-container rounded-4">
             <!-- header -->
             <div class="management-title d-flex align-items-center justify-content-between mb-3">
@@ -104,78 +155,88 @@
                 </div>
             </div>
             <!-- user list  -->
-            <div class="user-list table-responsive">
-                <table class="table table-hover align-middle" style="white-space: nowrap;">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-center">Photo</th>
-                            <th scope="col">Full name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Inscription date</th>
-                            <th scope="col">Statut</th>
-                            <th scope="col" class="text-center">Operation</th>
-                            <th scope="col" class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($user_list as $user) { ?> 
+            <?php if(empty($user_list)) { ?>
+                <div class="text-center py-5">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-muted">
+                        <img src="../assets/images/empty.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
+                        <h4 class="mt-3 fw-bold">Aucun utilisateur trouvé</h4>
+                        <p class="mb-0" style="font-size: large;">La liste des utilisateurs est vide pour le moment.</p>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <div class="user-list table-responsive">
+                    <table class="table table-hover align-middle" style="white-space: nowrap;">
+                        <thead>
                             <tr>
-                                <td class="text-center">
-                                    <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 35px; height: 35px;">
-                                </td>
-                                <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
-                                <td><?= $user['u_email'] ?></td>
-                                <td><?= $user['u_inscription_date'] ?></td>
-                                <td><?= statut_name($user['u_statut']) ?></td>
-                                <td class="">
-                                    <?php if ($user_statut == -1) { ?>
-                                        <div class="d-flex align-items-center justify-content-evenly">
-                                            <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
-                                            <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
-                                                Restore
-                                            </a>
-                                        </div>
-                                    <?php } else { ?>
-                                        <!-- for user not deleted -->
-                                        <div class="d-flex align-items-center justify-content-evenly">
-                                            <?php include("../inc/edit-user_modal.php"); ?>
-                                            <?php
-                                                $delete_user_link[$delete_user_index]['value'] = $user['user_id'];
-                                                $modal_confirm = modal_confirmation("Delete confirmation", "first_delete_" . $user['user_id'], custom_navigation_link($delete_user_link));
-                                            ?>
-                                            <button class="rounded-pill d-flex align-items-center border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
-                                                <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
-                                            </button>
-                                            <?php include("../inc/confirm_modal.php") ?>
-                                        </div>
-                                    <?php } ?>
-                                </td>
-                                <td class="text-center">
-                                    <?php if ($user_statut == -1) { ?>
-                                        <?php 
-                                            $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'];
-                                            $modal_confirm = modal_confirmation("Delete confirmation", "second_delete_" . $user['user_id'],custom_navigation_link($corbeille_link));
-                                        ?>
-                                        <button class="btn btn-danger fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
-                                            Delete
-                                        </button>
-                                        <?php include("../inc/confirm_modal.php"); ?>
-                                    <?php } else { ?>
-                                        <?php 
-                                            $login_link[$login_index]['value'] = $user['user_id'];
-                                            $modal_confirm = modal_confirmation("Login confirmation", "login_" . $user['user_id'], custom_navigation_link($login_link));
-                                        ?>
-                                        <button class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
-                                            Login
-                                        </button>
-                                        <?php include("../inc/confirm_modal.php"); ?>
-                                    <?php } ?>
-                                </td>
+                                <th scope="col" class="text-center">Photo</th>
+                                <th scope="col">Full name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Inscription date</th>
+                                <th scope="col">Statut</th>
+                                <th scope="col" class="text-center">Operation</th>
+                                <th scope="col" class="text-center">Action</th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            <?php foreach($user_list as $user) { ?> 
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 35px; height: 35px;">
+                                    </td>
+                                    <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
+                                    <td><?= $user['u_email'] ?></td>
+                                    <td><?= $user['u_inscription_date'] ?></td>
+                                    <td><?= statut_name($user['u_statut']) ?></td>
+                                    <td class="">
+                                        <?php if ($user_statut == -1) { ?>
+                                            <div class="d-flex align-items-center justify-content-evenly">
+                                                <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
+                                                <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
+                                                    Restore
+                                                </a>
+                                            </div>
+                                        <?php } else { ?>
+                                            <!-- for user not deleted -->
+                                            <div class="d-flex align-items-center justify-content-evenly">
+                                                <?php include("../inc/edit-user_modal.php"); ?>
+                                                <?php
+                                                    $delete_user_link[$delete_user_index]['value'] = $user['user_id'];
+                                                    $modal_confirm = modal_confirmation("Delete confirmation", "first_delete_" . $user['user_id'], custom_navigation_link($delete_user_link));
+                                                ?>
+                                                <button class="rounded-pill d-flex align-items-center border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
+                                                    <img src="../assets/images/trash.png" alt="Delete profile" style="width: 35px; height: 35px; padding: 5px;">
+                                                </button>
+                                                <?php include("../inc/confirm_modal.php") ?>
+                                            </div>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($user_statut == -1) { ?>
+                                            <?php 
+                                                $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'];
+                                                $modal_confirm = modal_confirmation("Delete confirmation", "second_delete_" . $user['user_id'],custom_navigation_link($corbeille_link));
+                                            ?>
+                                            <button class="btn btn-danger fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
+                                                Delete
+                                            </button>
+                                            <?php include("../inc/confirm_modal.php"); ?>
+                                        <?php } else { ?>
+                                            <?php 
+                                                $login_link[$login_index]['value'] = $user['user_id'];
+                                                $modal_confirm = modal_confirmation("Login confirmation", "login_" . $user['user_id'], custom_navigation_link($login_link));
+                                            ?>
+                                            <button class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;" data-bs-toggle="modal" data-bs-target="#<?= $modal_confirm['id'] ?>">
+                                                Login
+                                            </button>
+                                            <?php include("../inc/confirm_modal.php"); ?>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </section>

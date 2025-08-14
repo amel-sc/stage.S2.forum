@@ -18,6 +18,7 @@
             // header to user_management
             $link[$page_index]['value'] = 'user_management.php';
             $link[] = array('key' => 'user_statut', 'value' => $current_user['u_statut']);
+            $link[] = array('key' => 'delete_current_user', 'value' => 1);
             header('Location: ' . navigation_link($link));
         }
         else 

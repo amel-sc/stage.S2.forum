@@ -47,9 +47,9 @@
             <div class="profile-photo d-flex align-items-center justify-content-between bg-white rounded-4 p-3">
                 <div class="d-flex align-items-center gap-4">
                     <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 85px; height: 85px;">
-                    <div class="photo-text d-flex flex-column gap-3">
+                    <div class="photo-text d-flex flex-column align-items-start gap-3">
                         <p class="m-0 fw-bold"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-                        <small class="m-0 badge rounded-pill text-bg-primary w-50"><?= statut_name($user['u_statut']) ?></small>
+                        <small class="badge rounded-pill text-bg-primary"><?= statut_name($user['u_statut']) ?></small>
                     </div>
                 </div>
                 <div>
@@ -131,13 +131,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit profil</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit profile</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reset_form('', 'edit_profile_form', 'input_file_text')"></button>
             </div>
             <div class="modal-body">
-                <form action="traitement_image_profil.php" method="post" enctype="multipart/form-data">
+                <form action="traitement_image_profil.php" id="edit_profile_form" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
+                        <label type="button" tabindex="0" role="button" onkeydown="click_button_label('', 'input_file_profile', event)" for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
                             <p class="m-0 fw-bold col" style="white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">File: <span class="fw-normal" id="input_file_text">No file chosen</span></p>
                             <p class="m-0 fw-bold">User profile</p>
                         </label>
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-end gap-2">
-                        <button type="button" class="btn btn-secondary rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;">Cancel</button>
+                        <button type="button" class="btn btn-secondary rounded-1" data-bs-dismiss="modal" style="padding: 8px 20px 8px 20px;" onclick="reset_form('', 'edit_profile_form', 'input_file_text')">Cancel</button>
                         <button type="submit" class="btn btn-primary rounded-1" style="padding: 8px 20px 8px 20px;">Validate</button>
                     </div>
                 </form>

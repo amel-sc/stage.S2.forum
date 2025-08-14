@@ -9,28 +9,28 @@
         <h1 class="fw-bold text-center mb-4" style="color: #0d6efd;">Sign in</h1>
         <!-- user already exist -->
         <?php if (isset($_GET['user_exist'])) { ?>
-             <div class="alert alert-danger d-flex align-items-center" role="alert">
-                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+             <div class="alert alert-danger d-flex align-items-center rounded-1 gap-3" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="" style="width: 20px; height: 20px;">
                  <div>
-                     Email already exist.
+                    Email already in use. Try <a href="<?= navigation_link($link) ?>" class="alert-link">Logging in</a> or use a different email.
                  </div>
              </div>
         <?php } ?>
         <!-- user deleted -->
         <?php if (isset($_GET['deleted'])) { ?>
-            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+            <div class="alert alert-danger d-flex align-items-center rounded-1 gap-3" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="" style="width: 20px; height: 20px;">
                  <div>
-                     User is deleted
+                    User does not exist.
                  </div>
              </div>
         <?php } ?>
         <!-- sign in succes -->
          <?php if (isset($_GET['success'])) { ?>
-            <div class="alert alert-success d-flex align-items-center" role="alert">
-                 <img src="../assets/images/success.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+            <div class="alert alert-success d-flex align-items-center rounded-1 gap-3" role="alert">
+                 <img src="../assets/images/success.png" alt="" class="" style="width: 20px; height: 20px;">
                  <div>
-                     Success! Your account has been created
+                    Success! Your account has been created.
                  </div>
              </div>
         <?php } ?>

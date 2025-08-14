@@ -8,19 +8,19 @@
         <h1 class="fw-bold text-center mb-4" style="color: #0d6efd;">Log in</h1>
         <!-- error email or mdp -->
         <?php if (isset($_GET['error'])) { ?>
-             <div class="alert alert-danger d-flex align-items-center" role="alert">
-                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
-                 <div>
-                     Email/password is incorrect
-                 </div>
+             <div class="alert alert-danger d-flex align-items-center rounded-1 gap-3" role="alert">
+                <img src="../assets/images/error.png" alt="" class="" style="width: 20px; height: 20px;">
+                <div>
+                    Email/password is incorrect.
+                </div>
              </div>
         <?php } ?>
         <!-- user deleted -->
         <?php if (isset($_GET['deleted'])) { ?>
-            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+            <div class="alert alert-danger d-flex align-items-center rounded-1 gap-3" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="" style="width: 20px; height: 20px;">
                  <div>
-                     User is deleted
+                    User does not exist.
                  </div>
              </div>
         <?php } ?>

@@ -17,7 +17,7 @@
             <div class="modal-body">
                 <form action="traitement_sign.php" method="post" id="create_user_form" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
+                        <label type="button" tabindex="0" role="button" onkeydown="click_button_label('', 'input_file_profile', event)" for="input_file_profile" class="d-flex align-items-center justify-content-between border rounded-2" style="border-style: dashed !important; padding: 6px 12px; cursor: pointer;">
                             <p class="m-0 fw-bold col" style="white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">File: <span class="fw-normal" id="input_file_text">No file chosen</span></p>
                             <p class="m-0 fw-bold">User profile</p>
                         </label>
