@@ -80,7 +80,12 @@
                     </div>
                     <div class="">
                         <label for="<?= $edit_user['user_id'] ?>_mdp" class="form-label fw-bold">Password</label>
-                        <input type="password" class="form-control" id="<?= $edit_user['user_id'] ?>_mdp" name="mdp" placeholder="Change password or not">
+                        <div class="input-container d-flex align-items-center">
+                            <input type="password" class="form-control" name="mdp" id="<?= $edit_user['user_id'] ?>_mdp" placeholder="Change password or not" required style="padding: 6px 50px 6px 12px;">
+                            <label for="" class="toggle-icon">
+                                <img src="../assets/images/show.png" alt="show password" id="<?= $edit_user['user_id'] ?>_password_button" style="width: 22px; height: 22px;" onclick="password_visibility_id('<?= $edit_user['user_id'] ?>', '_mdp', '_password_button')">
+                            </label>
+                        </div>
                         <small style="color: #5c6c74;"><?= $edit_user['u_mdp'] ?></small>
                     </div>
                     <input type="hidden" name="user_id" value="<?= $edit_user['user_id'] ?>">

@@ -245,3 +245,18 @@ th {
 
 .ratio-tall { aspect-ratio: 9 / 16; }
 .ratio-wide { aspect-ratio: 16 / 9; }
+
+
+/* css for input password hide/show */
+.input-container {
+  position: relative;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
