@@ -12,19 +12,30 @@
     $user_list_condition = [];
     if (isset($_GET['user_statut']))
     {
-        $user_list_condition[] = array('key' => 'u_statut', 'value' => $_GET['user_statut']);
         $user_statut = $_GET['user_statut'];
+        if ($user_statut == "all")
+        {
+            $suer_list_condition = null;
+        }
+        else 
+        {
+            $user_list_condition[] = array('key' => 'u_statut', 'value' => $user_statut);
+        }
     }
     else 
     {
-        $user_list_condition[] = array('key' => 'u_statut', 'value' => 0);
-        $user_statut = 0;
+        $user_statut = "all";
+        $user_list_condition = null;
     }
-
-    $user_list_other_condition[] = "ORDER by u_last_name ASC";
-
     // all user list
     $user_list = select_table("user", $user_list_condition, null);
+    // all user list sql
+    $user_list_sql = select_table_sql("user", $user_list_condition, null);
+
+    // create page
+    $sql = $user_list_sql;
+    $page = create_pagination($sql);
+    $total_page = count($page)
 
     // login user navigation link
     $login_link = array();
@@ -32,15 +43,6 @@
     $login_link[] = array('key' => 'user_id', 'value' => null);
     $login_link[] = array('key' => 'admin_login', 'value' => 1);
     $login_index = get_index($login_link, 'user_id');
-    // edit profile navigation link
-    $edit_profile_link = array();
-    $edit_profile_link[] = array('key' => 'page', 'value' => "edit_profile.php");
-    $edit_profile_link[] = array('key' => 'user_id', 'value' => null);
-    $edit_profile_index = get_index($edit_profile_link, 'user_id');
-    // create user navigation link
-    $create_user_link = array();
-    $create_user_link[] = array('key' => 'page', 'value' => null);
-    $create_user_index = get_index($create_user_link, "page");
     // delete user navigation link
     $delete_user_link = array();
     $delete_user_link[] = array('key' => 'page', 'value' => 'traitement_delete_user.php');
@@ -51,7 +53,6 @@
     $reset_user_link[] = array('key' => 'page', 'value' => 'traitement_reset_user.php');
     $reset_user_link[] = array('key' => 'user_id', 'value' => null);
     $reset_user_index = get_index($reset_user_link, "user_id");
-
     // corbeille user navigation link
     $corbeille_link = array();
     $corbeille_link[] = array('key' => 'page', 'value' => 'traitement_corbeille.php');
@@ -138,6 +139,10 @@
                     <ul class="dropdown-menu" style="">
                         <li>
                             <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Statut</span>
+                        </li>
+                        <li>
+                            <?php $user_controls_link[$user_statut_index]['value'] = "all"; ?>
+                            <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">All</a>
                         </li>
                         <li>
                             <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>

@@ -44,7 +44,7 @@
     
             // header to user_management
             $link[$page_index]['value'] = 'user_management.php';
-            $link[] = array('key' => 'user_statut', 'value' => $old_info['u_statut']);
+            $link[] = array('key' => 'user_statut', 'value' => -1);
             header('Location: ' . navigation_link($link));
         }
     }

@@ -255,6 +255,10 @@
         {
             $statut_name = "Deleted user";
         }
+        else if ($statut == "all")
+        {
+            $statut_name = "All";
+        }
 
         return $statut_name;
     }
@@ -297,6 +301,50 @@
         $result['id'] = $id;
         $result['link'] = $link;
         
+        return $result;
+    }
+
+
+
+
+    // function to create pagination for web
+    // function to get total page 
+    function total_page($count_request_result)
+    {
+        $total_page = $count_request_result / 20;
+        $total_page = ((int) $total_page) + 1;
+
+        return $total_page;
+    }
+    // function to create page and limit (pas de 20)
+    function create_page($total_page)
+    {
+        $page = array();
+        for ($i = 1; $i <= $total_page; $i++)
+        {
+            $page[$i] = array(
+                'first' => ($i - 1) * 20,
+                'last' => 20,
+            );
+        }
+        
+        return $page;
+    }
+    // function to create pagination
+    function create_pagination($sql)
+    {
+        $count_request_result = count_request_result($sql);
+        $total_page = total_page($count_request_result);
+        $page = create_page($total_page);
+
+        return $page;
+    }
+    // function to get one page result
+    function one_page_result($sql, $page, $index_page)
+    {
+        $sql_one_page = $sql . ' limit ' . $page[$index_page]['first'] . ',' . $page[$index_page]['last'];
+        $result = array_query($sql_one_page);
+
         return $result;
     }
 ?>
