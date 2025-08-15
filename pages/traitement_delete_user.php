@@ -5,8 +5,10 @@
     $link = array();
     $link[] = array('key' => 'page', 'value' => null);
     $page_index = get_index($link, "page");
-    // current user info
-    $current_user = $_SESSION['current_user'];
+    // lastest user statut
+    $user_statut = $_SESSION['user_statut'];
+    // lastest page (in pagination)
+    $index_pagination = $_SESSION['index_pagination'];
 
     if (isset($_GET['user_id']))
     {
@@ -17,7 +19,8 @@
         {
             // header to user_management
             $link[$page_index]['value'] = 'user_management.php';
-            $link[] = array('key' => 'user_statut', 'value' => $current_user['u_statut']);
+            $link[] = array('key' => 'user_statut', 'value' => $user_statut);
+            $link[] = array('key' => 'index_pagination', 'value' => $index_pagination);
             $link[] = array('key' => 'delete_current_user', 'value' => 1);
             header('Location: ' . navigation_link($link));
         }
@@ -44,7 +47,8 @@
     
             // header to user_management
             $link[$page_index]['value'] = 'user_management.php';
-            $link[] = array('key' => 'user_statut', 'value' => -1);
+            $link[] = array('key' => 'user_statut', 'value' => $user_statut);
+            $link[] = array('key' => 'index_pagination', 'value' => $index_pagination);
             header('Location: ' . navigation_link($link));
         }
     }

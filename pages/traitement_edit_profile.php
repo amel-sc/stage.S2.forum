@@ -5,6 +5,10 @@
     $link = array();
     $link[] = array('key' => 'page', 'value' => null);
     $page_index = get_index($link, "page");
+    // lastest user statut
+    $user_statut = $_SESSION['user_statut'];
+    // lastest page (in pagination)
+    $index_pagination = $_SESSION['index_pagination'];
 
     if(isset($_POST['user_id']))
     {
@@ -39,7 +43,8 @@
         $update_user = update_table('user', $column, $condition);
 
         // redirect to user_management page
-        $link[] = array('key' => 'user_statut', 'value' => $statut);
+        $link[] = array('key' => 'user_statut', 'value' => $user_statut);
+        $link[] = array('key' => 'index_pagination', 'value' => $index_pagination);
         $link[$page_index]['value'] = 'user_management.php';
         header('Location: ' . navigation_link($link));
     }

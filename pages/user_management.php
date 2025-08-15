@@ -48,6 +48,9 @@
         $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
     }
 
+    // save the lastest value for header
+    $_SESSION['user_statut'] = $user_statut;
+    $_SESSION['index_pagination'] = $index_pagination;
 
     // login user navigation link
     $login_link = array();
