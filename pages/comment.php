@@ -47,16 +47,20 @@
 
 <section class="div-container">
     <div class="content col-12 col-lg-9 m-auto mb-3">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="User profile" style="width: 25px; height: 25px;">
+            </a>
+            <h1 class="m-0" style="">Post</h1>
+        </div>
+
         <div class="post-comment-container rounded-4">
             <!-- post's card -->
             <div class="card card-post-selected mb-1 border-0 rounded-4">
                 <div class="card-body" style="padding: 0;">
                     <!-- sender info (user img, name , sended_date) -->
                     <div class="post-info d-flex align-items-center gap-2 mb-2">
-                        <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
-                        <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
-                            <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
-                        </a>
                         <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
                         <div class="">
                             <p class="m-0">
