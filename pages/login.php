@@ -8,19 +8,19 @@
         <h1 class="fw-bold text-center mb-4" style="color: #0d6efd;">Log in</h1>
         <!-- error email or mdp -->
         <?php if (isset($_GET['error'])) { ?>
-             <div class="alert alert-danger d-flex align-items-center" role="alert">
-                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
-                 <div>
-                     Email/password is incorrect
-                 </div>
+             <div class="alert alert-danger d-flex align-items-center rounded-1 gap-3" role="alert">
+                <img src="../assets/images/error.png" alt="" class="" style="width: 20px; height: 20px;">
+                <div>
+                    Email/password is incorrect.
+                </div>
              </div>
         <?php } ?>
         <!-- user deleted -->
         <?php if (isset($_GET['deleted'])) { ?>
-            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                 <img src="../assets/images/error.png" alt="" class="me-2" style="width: 20px; height: 20px;">
+            <div class="alert alert-danger d-flex align-items-center rounded-1 gap-3" role="alert">
+                 <img src="../assets/images/error.png" alt="" class="" style="width: 20px; height: 20px;">
                  <div>
-                     User is deleted
+                    User does not exist.
                  </div>
              </div>
         <?php } ?>
@@ -31,7 +31,12 @@
             </div>
             <div class="mb-3">
                 <label for="mdp" class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
+                <div class="input-container d-flex align-items-center">
+                    <input type="password" class="form-control" name="mdp" id="password" placeholder="Password" required style="padding: 6px 50px 6px 12px;">
+                    <label for="" class="toggle-icon">
+                        <img src="../assets/images/show.png" alt="show password" id="password_button" style="width: 22px; height: 22px;">
+                    </label>
+                </div>
             </div>
             <div class="mb-3 d-grid">
                 <button type="submit" class="input_button btn btn-primary">Log in</button>
@@ -47,3 +52,5 @@
         </div>
     </div>
 </section>
+
+<script src="../assets/js/profile.js"></script>

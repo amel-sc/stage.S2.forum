@@ -23,11 +23,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label fw-bold">Content</label>
-                    <textarea class="form-control" id="content" name="s_content" rows="8" style="resize: none; border: 1px solid #00000033" placeholder="Body text (optional)"></textarea>
+                    <textarea class="form-control" id="content" name="s_content" rows="6" style="resize: none; border: 1px solid #00000033" placeholder="Body text (optional)"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label fw-bold">Image/Video</label>
-                    <input type="file" class="form-control"  id="" name="s_media" accept="image/jpeg, image/png, image/jpg, video/mp4">
+                    <p class="fw-bold mb-2">Image/Video</p>
+                    <div class="w-100 rounded-2 d-flex align-items-center" style="border: 1px dashed #00000033; padding: 60px 55px;">
+                        <span class="col" id="input_file_text" style="white-space: nowrap;text-overflow: ellipsis; overflow: hidden;">No file chosen</span>
+                        <label type="button" tabindex="0" role="button" for="input_file_post" style="cursor: pointer;" class="d-flex align-items-center return-button rounded-circle p-0" onkeydown="click_button_label('', 'input_file_post', event)">
+                            <img src="../assets/images/upload.png" alt="Upload media" style="width: 35px; height: 35px; padding: 5px;">
+                        </label>
+                    </div>
+                    <div class="d-none">
+                        <input type="file" class="form-control"  id="input_file_post" onchange="input_file_name('', 'input_file_post', 'input_file_text')" name="s_media" accept="image/jpeg, image/png, image/jpg, image/gif, video/mp4">
+                    </div>
                 </div>
                 <div class="d-flex justify-content-end align-items-center gap-3">
                     <a href="<?= navigation_link($return_link) ?>" class="fw-bold btn btn-secondary rounded-1">Cancel</a>
@@ -37,3 +45,5 @@
         </div>
     </div>
 </section>
+
+<script src="../assets/js/user_management.js"></script>

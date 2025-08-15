@@ -198,11 +198,7 @@ body {
 
 /* user management */
 .table>:not(caption)>*>* {
-    padding: 10px !important;
-}
-.table tbody tr:last-child td,
-.table tbody tr:last-child th {
-    border-bottom: none;
+    padding: 15px 15px !important;
 }
 
 .nav-link {
@@ -217,6 +213,50 @@ body {
     border-bottom-color: #0d6efd !important;
 }
 
+.table {
+    --bs-table-hover-bg: #f5f6f8  !important; 
+}
+
 th {
-    background: #f0f2f5 !important;
+    background: #f5f6f8  !important;
+}
+
+
+
+/* css for image post */
+.media-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 850px; /* limite sur grand écran */
+  margin-top: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000; /* fond neutre */
+  aspect-ratio: 16 / 9; /* adapte selon le média */
+}
+
+.media-wrapper img,
+.media-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* montre tout le contenu, pas de découpe */
+  display: block;
+}
+
+.ratio-tall { aspect-ratio: 9 / 16; }
+.ratio-wide { aspect-ratio: 16 / 9; }
+
+
+/* css for input password hide/show */
+.input-container {
+  position: relative;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
 }

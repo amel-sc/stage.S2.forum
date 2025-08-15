@@ -131,7 +131,7 @@
     {
         $upload_dir = dirname(__DIR__).'/assets/uploads/';
         $max_size = 500 * 1024 * 1024;
-        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'video/mp4'];
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'video/mp4'];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
             die('Erreur lors de l’upload : ' . $file['error']);
@@ -253,29 +253,98 @@
         }
         else if ($statut == "-1")
         {
-            $statut_name = "Deleted";
+            $statut_name = "Deleted user";
+        }
+        else if ($statut == "all")
+        {
+            $statut_name = "All";
         }
 
         return $statut_name;
     }
 
-    // user_statut name for management
-    function statut_name_management($statut)
+    // function for input set/not
+    function check_input_value($new_value, $old_value, $index_value, $input_type)
     {
-        $statut_name = null;
-        if ($statut == 1)
+        $result = null;
+        if ($input_type == 'text')
         {
-            $statut_name = "Admins";
-        }
-        else if ($statut == 0)
-        {
-            $statut_name = "Users";
-        }
-        else if ($statut == -1)
-        {
-            $statut_name ="Deleted";
+            if ($new_value == "")
+            {
+                $result = $old_value[$index_value];
+            }
+            else 
+            {
+                $result = $new_value;
+            }
         }
 
-        return $statut_name;
+        else if ($input_type == 'file')
+        {
+            if ($new_value['name'] == "")
+            {
+                $result = $old_value[$index_value];
+            }
+            else 
+            {
+                $result = upload_image($new_value);
+            }
+        }
+
+        return $result;
+    }
+
+    // function to create modal confirmation value
+    function modal_confirmation($header, $id, $link)
+    {
+        $result['header'] = $header;
+        $result['id'] = $id;
+        $result['link'] = $link;
+        
+        return $result;
+    }
+
+
+
+
+    // function to create pagination for web
+    // function to get total page 
+    function total_page($count_request_result)
+    {
+        $total_page = $count_request_result / 20;
+        $total_page = ((int) $total_page) + 1;
+
+        return $total_page;
+    }
+    // function to create page and limit (pas de 20)
+    function create_page($total_page)
+    {
+        $page = array();
+        for ($i = 1; $i <= $total_page; $i++)
+        {
+            $page[$i] = array(
+                'first' => ($i - 1) * 20,
+                'last' => 20,
+            );
+        }
+        
+        return $page;
+    }
+    // function to create pagination
+    function create_pagination($sql)
+    {
+        $count_request_result = count_request_result($sql);
+        $total_page = total_page($count_request_result);
+        $page = create_page($total_page);
+
+        return $page;
+    }
+    // function to get one page result
+    function one_page_result($sql, $page, $index_page)
+    {
+        $sql_one_page = $sql . ' limit ' . $page[$index_page]['first'] . ',' . $page[$index_page]['last'];
+        $result = array_query($sql_one_page);
+
+        return $result;
     }
 ?>
