@@ -27,15 +27,27 @@
         $user_statut = "all";
         $user_list_condition = null;
     }
-    // all user list
-    $user_list = select_table("user", $user_list_condition, null);
     // all user list sql
     $user_list_sql = select_table_sql("user", $user_list_condition, null);
 
     // create page
     $sql = $user_list_sql;
-    $page = create_pagination($sql);
-    $total_page = count($page)
+    $pagination = create_pagination($sql);
+    $total_page = count($pagination);
+    
+    if (isset($_GET['index_pagination']))
+    {
+        // get one page result
+        $index_pagination = $_GET['index_pagination'];
+        $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
+    }
+    else 
+    {
+        // get first page result
+        $index_pagination = 1;
+        $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
+    }
+
 
     // login user navigation link
     $login_link = array();
@@ -123,7 +135,12 @@
         <div class="user-management-container rounded-4">
             <!-- header -->
             <div class="management-title d-flex align-items-center justify-content-between mb-3">
-                <h3 class="m-0 fw-bold">Users</h3>
+                <h3 class="m-0 fw-bold">
+                    Users
+                    <?php if ($total_page > 1) { ?>
+                        <span> <?= $index_pagination ?> / <?= $total_page ?></span> 
+                    <?php } ?>
+                </h3>
                 <div class="add-new">
                     <?php include("../inc/create-user_modal.php"); ?>
                 </div>
@@ -169,7 +186,7 @@
                     </div>
                 </div>
             <?php } else { ?>
-                <div class="user-list table-responsive">
+                <div class="user-list table-responsive mb-3">
                     <table class="table table-hover align-middle" style="white-space: nowrap;">
                         <thead>
                             <tr>
@@ -240,6 +257,21 @@
                             <?php } ?>
                         </tbody>
                     </table>
+                </div>
+            <?php } ?>
+            
+            <?php if ($total_page > 1) { ?>
+                <!-- pagination div -->
+                <div class="pagination-div">
+                    <!-- link for pagination -->
+                    <?php 
+                        $pagination_link = array();
+                        $pagination_link[] = array('key' => 'page', 'value' => 'user_management.php');
+                        $pagination_link[] = array('key' => 'user_statut', 'value' => $user_statut);
+                        $pagination_link[] = array('key' => 'index_pagination', 'value' => null);
+                        $pagination_link_index = get_index($pagination_link, "index_pagination");
+                    ?>
+                    <?php include('../inc/pagination_web.php'); ?>
                 </div>
             <?php } ?>
         </div>

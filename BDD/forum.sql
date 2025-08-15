@@ -10,7 +10,8 @@ create table user (
     u_email text,
     u_mdp varchar(100), 
     u_image text,
-    u_type int
+    u_statut int,
+    u_inscription_date date
 );
 
 create table forum_subject (
@@ -18,6 +19,8 @@ create table forum_subject (
     s_title text,
     s_content text,
     s_date datetime,
+    s_media text,
+    s_statut int,
     user_id int,
     Constraint fk_user_subject foreign key (user_id) references
     user(user_id)
@@ -39,6 +42,7 @@ create table comment (
     comment_id int auto_increment primary key,
     c_content text,
     c_date datetime,
+    c_statut int,
     user_id int,
     subject_id int,
     Constraint fk_user_comment foreign key (user_id) references
