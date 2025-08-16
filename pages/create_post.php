@@ -19,11 +19,11 @@
             <form action="traitement_create_post.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label fw-bold">Title<span style="color: red;">*</span></label>
-                    <textarea class="form-control" id="title" name="s_title" rows="2" style="resize: none; border: 1px solid #00000033" placeholder="Title" required></textarea>
+                    <textarea class="form-control" id="title" name="s_title" rows="1" placeholder="Title*" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label fw-bold">Content</label>
-                    <textarea class="form-control" id="content" name="s_content" rows="6" style="resize: none; border: 1px solid #00000033" placeholder="Body text (optional)"></textarea>
+                    <textarea class="form-control" id="content" name="s_content" rows="5" style="min-height: 135px;" placeholder="Body text (optional)" oninput="autoResize_function('content')"></textarea>
                 </div>
                 <div class="mb-3">
                     <p class="fw-bold mb-2">Image/Video</p>

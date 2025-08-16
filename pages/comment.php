@@ -104,23 +104,28 @@
                         </label>
                     </div>
                     <!-- input comment -->
-                    <div class="input-comment border border-dark-subtle rounded-3">
-                        <form action="traitement_comment.php" method="post">
-                            <textarea class="form-control mb-2" id="comment-textarea" name="c_content" rows="2" style="resize: none;" placeholder="Join the conversation" required pattern=".*\S.*"></textarea>
-                            <!-- hidden values to send -->
-                            <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="rounded-pill btn btn-primary fw-bold">Comment</button>
-                            </div>
-                        </form>
+                    <div class="mb-3">
+                        <div class="show-comment rounded-pill" id="show-comment">
+                            <span class="text">Join the converation</span>
+                        </div>
+                        <div class="comment-input d-none" id="comment-input">
+                            <form action="traitement_comment.php" method="post">
+                                <div style="padding: 12px 16px;">
+                                    <textarea name="c_content" id="autoResize" rows="1" placeholder="Join the conversation" required></textarea>
+                                </div>
+                                <!-- hidden values to send -->
+                                <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                                <div class="gap-1 d-flex justify-content-end" style="padding: 4px 8px;">
+                                    <button class="btn btn-light rounded-pill fw-bold" type="button" id="hide-comment">Cancel</button>
+                                    <button class="btn btn-secondary rounded-pill fw-bold" type="submit">Comment</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div> 
             </div>
-            <!-- blue separator -->
-            <hr class="hr-design border-3 opacity-50" style="color: #0d6efd;">
             <!-- comments header -->
             <div class="comment-container">
-                <h2 class="" style="padding: 0px 0px 0px 0px; color: #0d6efd;"><span class="fw-bold"><?= count($comments) ?></span> Comments</h2>
                 <!-- sort by -->
                 <div class="d-flex align-items-center gap-2 mb-3" style="padding: 0px 0px 0px 0px;">
                     <p class="m-0">Sort by:</p>
@@ -172,3 +177,5 @@
         </div>
     </div>
 </section>
+
+<script src="../assets/js/comment.js"></script>
