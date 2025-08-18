@@ -9,6 +9,8 @@
     $user_statut = $_SESSION['user_statut'];
     // lastest page (in pagination)
     $index_pagination = $_SESSION['index_pagination'];
+    // current user info
+    $current_user = $_SESSION['current_user'];
 
     if (isset($_GET['user_id']))
     {

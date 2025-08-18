@@ -213,7 +213,7 @@
                                     <td><?= $user['u_inscription_date'] ?></td>
                                     <td><?= statut_name($user['u_statut']) ?></td>
                                     <td class="">
-                                        <?php if ($user_statut == -1) { ?>
+                                        <?php if ($user['u_statut'] == -1) { ?>
                                             <div class="d-flex align-items-center justify-content-evenly">
                                                 <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
                                                 <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
@@ -236,7 +236,7 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php if ($user_statut == -1) { ?>
+                                        <?php if ($user['u_statut'] == -1) { ?>
                                             <?php 
                                                 $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'];
                                                 $modal_confirm = modal_confirmation("Delete confirmation", "second_delete_" . $user['user_id'],custom_navigation_link($corbeille_link));

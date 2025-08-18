@@ -229,13 +229,9 @@ body {
     border: 2px dotted #00000033;
 }
 
-/* dropdown focus (show) */
-.custom-btn:focus {
+/* dropdown active button  */
+.active-dropdown-button {
     background-color: #dbe4e9;
-}
-
-.custom-btn:focus:not(:focus-visible) {
-    outline: none;
 }
 
 /* user management */

@@ -1,5 +1,6 @@
 <?php
     require('../inc/function.php');
+    session_start();
     // naviagtion link
     $link = array();
     $link[] = array('key' => 'page', 'value' => null);

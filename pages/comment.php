@@ -130,7 +130,7 @@
                 <div class="d-flex align-items-center gap-2 mb-3" style="padding: 0px 0px 0px 0px;">
                     <p class="m-0">Sort by:</p>
                     <div class="dropdown">
-                        <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn fw-bold" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+                        <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn fw-bold" id="dropdown-show-button" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
                             <?= order_name($order_name) ?>
                         </button>
                         <ul class="dropdown-menu" style="min-width: 100px;">
@@ -179,3 +179,4 @@
 </section>
 
 <script src="../assets/js/comment.js"></script>
+<script src="../assets/js/home.js"></script>
