@@ -365,7 +365,7 @@
             $separated_hidden_post = explode("-", $user['u_hidden_post']);
             if (!in_array($subject_id, $separated_hidden_post))
             {
-                $result = $user['u_hidden_post'] . $subject_id;
+                $result = $user['u_hidden_post'] . "-" . $subject_id;
             }
         }
 
