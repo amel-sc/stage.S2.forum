@@ -1,4 +1,5 @@
 <?php
+    $current_user = $_SESSION['current_user'];
     // subject 
     // forum subject list other condition
     $other_condition = [];
@@ -15,9 +16,13 @@
     }
     // forum_subject condition
     $condition = [];
-    $condition[] = array('key' => 's_statut', 'value' => 0);
+    $condition[] = array('key' => 's_statut', 'operation' => '=', 'value' => 0);
+    // permission condition 
+    $permission_condition = '(SELECT subject_id FROM post_permission WHERE user_id=' . $current_user['user_id'] . ' AND p_statut=1)';
+    $condition[] = array('key' => 'subject_id', 'operation' => 'NOT IN', 'value' => $permission_condition);
     // forum subject
-    $subject = select_table("v_subject_user", $condition, $other_condition);
+    echo select_table_operation_sql("v_subject_user", $condition, $other_condition);
+    $subject = select_table_operation("v_subject_user", $condition, $other_condition);
 
     // navigation link for post
     $link_comment = array();
@@ -120,12 +125,14 @@
                                 </a>
                             </div>
                             <!-- post parameter for selecting who can see/not the post -->
-                            <div class="mt-3">
-                                <?php $link_post_edit[$post_edit_index]['value'] = $item['subject_id']; ?>
-                                <a href="<?= navigation_link($link_post_edit) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="position: relative;z-index: 1000;">
-                                    Edit post
-                                </a>
-                            </div>
+                            <?php if ($item['user_id'] == $current_user['user_id']) { ?>
+                                <div class="mt-3">
+                                    <?php $link_post_edit[$post_edit_index]['value'] = $item['subject_id']; ?>
+                                    <a href="<?= navigation_link($link_post_edit) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="position: relative;z-index: 1000;">
+                                        Edit post
+                                    </a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </a>
                 </div>

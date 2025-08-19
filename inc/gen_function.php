@@ -175,13 +175,27 @@
             $sql = $sql . ' WHERE ';
             for ($i = 0; $i < count($condition); $i++)
             {
-                if ($i == count($condition) - 1)
+                if ($condition[$i]['operation'] == "NOT IN" || $condition[$i]['operation'] == "IN")
                 {
-                    $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '"';
+                    if ($i == count($condition) - 1)
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' ' . $condition[$i]['value'] . '';
+                    }
+                    else
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' ' . $condition[$i]['value'] . ' AND ';
+                    }
                 }
-                else
+                else 
                 {
-                    $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '" AND ';
+                    if ($i == count($condition) - 1)
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '"';
+                    }
+                    else
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '" AND ';
+                    }
                 }
             }
         }
@@ -210,13 +224,27 @@
             $sql = $sql . ' WHERE ';
             for ($i = 0; $i < count($condition); $i++)
             {
-                if ($i == count($condition) - 1)
+                if ($condition[$i]['operation'] == "NOT IN" || $condition[$i]['operation'] == "IN")
                 {
-                    $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '"';
+                    if ($i == count($condition) - 1)
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' ' . $condition[$i]['value'] . '';
+                    }
+                    else
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' ' . $condition[$i]['value'] . ' AND ';
+                    }
                 }
-                else
+                else 
                 {
-                    $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '" AND ';
+                    if ($i == count($condition) - 1)
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '"';
+                    }
+                    else
+                    {
+                        $sql = $sql . $condition[$i]['key'] . ' ' . $condition[$i]['operation'] . ' "' . $condition[$i]['value'] . '" AND ';
+                    }
                 }
             }
         }

@@ -68,6 +68,34 @@ ADD CONSTRAINT fk_subject_comment
     ON DELETE CASCADE
     ON UPDATE CASCADE;
 
+create table post_permission (
+    permission_id int auto_increment primary key,
+    subject_id int,
+    user_id int,
+    p_statut int,
+    Constraint fk_user_post_permission foreign key (user_id) references
+    user(user_id),
+    Constraint fk_subject_post_permission foreign key (subject_id) references
+    forum_subject(subject_id)
+);
+-- add cascade for post_permission
+-- delete foreign key
+ALTER TABLE post_permission
+DROP FOREIGN KEY fk_user_post_permission,
+DROP FOREIGN KEY fk_subject_post_permission,
+-- new foreign key
+ALTER TABLE post_permission
+ADD CONSTRAINT fk_user_post_permission
+    FOREIGN KEY (user_id)
+    REFERENCES user(user_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+ADD CONSTRAINT fk_subject_post_permission
+    FOREIGN KEY (subject_id)
+    REFERENCES forum_subject(subject_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
 
 -- subject default values
 INSERT INTO forum_subject (s_title, s_content, user_id, s_date) VALUES

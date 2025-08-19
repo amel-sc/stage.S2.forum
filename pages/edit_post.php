@@ -1,4 +1,5 @@
 <?php
+    $current_user = $_SESSION['current_user'];
     // post clicked info
     // post clicked condition
     $subject_condition = array();
@@ -6,11 +7,15 @@
     // request result
     $subject = select_table("v_subject_user", $subject_condition, null);
 
-    // user list
+    // user list other condition
     $user_list_other_condition = [];
     $user_list_other_condition[] = "ORDER BY u_last_name";
+    // user list condition
+    $user_list_condition = [];
+    $user_list_condition[] = array('key' => 'user_id', 'operation' => '!=', 'value' => $current_user['user_id']);
+    $user_list_condition[] = array('key' => 'u_statut', 'operation' => '!=', 'value' => -1);
     // result
-    $user_list = select_table('user', null, $user_list_other_condition);
+    $user_list = select_table_operation('user', $user_list_condition, $user_list_other_condition);
 
     //return link 
     $return_link = array();
@@ -85,15 +90,28 @@
             <div>
                 <form action="traitement_edit_post.php" method="post">
                     <?php foreach($user_list as $user) { ?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?= $user['user_id'] ?>" name="user_id[]" id="check_<?= $user['user_id'] ?>">
-                            <label class="form-check-label" for="check_<?= $user['user_id'] ?>">
-                                <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
-                            </label>
-                        </div>
+                        <!-- checked permission if 1 not checked if 0 -->
+                        <?php $permission = get_post_permission($user['user_id'], $subject[0]['subject_id']) ?>
+                        <?php if ($permission != null && $permission['p_statut'] == 1) { ?>
+                            <div class="form-check" id="input_container_<?= $user['user_id'] ?>">
+                                <input class="form-check-input" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')" checked>
+                                <label class="form-check-label" for="check_<?= $user['user_id'] ?>">
+                                    <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
+                                </label>
+                            </div>
+                            <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
+                        <?php } else { ?>
+                            <div class="form-check" id="input_container_<?= $user['user_id'] ?>">
+                                <input class="form-check-input" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')">
+                                <label class="form-check-label" for="check_<?= $user['user_id'] ?>">
+                                    <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
+                                </label>
+                            </div>
+                            <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
+                        <?php } ?>
                     <?php } ?>
                     <!-- send the subject id as hidden -->
-                     <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                    <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
                     <div class="gap-1 d-flex justify-content-start" style="padding: 4px 8px;">
                         <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
                         <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
@@ -104,3 +122,13 @@
         </div>
     </div>
 </section>
+<!-- script to load checkbox when load the page -->
+<script>
+window.onload = function() {
+    <?php foreach($user_list as $user) { ?>
+        checkbox_value('<?= $user['user_id'] ?>');
+    <?php } ?>
+};
+</script>
+
+<script src="../assets/js/edit_post.js"></script>

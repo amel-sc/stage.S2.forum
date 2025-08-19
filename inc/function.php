@@ -86,6 +86,16 @@
         return $result;
     }
 
+    // function to get post_permission by subject_id and user_id
+    function get_post_permission($user_id, $subject_id)
+    {
+        $sql = "SELECT * FROM post_permission WHERE user_id = %s AND subject_id = %s";
+        $sql = sprintf($sql, $user_id, $subject_id);
+        $result = one_query($sql);
+
+        return $result;
+    }
+
     // function uplaod image for profil
     function upload_image($file)
     {
@@ -344,30 +354,6 @@
     {
         $sql_one_page = $sql . ' limit ' . $page[$index_page]['first'] . ',' . $page[$index_page]['last'];
         $result = array_query($sql_one_page);
-
-        return $result;
-    }
-
-    // function for update hidden post of one use
-    function hide_post($user_id, $subject_id)
-    {
-        // get user information
-        $user = get_user_by_id($user_id);
-        // result
-        $result = null;
-        // condition if user already restricted or not
-        if ($user['u_hidden_post'] == 0)
-        {
-            $result = $subject_id;
-        }
-        else
-        {
-            $separated_hidden_post = explode("-", $user['u_hidden_post']);
-            if (!in_array($subject_id, $separated_hidden_post))
-            {
-                $result = $user['u_hidden_post'] . "-" . $subject_id;
-            }
-        }
 
         return $result;
     }
