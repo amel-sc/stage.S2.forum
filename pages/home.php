@@ -13,8 +13,11 @@
         $other_condition[] = "ORDER BY s_date DESC";
         $order_name = "DESC";
     }
+    // forum_subject condition
+    $condition = [];
+    $condition[] = array('key' => 's_statut', 'value' => 0);
     // forum subject
-    $subject = select_table("v_subject_user", null, $other_condition);
+    $subject = select_table("v_subject_user", $condition, $other_condition);
 
     // navigation link for post
     $link_comment = array();
@@ -31,6 +34,11 @@
     $link_order[] = array('key' => 'page', 'value' => "home.php");
     $link_order[] = array('key' => 'order', 'value' => null);
     $order_index = get_index($link_order, "order");
+    // post parameter link
+    $link_post_edit = array();
+    $link_post_edit[] = array('key' => 'page', 'value' => 'edit_post.php');
+    $link_post_edit[] = array('key' => 'subject_id', 'value' => null);
+    $post_edit_index = get_index($link_post_edit, "subject_id");
 ?>
 
 <section class="div-container">
@@ -74,7 +82,7 @@
                                 <div class="">
                                     <p class="m-0">
                                         <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
-                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 10;">
+                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 1000;">
                                             <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
                                         </a>
                                         <span class="dot my-0">•</span>
@@ -89,11 +97,11 @@
                                 <?php if ($item['s_media'] != "empty") { ?>
                                     <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
                                         <div class="media-wrapper" style="margin: auto;">
-                                            <img class="" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 10;">
+                                            <img class="" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 1000;">
                                         </div>
                                     <?php } else { ?>
                                         <div class="media-wrapper" style="margin: auto;">
-                                            <video class="" controls style="z-index: 10;">
+                                            <video class="" controls style="z-index: 1000;">
                                                 <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
                                                 Votre navigateur ne supporte pas la lecture vidéo.
                                             </video>
@@ -106,9 +114,16 @@
                             <div class="post-comment mt-3 d-flex align-items-start">
                                 <!-- commment number -->
                                 <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                                <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 10;">
+                                <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 1000;">
                                     <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
                                     <span class="text-black fw-bold"><?= count($comments_number) ?></span>
+                                </a>
+                            </div>
+                            <!-- post parameter for selecting who can see/not the post -->
+                            <div class="mt-3">
+                                <?php $link_post_edit[$post_edit_index]['value'] = $item['subject_id']; ?>
+                                <a href="<?= navigation_link($link_post_edit) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="position: relative;z-index: 1000;">
+                                    Edit post
                                 </a>
                             </div>
                         </div>

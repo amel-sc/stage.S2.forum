@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- bootstrap -->
     <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <title>Forum</title>
 </head>
 <body>

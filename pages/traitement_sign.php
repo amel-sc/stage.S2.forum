@@ -62,6 +62,7 @@
             $value[] = array('key' => 'u_mdp', 'value' => $mdp);
             $value[] = array('key' => 'u_image', 'value' => $image);
             $value[] = array('key' => 'u_inscription_date', 'value' => $date_now);
+            $value[] = array('key' => 'u_hidden_post', 'value' => "0");
             // insert values in table
             insert_table("user", $value);
             // navigation link
@@ -118,6 +119,7 @@
             $value[] = array('key' => 'u_image', 'value' => "../assets/images/user.png");
             $value[] = array('key' => 'u_statut', 'value' => 0); 
             $value[] = array('key' => 'u_inscription_date', 'value' => $date_now);
+            $value[] = array('key' => 'u_hidden_post', 'value' => "0");
             // insert values in table
             insert_table("user", $value);
             // navigation link

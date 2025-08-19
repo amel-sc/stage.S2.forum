@@ -68,7 +68,7 @@
     // function to get comment by forum_subject
     function get_comment_by_subject($subject_id)
     {
-        $sql = "SELECT *  FROM comment WHERE subject_id = %s";
+        $sql = "SELECT *  FROM comment WHERE subject_id = %s AND c_statut = 0";
         $sql = sprintf($sql, $subject_id);
         $result = array_query($sql); 
 
@@ -344,6 +344,30 @@
     {
         $sql_one_page = $sql . ' limit ' . $page[$index_page]['first'] . ',' . $page[$index_page]['last'];
         $result = array_query($sql_one_page);
+
+        return $result;
+    }
+
+    // function for update hidden post of one use
+    function hide_post($user_id, $subject_id)
+    {
+        // get user information
+        $user = get_user_by_id($user_id);
+        // result
+        $result = null;
+        // condition if user already restricted or not
+        if ($user['u_hidden_post'] == 0)
+        {
+            $result = $subject_id;
+        }
+        else
+        {
+            $separated_hidden_post = explode("-", $user['u_hidden_post']);
+            if (!in_array($subject_id, $separated_hidden_post))
+            {
+                $result = $user['u_hidden_post'] . $subject_id;
+            }
+        }
 
         return $result;
     }

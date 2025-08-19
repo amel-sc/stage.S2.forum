@@ -184,8 +184,8 @@
                 <div class="text-center py-5">
                     <div class="d-flex flex-column align-items-center justify-content-center text-muted">
                         <img src="../assets/images/empty.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
-                        <h4 class="mt-3 fw-bold">Aucun utilisateur trouvé</h4>
-                        <p class="mb-0" style="font-size: large;">La liste des utilisateurs est vide pour le moment.</p>
+                        <h4 class="mt-3 fw-bold">No user found</h4>
+                        <p class="mb-0" style="font-size: large;">The user list is currently empty.</p>
                     </div>
                 </div>
             <?php } else { ?>
