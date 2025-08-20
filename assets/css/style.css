@@ -52,6 +52,7 @@ body {
 .card-post, .form-check {
     background-color: white;
     border-bottom: 1px solid #f0f0f0 !important;
+    border-radius: 0px !important;
     transition: all 0.2s ease;
 }
 
@@ -59,7 +60,7 @@ body {
     background-color: #f9fbfe;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
-    border-radius: 16px;
+    border-radius: 16px !important;
 }
 
 .profile-link {

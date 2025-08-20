@@ -22,6 +22,8 @@
     $condition[] = array('key' => 'subject_id', 'operation' => 'NOT IN', 'value' => $permission_condition);
     // forum subject
     $subject = select_table_operation("v_subject_user", $condition, $other_condition);
+    // subject sql for count
+    $subject_sql = select_table_operation_sql("v_subject_user", $condition, $other_condition);
 
     // navigation link for post
     $link_comment = array();
@@ -48,93 +50,102 @@
 <section class="div-container">
     <div class="content col-12 col-lg-9 m-auto mb-3">
         <div class="post_container rounded-4">
-            <!-- sort by -->
-            <div class="d-flex align-items-center gap-1 mb-3">
-                <p class="m-0">Sort by : </p>
-                <div class="d-block dropdown">
-                    <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" id="dropdown-show-button" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
-                        <?= order_name($order_name) ?>
-                    </button>
-                    <ul class="dropdown-menu" style="min-width: 100px;">
-                        <li>
-                            <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
-                        </li>
-                        <li>
-                            <?php $link_order[$order_index]['value'] = "DESC" ?>
-                            <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
-                        </li>
-                        <li>
-                            <?php $link_order[$order_index]['value'] = "ASC" ?>
-                            <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        
-         
-            <?php foreach ($subject as $item) { ?>
-                <!-- link to comment  -->
-                <?php $link_comment[$subject_id_index]['value'] = $item['subject_id']; ?>
-                <!-- post's card -->
-                 
-                <div class="card card-post border-top-0 border-end-0 border-start-0 position-relative">
-                    <div onclick="as_link('<?= navigation_link($link_comment) ?>')" class="" style="cursor: pointer;">
-                        <div class="card-body">
-                            <!-- sender info (user img, name , sended_date) -->
-                            <div class="post-info d-flex align-items-center gap-2 mb-3">
-                                <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
-                                <div class="">
-                                    <p class="m-0">
-                                        <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
-                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 1000;">
-                                            <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
-                                        </a>
-                                        <span class="dot my-0">•</span>
-                                        <span class="post-date"><?= $item['s_date'] ?></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- post content -->
-                            <div class="post-content">
-                                <h4 class="card-title fw-bold"><?= $item['s_title'] ?></h4>
-                                <!-- video or image of the post -->
-                                <?php if ($item['s_media'] != "empty") { ?>
-                                    <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
-                                        <div class="media-wrapper" style="margin: auto;">
-                                            <img class="" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 1000;">
-                                        </div>
-                                    <?php } else { ?>
-                                        <div class="media-wrapper" style="margin: auto;">
-                                            <video class="" controls style="z-index: 1000;">
-                                                <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
-                                                Votre navigateur ne supporte pas la lecture vidéo.
-                                            </video>
-                                        </div>
-                                    <?php } ?>
-                                <?php } ?>
-                                <p class="card-text"><?= $item['s_content'] ?></p>
-                            </div>
-                            <!-- comment number and button to comment -->
-                            <div class="post-comment mt-3 d-flex align-items-start">
-                                <!-- commment number -->
-                                <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                                <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 1000;">
-                                    <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
-                                    <span class="text-black fw-bold"><?= count($comments_number) ?></span>
-                                </a>
-                            </div>
-                            <!-- post parameter for selecting who can see/not the post -->
-                            <?php if ($item['user_id'] == $current_user['user_id']) { ?>
-                                <div class="mt-3">
-                                    <?php $link_post_edit[$post_edit_index]['value'] = $item['subject_id']; ?>
-                                    <a href="<?= navigation_link($link_post_edit) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="position: relative;z-index: 1000;">
-                                        Edit post
-                                    </a>
-                                </div>
-                            <?php } ?>
-                        </div>
+            <?php if (count_request_result($subject_sql) == 0) { ?>
+                <div class="text-center py-5">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-muted">
+                        <h4 class="fw-bold">There are no post here</h4>
+                        <p class="mb-0" style="font-size: large;">Maybe they are hidden.</p>
                     </div>
                 </div>
+            <?php } else { ?>
+                <!-- sort by -->
+                <div class="d-flex align-items-center gap-1 mb-3">
+                    <p class="m-0">Sort by : </p>
+                    <div class="d-block dropdown">
+                        <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" id="dropdown-show-button" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+                            <?= order_name($order_name) ?>
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 100px;">
+                            <li>
+                                <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
+                            </li>
+                            <li>
+                                <?php $link_order[$order_index]['value'] = "DESC" ?>
+                                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
+                            </li>
+                            <li>
+                                <?php $link_order[$order_index]['value'] = "ASC" ?>
+                                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            
+             
+                <?php foreach ($subject as $item) { ?>
+                    <!-- link to comment  -->
+                    <?php $link_comment[$subject_id_index]['value'] = $item['subject_id']; ?>
+                    <!-- post's card -->
+                     
+                    <div class="card card-post border-top-0 border-end-0 border-start-0 position-relative" style="">
+                        <div onclick="as_link('<?= navigation_link($link_comment) ?>')" class="" style="cursor: pointer;">
+                            <div class="card-body">
+                                <!-- sender info (user img, name , sended_date) -->
+                                <div class="post-info d-flex align-items-center gap-2 mb-3">
+                                    <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
+                                    <div class="">
+                                        <p class="m-0">
+                                            <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
+                                            <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 1000;">
+                                                <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
+                                            </a>
+                                            <span class="dot my-0">•</span>
+                                            <span class="post-date"><?= $item['s_date'] ?></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- post content -->
+                                <div class="post-content">
+                                    <h4 class="card-title fw-bold"><?= $item['s_title'] ?></h4>
+                                    <!-- video or image of the post -->
+                                    <?php if ($item['s_media'] != "empty") { ?>
+                                        <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
+                                            <div class="media-wrapper" style="margin: auto;">
+                                                <img class="" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 1000;">
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="media-wrapper" style="margin: auto;">
+                                                <video class="" controls style="z-index: 1000;">
+                                                    <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
+                                                    Votre navigateur ne supporte pas la lecture vidéo.
+                                                </video>
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
+                                    <p class="card-text"><?= $item['s_content'] ?></p>
+                                </div>
+                                <!-- comment number and button to comment -->
+                                <div class="post-comment mt-3 d-flex align-items-start">
+                                    <!-- commment number -->
+                                    <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
+                                    <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 1000;">
+                                        <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
+                                        <span class="text-black fw-bold"><?= count($comments_number) ?></span>
+                                    </a>
+                                </div>
+                                <!-- post parameter for selecting who can see/not the post -->
+                                <?php if ($item['user_id'] == $current_user['user_id']) { ?>
+                                    <div class="mt-3">
+                                        <?php $link_post_edit[$post_edit_index]['value'] = $item['subject_id']; ?>
+                                        <a href="<?= navigation_link($link_post_edit) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="position: relative;z-index: 1000;">
+                                            Post permission
+                                        </a>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>

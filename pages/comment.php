@@ -130,12 +130,12 @@
             <div class="comment-container">
                 <?php if (empty($comments)) { ?>
                     <div class="text-center py-5">
-                    <div class="d-flex flex-column align-items-center justify-content-center text-muted">
-                        <img src="../assets/images/no-comments.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
-                        <h4 class="mt-3 fw-bold">Be the first to comment</h4>
-                        <p class="mb-0" style="font-size: large;">Nobody's responded to this post yet. Add your thoughts and get the conversation going.</p>
+                        <div class="d-flex flex-column align-items-center justify-content-center text-muted">
+                            <img src="../assets/images/no-comments.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
+                            <h4 class="mt-3 fw-bold">Be the first to comment</h4>
+                            <p class="mb-0" style="font-size: large;">Nobody's responded to this post yet. Add your thoughts and get the conversation going.</p>
+                        </div>
                     </div>
-                </div>
                 <?php } else { ?>
                     <!-- sort by -->
                     <div class="d-flex align-items-center gap-2 mb-3" style="padding: 0px 0px 0px 0px;">
