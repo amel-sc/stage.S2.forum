@@ -12,11 +12,16 @@
 
     // value getted
     $user_id = $_GET['user_id'];
+    // get user value
+    $user_info = get_user_by_id($user_id);
 
     // delete from user table
     // delete condition
     $condition = array();
     $condition[] = array('key' => 'user_id', 'value' => $user_id);
+    // delete profil of user (image profil)
+    $image_path = dirname(__DIR__) . ltrim($user_info['u_image'], "..");
+    unlink($image_path);
     // execute request
     $delete = delete_table('user', $condition);
 

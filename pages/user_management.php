@@ -206,7 +206,7 @@
                             <?php foreach($user_list as $user) { ?> 
                                 <tr>
                                     <td class="text-center">
-                                        <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 35px; height: 35px;">
+                                        <img src="<?= $user['u_image'] ?>" alt="User profile" class="rounded-circle" style="width: 35px; height: 35px;">
                                     </td>
                                     <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
                                     <td><?= $user['u_email'] ?></td>

@@ -21,7 +21,6 @@
     $permission_condition = '(SELECT subject_id FROM post_permission WHERE user_id=' . $current_user['user_id'] . ' AND p_statut=1)';
     $condition[] = array('key' => 'subject_id', 'operation' => 'NOT IN', 'value' => $permission_condition);
     // forum subject
-    echo select_table_operation_sql("v_subject_user", $condition, $other_condition);
     $subject = select_table_operation("v_subject_user", $condition, $other_condition);
 
     // navigation link for post
@@ -78,12 +77,12 @@
                 <?php $link_comment[$subject_id_index]['value'] = $item['subject_id']; ?>
                 <!-- post's card -->
                  
-                <div class="card card-post border-top-0 border-end-0 border-start-0 rounded-4 position-relative">
-                    <a href="<?= navigation_link($link_comment) ?>" class="text-decoration-none text-black stretched-link" style="">
+                <div class="card card-post border-top-0 border-end-0 border-start-0 position-relative">
+                    <div onclick="as_link('<?= navigation_link($link_comment) ?>')" class="" style="cursor: pointer;">
                         <div class="card-body">
                             <!-- sender info (user img, name , sended_date) -->
                             <div class="post-info d-flex align-items-center gap-2 mb-3">
-                                <img src="<?= $item['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                                <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
                                 <div class="">
                                     <p class="m-0">
                                         <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
@@ -134,7 +133,7 @@
                                 </div>
                             <?php } ?>
                         </div>
-                    </a>
+                    </div>
                 </div>
             <?php } ?>
         </div>

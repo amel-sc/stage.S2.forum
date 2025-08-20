@@ -3,10 +3,12 @@ function checkbox_value(user_id) {
     let check_value = document.getElementById("check_value_" + user_id);
     let input_container = document.getElementById("input_container_" + user_id);
 
+    let check_value_split = check.value.split("-");
+
     if (check.checked)
     {
-        check.value = check.value.split("-")[0] + "-1";
-        check_value.innerText = check.value;
+        check.value = check_value_split[0] + "-1";
+        check_value.innerText = permission_name("1");
         // delete input hidden
         let hidden_input = document.getElementById("input_hidden_" + user_id)
 
@@ -17,8 +19,8 @@ function checkbox_value(user_id) {
     }
     else 
     {
-        check.value = check.value.split("-")[0] + "-0";
-        check_value.innerText = check.value;
+        check.value = check_value_split[0] + "-0";
+        check_value.innerText = permission_name("0");
 
         // create input hidden
         // create input element
@@ -33,4 +35,19 @@ function checkbox_value(user_id) {
         // add in input_container
         input_container.appendChild(hidden_input);
     }
+}
+
+// function for permission name
+function permission_name(permission) {
+    let result;
+    if (permission == "0")
+    {
+        result = "Show";
+    }
+    else if (permission == "1")
+    {
+        result = "Hide";
+    }
+
+    return result;
 }

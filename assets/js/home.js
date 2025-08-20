@@ -1,3 +1,4 @@
+// js for dropdown
 let dropdown_button = document.getElementById("dropdown-show-button")
 
 window.addEventListener('click', function(event) {
@@ -29,7 +30,11 @@ function dropdown_active(statut) {
     {
         dropdown_classes.remove("active-dropdown-button");
     }
+}
 
+// js for link in a link
+function as_link(navigation) {
+    window.location.href=navigation;
 }
 
     

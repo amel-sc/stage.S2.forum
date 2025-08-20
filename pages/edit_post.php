@@ -36,7 +36,7 @@
             <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
                 <img src="../assets/images/return-arrow.png" alt="User profile" style="width: 25px; height: 25px;">
             </a>
-            <h1 class="m-0" style="">Post</h1>
+            <h1 class="m-0" style="">Post permission</h1>
         </div>
         <!-- edit post container  -->
         <div class="edit-profile rounded-4">
@@ -88,36 +88,55 @@
             </div>
             <!-- user list to check -->
             <div>
-                <form action="traitement_edit_post.php" method="post">
-                    <?php foreach($user_list as $user) { ?>
-                        <!-- checked permission if 1 not checked if 0 -->
-                        <?php $permission = get_post_permission($user['user_id'], $subject[0]['subject_id']) ?>
-                        <?php if ($permission != null && $permission['p_statut'] == 1) { ?>
-                            <div class="form-check" id="input_container_<?= $user['user_id'] ?>">
-                                <input class="form-check-input" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')" checked>
-                                <label class="form-check-label" for="check_<?= $user['user_id'] ?>">
-                                    <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
+                <div class="user_list_header border-bottom">
+                    <h5 class="fw-bold">Permission management</h5>
+                </div>
+                
+                <div class="user_list_check" style="margin: 8px 0px 0px;">
+                    <form action="traitement_edit_post.php" method="post">
+                        <?php foreach($user_list as $user) { ?>
+                            <!-- checked permission if 1 not checked if 0 -->
+                            <?php $permission = get_post_permission($user['user_id'], $subject[0]['subject_id']) ?>
+                            <?php if ($permission != null && $permission['p_statut'] == 1) { ?>
+                                <label class="form-check mt-3" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 0px 25px 40px; cursor: pointer;">
+                                    <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')" checked>
+                                    <div class="form-check-label d-block">
+                                        <div class="d-flex align-items-end gap-2 ms-4 mb-2">
+                                            <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
+                                            <div class="d-flex flex-column align-items-start justify-content-around">
+                                                <p class="m-0 fw-bold" style="white-space: nowrap"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+                                                <p class="m-0 text-muted fw-bold" style="white-space: nowrap; font-size: 14px;"><?= $user['u_email'] ?></p>
+                                            </div>
+                                        </div>
+                                        <p class="mb-0 ms-4 fw-bold" style="font-size: 14px;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
+                                    </div>
                                 </label>
-                            </div>
-                            <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
-                        <?php } else { ?>
-                            <div class="form-check" id="input_container_<?= $user['user_id'] ?>">
-                                <input class="form-check-input" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')">
-                                <label class="form-check-label" for="check_<?= $user['user_id'] ?>">
-                                    <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
+                                <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
+                            <?php } else { ?>
+                                <label class="form-check mt-3" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 0px 25px 40px; cursor: pointer;">
+                                    <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')">
+                                    <div class="form-check-label d-block">
+                                        <div class="d-flex align-items-end gap-2 ms-4 mb-2">
+                                            <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
+                                            <div class="d-flex flex-column align-items-start justify-content-around">
+                                                <p class="m-0 fw-bold" style="white-space: nowrap"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+                                                <p class="m-0 text-muted fw-bold" style="white-space: nowrap; font-size: 14px;"><?= $user['u_email'] ?></p>
+                                            </div>
+                                        </div>
+                                        <p class="mb-0 ms-4 fw-bold" style="font-size: 14px;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
+                                    </div>
                                 </label>
-                            </div>
-                            <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
-                    <!-- send the subject id as hidden -->
-                    <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
-                    <div class="gap-1 d-flex justify-content-start" style="padding: 4px 8px;">
-                        <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
-                        <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
-                        <button class="btn btn-secondary btn-sm rounded-pill fw-bold" type="submit">Comment</button>
-                    </div>
-                </form>
+                        <!-- send the subject id as hidden -->
+                        <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                        <div class="gap-1 d-flex justify-content-end mt-2" style="padding: 4px 8px;">
+                            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+                            <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
+                            <button class="btn btn-secondary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

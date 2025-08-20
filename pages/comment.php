@@ -65,7 +65,7 @@
                 <div class="card-body" style="padding: 0;">
                     <!-- sender info (user img, name , sended_date) -->
                     <div class="post-info d-flex align-items-center gap-2 mb-2">
-                        <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                        <img src="<?= $subject[0]['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
                         <div class="">
                             <p class="m-0">
                                 <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
@@ -165,7 +165,7 @@
                             <div class="card-body mb-3 mt-3" style="padding: 0;">
                                 <!-- sender info (user img, name , sended_date) -->
                                 <div class="comment-info d-flex align-items-center gap-2 mb-2">
-                                    <img src="<?= $item['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                    <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 35px; height: 35px">
                                     <div class="">
                                         <p class="m-0">
                                             <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>

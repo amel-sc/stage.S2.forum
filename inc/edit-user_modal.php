@@ -21,7 +21,7 @@
             <div class="modal-body">
                 <form action="traitement_edit_profile.php" id="<?= $edit_user['user_id'] ?>_edit_form" method="post" enctype="multipart/form-data">
                     <div class="d-flex flex-column align-items-center justify-content-center gap-2 mb-3">
-                        <img src="<?= $edit_user['u_image'] ?>" alt="User profile" style="width: 100px; height: 100px;">
+                        <img src="<?= $edit_user['u_image'] ?>" alt="User profile" class="rounded-circle" style="width: 100px; height: 100px;">
                         <label type="button" tabindex="0" role="button" for="<?= $edit_user['user_id'] ?>_image" class="btn btn-primary fw-bold rounded-1" onkeydown="click_button_label('<?= $edit_user['user_id'] ?>', '_image', event)">
                             Change profil
                         </label>
