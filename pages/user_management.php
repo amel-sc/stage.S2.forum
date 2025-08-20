@@ -140,9 +140,7 @@
             <div class="management-title d-flex align-items-center justify-content-between mb-3">
                 <h3 class="m-0 fw-bold">
                     Users
-                    <?php if ($total_page > 1) { ?>
-                        <span> <?= $index_pagination ?> / <?= $total_page ?></span> 
-                    <?php } ?>
+                    <span> (<?= count_request_result($user_list_sql) ?>) </span> 
                 </h3>
                 <div class="add-new">
                     <?php include("../inc/create-user_modal.php"); ?>
