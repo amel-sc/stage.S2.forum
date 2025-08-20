@@ -59,7 +59,7 @@
                 </div>
             <?php } else { ?>
                 <!-- sort by -->
-                <div class="d-flex align-items-center gap-1 mb-3">
+                <div class="d-flex align-items-center gap-1 mb-3" style="position: relative; z-index: 2000;">
                     <p class="m-0">Sort by : </p>
                     <div class="d-block dropdown">
                         <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" id="dropdown-show-button" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
