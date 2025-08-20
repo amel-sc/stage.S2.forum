@@ -24,8 +24,12 @@
         // comment list condition
         $comment_condition = array();
         $comment_condition[] = array('key' => 'subject_id', 'value' => $_GET['subject_id']);
+        $comment_condition[] = array('key' => 'c_statut', 'value' => 0);
         // comment list
         $comments = select_table("v_comment_user", $comment_condition, $comment_other_condition);
+        // comment sql to get comment number
+        $comment_sql = select_table_sql("v_comment_user", $comment_condition, $comment_other_condition);
+        $comment_number = count_request_result($comment_sql);
 
         //return link 
         $return_link = array();
@@ -47,17 +51,21 @@
 
 <section class="div-container">
     <div class="content col-12 col-lg-9 m-auto mb-3">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+            <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
+                <img src="../assets/images/return-arrow.png" alt="User profile" style="width: 25px; height: 25px;">
+            </a>
+            <h1 class="m-0" style="">Post</h1>
+        </div>
+
         <div class="post-comment-container rounded-4">
             <!-- post's card -->
             <div class="card card-post-selected mb-1 border-0 rounded-4">
                 <div class="card-body" style="padding: 0;">
                     <!-- sender info (user img, name , sended_date) -->
                     <div class="post-info d-flex align-items-center gap-2 mb-2">
-                        <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
-                        <a href="<?= navigation_link($return_link) ?>" class="d-flex align-items-center return-button rounded-circle">
-                            <img src="../assets/images/return-arrow.png" alt="" style="width: 25px; height: 25px;">
-                        </a>
-                        <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
+                        <img src="<?= $subject[0]['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
                         <div class="">
                             <p class="m-0">
                                 <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
@@ -91,80 +99,96 @@
                     </div>
                     <!-- comment number and button to comment -->
                     <div class="post-comment mt-3 mb-3 d-flex justify-content-between align-items-center">
-                        <!-- commment number -->
-                        <?php $comments_number = get_comment_by_subject($subject[0]['subject_id']); ?>
                         <!-- link to comment  -->
                         <label class="d-flex align-items-center gap-2 rounded-pill comment-link" for="comment-textarea" style="cursor: pointer;">
                             <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
-                            <span class="text-black fw-bold"><?= count($comments_number) ?></span>
+                            <span class="text-black fw-bold"><?= $comment_number ?></span>
                         </label>
                     </div>
                     <!-- input comment -->
-                    <div class="input-comment border border-dark-subtle rounded-3">
-                        <form action="traitement_comment.php" method="post">
-                            <textarea class="form-control mb-2" id="comment-textarea" name="c_content" rows="2" style="resize: none;" placeholder="Join the conversation" required pattern=".*\S.*"></textarea>
-                            <!-- hidden values to send -->
-                            <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="rounded-pill btn btn-primary fw-bold">Comment</button>
-                            </div>
-                        </form>
+                    <div class="mb-3">
+                        <div class="show-comment rounded-pill" id="show-comment">
+                            <span class="text">Join the converation</span>
+                        </div>
+                        <div class="comment-input d-none" id="comment-input">
+                            <form action="traitement_comment.php" method="post">
+                                <div style="padding: 12px 16px;">
+                                    <textarea name="c_content" id="autoResize" rows="1" placeholder="Join the conversation" required></textarea>
+                                </div>
+                                <!-- hidden values to send -->
+                                <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                                <div class="gap-1 d-flex justify-content-end" style="padding: 4px 8px;">
+                                    <button class="btn btn-light rounded-pill fw-bold" type="button" id="hide-comment">Cancel</button>
+                                    <button class="btn btn-secondary rounded-pill fw-bold" type="submit">Comment</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div> 
             </div>
-            <!-- blue separator -->
-            <hr class="hr-design border-3 opacity-50" style="color: #0d6efd;">
             <!-- comments header -->
             <div class="comment-container">
-                <h2 class="" style="padding: 0px 0px 0px 0px; color: #0d6efd;"><span class="fw-bold"><?= count($comments) ?></span> Comments</h2>
-                <!-- sort by -->
-                <div class="d-flex align-items-center gap-2 mb-3" style="padding: 0px 0px 0px 0px;">
-                    <p class="m-0">Sort by:</p>
-                    <div class="dropdown">
-                        <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn fw-bold" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
-                            <?= order_name($order_name) ?>
-                        </button>
-                        <ul class="dropdown-menu" style="min-width: 100px;">
-                            <li>
-                                <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
-                            </li>
-                            <li>
-                                <?php $link_order[$order_index]['value'] = "DESC" ?>
-                                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
-                            </li>
-                            <li>
-                                <?php $link_order[$order_index]['value'] = "ASC" ?>
-                                <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- comments container -->
-                <?php foreach ($comments as $item) { ?>
-                    <div class="card card-comment border-end-0 border-bottom-0 border-start-0 rounded-top-0">
-                        <div class="card-body mb-3 mt-3" style="padding: 0;">
-                            <!-- sender info (user img, name , sended_date) -->
-                            <div class="comment-info d-flex align-items-center gap-2 mb-2">
-                                <img src="<?= $item['u_image'] ?>" alt="" style="width: 35px; height: 35px">
-                                <div class="">
-                                    <p class="m-0">
-                                        <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
-                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
-                                            <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
-                                        </a>
-                                        <span class="dot my-0">•</span>
-                                        <span class="post-date"><?= $item['c_date'] ?></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- post content -->
-                            <div class="comment-content">
-                                <p class="card-text"><?= $item['c_content'] ?></p>
-                            </div>
+                <?php if (empty($comments)) { ?>
+                    <div class="text-center py-5">
+                        <div class="d-flex flex-column align-items-center justify-content-center text-muted">
+                            <img src="../assets/images/no-comments.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
+                            <h4 class="mt-3 fw-bold">Be the first to comment</h4>
+                            <p class="mb-0" style="font-size: large;">Nobody's responded to this post yet. Add your thoughts and get the conversation going.</p>
                         </div>
                     </div>
+                <?php } else { ?>
+                    <!-- sort by -->
+                    <div class="d-flex align-items-center gap-2 mb-3" style="padding: 0px 0px 0px 0px;">
+                        <p class="m-0">Sort by:</p>
+                        <div class="dropdown">
+                            <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn fw-bold" id="dropdown-show-button" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+                                <?= order_name($order_name) ?>
+                            </button>
+                            <ul class="dropdown-menu" style="min-width: 100px;">
+                                <li>
+                                    <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Sort by</span>
+                                </li>
+                                <li>
+                                    <?php $link_order[$order_index]['value'] = "DESC" ?>
+                                    <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">New</a>
+                                </li>
+                                <li>
+                                    <?php $link_order[$order_index]['value'] = "ASC" ?>
+                                    <a href="<?= navigation_link($link_order) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Old</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- comments container -->
+                    <?php foreach ($comments as $item) { ?>
+                        <div class="card card-comment border-end-0 border-bottom-0 border-start-0 rounded-top-0">
+                            <div class="card-body mb-3 mt-3" style="padding: 0;">
+                                <!-- sender info (user img, name , sended_date) -->
+                                <div class="comment-info d-flex align-items-center gap-2 mb-2">
+                                    <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 35px; height: 35px">
+                                    <div class="">
+                                        <p class="m-0">
+                                            <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
+                                            <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
+                                                <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
+                                            </a>
+                                            <span class="dot my-0">•</span>
+                                            <span class="post-date"><?= $item['c_date'] ?></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- post content -->
+                                <div class="comment-content">
+                                    <p class="card-text"><?= $item['c_content'] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </div>
     </div>
 </section>
+
+<script src="../assets/js/comment.js"></script>
+<script src="../assets/js/home.js"></script>

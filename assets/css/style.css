@@ -42,22 +42,25 @@ body {
 .profile-container, 
 .user-management-container,
 .edit-profile-container,
-.create-post_container {
+.create-post_container,
+.edit-profile {
     background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     padding: 20px;
 }
 
-.card-post {
+.card-post, .form-check {
     background-color: white;
     border-bottom: 1px solid #f0f0f0 !important;
+    border-radius: 0px !important;
     transition: all 0.2s ease;
 }
 
-.card-post:hover {
+.card-post:hover, .form-check:hover {
     background-color: #f9fbfe;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
+    border-radius: 16px !important;
 }
 
 .profile-link {
@@ -80,11 +83,14 @@ body {
     white-space: nowrap;
 }
 
-/* comment design */
-.input-comment {
-    padding: 10px 10px 5px 10px;
+/* create post design */
+.create-post_container textarea {
+    resize: none;
+    overflow: hidden;
+    field-sizing: content;
 }
 
+/* comment design */
 .comment-content {
     padding: 0px 0px 0px 35px;
 }
@@ -127,6 +133,45 @@ body {
 }
 .return-button:active {
     background-color: #c9d7de;
+}
+
+.show-comment {
+    width: 100%;
+    border: 1px solid #cccccc;
+    background: white;
+    padding: 10px 15px;
+}
+.show-comment:hover {
+    background : #f2f4f5;
+    border-color: #797a7b;
+}
+
+.show-comment .text {
+    color: #757575;
+    font-size: large;
+    text-align: left;
+}
+
+.comment-input {
+    border: 1px solid #c7c8c9;
+    border-radius: 25px;
+}
+
+.comment-input textarea {
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    field-sizing: content;
+}
+
+.comment-input .btn {
+    font-size: small !important;
+}
+
+.comment-input:focus-within {
+    border-color: #60686d;
 }
 
 /* hr */
@@ -187,13 +232,9 @@ body {
     border: 2px dotted #00000033;
 }
 
-/* dropdown focus (show) */
-.custom-btn:focus {
+/* dropdown active button  */
+.active-dropdown-button {
     background-color: #dbe4e9;
-}
-
-.custom-btn:focus:not(:focus-visible) {
-    outline: none;
 }
 
 /* user management */

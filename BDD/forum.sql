@@ -68,6 +68,34 @@ ADD CONSTRAINT fk_subject_comment
     ON DELETE CASCADE
     ON UPDATE CASCADE;
 
+create table post_permission (
+    permission_id int auto_increment primary key,
+    subject_id int,
+    user_id int,
+    p_statut int,
+    Constraint fk_user_post_permission foreign key (user_id) references
+    user(user_id),
+    Constraint fk_subject_post_permission foreign key (subject_id) references
+    forum_subject(subject_id)
+);
+-- add cascade for post_permission
+-- delete foreign key
+ALTER TABLE post_permission
+DROP FOREIGN KEY fk_user_post_permission,
+DROP FOREIGN KEY fk_subject_post_permission,
+-- new foreign key
+ALTER TABLE post_permission
+ADD CONSTRAINT fk_user_post_permission
+    FOREIGN KEY (user_id)
+    REFERENCES user(user_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+ADD CONSTRAINT fk_subject_post_permission
+    FOREIGN KEY (subject_id)
+    REFERENCES forum_subject(subject_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
 
 -- subject default values
 INSERT INTO forum_subject (s_title, s_content, user_id, s_date) VALUES
@@ -83,10 +111,10 @@ INSERT INTO user (user_id, u_first_name, u_last_ame, u_birth_date, u_gender, u_e
 
 -- view subject / user
 create or replace view v_subject_user as 
-(select u.*, s.subject_id, s.s_title, s.s_content, s.s_date, s.s_media from forum_subject s 
+(select u.*, s.subject_id, s.s_title, s.s_content, s.s_date, s.s_media, s.s_statut from forum_subject s 
 join user u on s.user_id = u.user_id);
 
 -- view subject / user
 create or replace view v_comment_user as 
-(select u.*, c.comment_id, c.c_content, c.subject_id, c.c_date from comment c
+(select u.*, c.comment_id, c.c_content, c.subject_id, c.c_date, c.c_statut from comment c
 join user u on c.user_id = u.user_id);

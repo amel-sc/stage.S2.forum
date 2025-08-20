@@ -54,14 +54,14 @@
                     <li class="nav-item dropdown">
                         <div class="d-block d-lg-none">
                             <button type="button" class="d-flex align-items-center header-link gap-2 custom-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
-                                <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                <img class="" src="<?= $user_header['u_image'] ?>" alt="" class="rounded-circle" style="width: 35px; height: 35px">
                                 <span class="text-black d-block d-lg-none">Profile</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end" style="min-width: 250px;">
                                 <li>
                                     <?php $link_header[$page_index]['value'] = "profile.php"; ?>
                                     <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
-                                        <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                        <img class="" src="<?= $user_header['u_image'] ?>" alt="" class="rounded-circle" style="width: 35px; height: 35px">
                                         <span class="text-black d-block">View profile</span>
                                     </a>
                                 </li>
@@ -88,14 +88,14 @@
                         </div>
                         <div class="d-none d-lg-block">
                             <button type="button" class="rounded-circle d-flex align-items-center header-link gap-2 custom-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none; width: 100%;">
-                                <img src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                <img src="<?= $user_header['u_image'] ?>" alt="" class="rounded-circle" style="width: 35px; height: 35px">
                                 <span class="text-black d-block d-lg-none">Profile</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end" style="min-width: 250px;">
                                 <li>
                                     <?php $link_header[$page_index]['value'] = "profile.php"; ?>
                                     <a class="d-flex align-items-center header-link gap-2" href="<?= navigation_link($link_header) ?>" style="padding: 10px 0px 10px 16px;">
-                                        <img class="" src="<?= $user_header['u_image'] ?>" alt="" style="width: 35px; height: 35px">
+                                        <img src="<?= $user_header['u_image'] ?>" alt="" class="rounded-circle" style="width: 35px; height: 35px">
                                         <span class="text-black d-block">View profile</span>
                                     </a>
                                 </li>

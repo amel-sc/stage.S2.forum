@@ -48,6 +48,9 @@
         $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
     }
 
+    // save the lastest value for header
+    $_SESSION['user_statut'] = $user_statut;
+    $_SESSION['index_pagination'] = $index_pagination;
 
     // login user navigation link
     $login_link = array();
@@ -181,8 +184,8 @@
                 <div class="text-center py-5">
                     <div class="d-flex flex-column align-items-center justify-content-center text-muted">
                         <img src="../assets/images/empty.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
-                        <h4 class="mt-3 fw-bold">Aucun utilisateur trouvé</h4>
-                        <p class="mb-0" style="font-size: large;">La liste des utilisateurs est vide pour le moment.</p>
+                        <h4 class="mt-3 fw-bold">No user found</h4>
+                        <p class="mb-0" style="font-size: large;">The user list is currently empty.</p>
                     </div>
                 </div>
             <?php } else { ?>
@@ -203,14 +206,14 @@
                             <?php foreach($user_list as $user) { ?> 
                                 <tr>
                                     <td class="text-center">
-                                        <img src="<?= $user['u_image'] ?>" alt="User profile" style="width: 35px; height: 35px;">
+                                        <img src="<?= $user['u_image'] ?>" alt="User profile" class="rounded-circle" style="width: 35px; height: 35px;">
                                     </td>
                                     <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
                                     <td><?= $user['u_email'] ?></td>
                                     <td><?= $user['u_inscription_date'] ?></td>
                                     <td><?= statut_name($user['u_statut']) ?></td>
                                     <td class="">
-                                        <?php if ($user_statut == -1) { ?>
+                                        <?php if ($user['u_statut'] == -1) { ?>
                                             <div class="d-flex align-items-center justify-content-evenly">
                                                 <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
                                                 <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
@@ -233,7 +236,7 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php if ($user_statut == -1) { ?>
+                                        <?php if ($user['u_statut'] == -1) { ?>
                                             <?php 
                                                 $corbeille_link[$corbeille_user_index]['value'] = $user['user_id'];
                                                 $modal_confirm = modal_confirmation("Delete confirmation", "second_delete_" . $user['user_id'],custom_navigation_link($corbeille_link));

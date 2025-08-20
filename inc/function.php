@@ -68,7 +68,7 @@
     // function to get comment by forum_subject
     function get_comment_by_subject($subject_id)
     {
-        $sql = "SELECT *  FROM comment WHERE subject_id = %s";
+        $sql = "SELECT *  FROM comment WHERE subject_id = %s AND c_statut = 0";
         $sql = sprintf($sql, $subject_id);
         $result = array_query($sql); 
 
@@ -81,6 +81,16 @@
     {
         $sql = "SELECT * FROM user WHERE user_id = %s";
         $sql = sprintf($sql, $user_id);
+        $result = one_query($sql);
+
+        return $result;
+    }
+
+    // function to get post_permission by subject_id and user_id
+    function get_post_permission($user_id, $subject_id)
+    {
+        $sql = "SELECT * FROM post_permission WHERE user_id = %s AND subject_id = %s";
+        $sql = sprintf($sql, $user_id, $subject_id);
         $result = one_query($sql);
 
         return $result;

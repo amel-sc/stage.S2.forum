@@ -19,11 +19,12 @@
             <form action="traitement_create_post.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label fw-bold">Title<span style="color: red;">*</span></label>
-                    <textarea class="form-control" id="title" name="s_title" rows="2" style="resize: none; border: 1px solid #00000033" placeholder="Title" required></textarea>
+                    <textarea class="form-control" id="title" name="s_title" rows="1" maxlength="300" placeholder="Title*" required oninput="input_counter('title', 'result')"></textarea>
+                    <p class="text-end mb-0 mt-1 small" id="result">0/300</p>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label fw-bold">Content</label>
-                    <textarea class="form-control" id="content" name="s_content" rows="6" style="resize: none; border: 1px solid #00000033" placeholder="Body text (optional)"></textarea>
+                    <textarea class="form-control" id="content" name="s_content" rows="5" style="min-height: 135px;" placeholder="Body text (optional)" oninput="autoResize_function('content')"></textarea>
                 </div>
                 <div class="mb-3">
                     <p class="fw-bold mb-2">Image/Video</p>
@@ -47,3 +48,4 @@
 </section>
 
 <script src="../assets/js/user_management.js"></script>
+<script src="../assets/js/create_post.js"></script>
