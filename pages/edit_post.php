@@ -15,7 +15,28 @@
     $user_list_condition[] = array('key' => 'user_id', 'operation' => '!=', 'value' => $current_user['user_id']);
     $user_list_condition[] = array('key' => 'u_statut', 'operation' => '!=', 'value' => -1);
     // result
-    $user_list = select_table_operation('user', $user_list_condition, $user_list_other_condition);
+    $user_list_sql = select_table_operation_sql('user', $user_list_condition, $user_list_other_condition);
+
+    // create page
+    $sql = $user_list_sql;
+    $pagination = create_pagination($sql);
+    $total_page = count($pagination);
+
+    if (isset($_GET['index_pagination_post']))
+    {
+        // get one page result
+        $index_pagination = $_GET['index_pagination_post'];
+        $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
+    }
+    else 
+    {
+        // get first page result
+        $index_pagination = 1;
+        $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
+    }
+
+    // save the lastest value for header
+    $_SESSION['index_pagination_post'] = $index_pagination;
 
     //return link 
     $return_link = array();
@@ -120,7 +141,7 @@
                                             <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
                                             <div class="d-flex flex-column align-items-start justify-content-around">
                                                 <p class="m-0 fw-bold" style="white-space: nowrap"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-                                                <p class="m-0 text-muted fw-bold" style="white-space: nowrap; font-size: 14px;"><?= $user['u_email'] ?></p>
+                                                <p class="m-0 text-muted fw-bold" style="white-space: nowrap;font-size: 14px;"><?= $user['u_email'] ?></p>
                                             </div>
                                         </div>
                                         <p class="mb-0 ms-4 fw-bold" style="font-size: 14px;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
@@ -130,10 +151,27 @@
                         <?php } ?>
                         <!-- send the subject id as hidden -->
                         <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
-                        <div class="gap-1 d-flex justify-content-end mt-2" style="padding: 4px 8px;">
-                            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
-                            <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
-                            <button class="btn btn-secondary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
+                        <div class="d-flex flex-column flex-sm-row gap-3 gap-sm-0 align-items-center justify-content-sm-between mt-3">
+                            <div class="" style="">
+                                <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+                                <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
+                                <button class="btn btn-secondary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
+                            </div>
+                            <!-- pagination -->
+                            <?php if ($total_page > 1) { ?>
+                                <!-- pagination div -->
+                                <div class="pagination-div">
+                                    <!-- link for pagination -->
+                                    <?php 
+                                        $pagination_link = array();
+                                        $pagination_link[] = array('key' => 'page', 'value' => 'edit_post.php');
+                                        $pagination_link[] = array('key' => 'subject_id', 'value' => $subject[0]['subject_id']);
+                                        $pagination_link[] = array('key' => 'index_pagination_post', 'value' => null);
+                                        $pagination_link_index = get_index($pagination_link, "index_pagination_post");
+                                    ?>
+                                    <?php include('../inc/pagination_web.php'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                     </form>
                 </div>
@@ -141,6 +179,8 @@
         </div>
     </div>
 </section>
+
+
 <!-- script to load checkbox when load the page -->
 <script>
 window.onload = function() {
