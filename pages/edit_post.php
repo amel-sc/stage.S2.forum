@@ -9,7 +9,7 @@
 
     // user list other condition
     $user_list_other_condition = [];
-    $user_list_other_condition[] = "ORDER BY u_last_name";
+    $user_list_other_condition[] = "ORDER BY u_last_name ASC";
     // user list condition
     $user_list_condition = [];
     $user_list_condition[] = array('key' => 'user_id', 'operation' => '!=', 'value' => $current_user['user_id']);
@@ -134,17 +134,17 @@
                                 <!-- checked permission if 1 not checked if 0 -->
                                 <?php $permission = get_post_permission($user['user_id'], $subject[0]['subject_id']) ?>
                                 <?php if ($permission != null && $permission['p_statut'] == 1) { ?>
-                                    <label class="form-check mt-3" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 0px 25px 40px; cursor: pointer;">
+                                    <label class="form-check mt-3 w-100" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 40px 25px 40px; cursor: pointer;">
                                         <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')" checked>
                                         <div class="form-check-label d-block">
-                                            <div class="d-flex align-items-end gap-2 ms-4 mb-2">
+                                            <div class="d-flex align-items-end gap-2 ms-2 mb-2 flex-wrap">
                                                 <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
-                                                <div class="d-flex flex-column align-items-start justify-content-around">
-                                                    <p class="m-0 fw-bold" style="white-space: nowrap"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-                                                    <p class="m-0 text-muted fw-bold" style="white-space: nowrap; font-size: 14px;"><?= $user['u_email'] ?></p>
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <p class="m-0 fw-bold text-truncate" style="font-size: 15px; max-width: 100%;"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+                                                    <p class="m-0 text-muted fw-bold text-truncate" style="font-size: 13px; max-width: 100%;"><?= $user['u_email'] ?></p>
                                                 </div>
                                             </div>
-                                            <p class="mb-0 ms-4 fw-bold" style="font-size: 14px;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
+                                            <p class="mb-0 ms-4 fw-bold" style="font-size: 13px; white-space: nowrap;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
                                         </div>
                                     </label>
                                     <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>

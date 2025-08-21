@@ -27,8 +27,12 @@
         $user_statut = "all";
         $user_list_condition = null;
     }
+    // user list other condition
+    $user_list_other_condition = [];
+    $user_list_other_condition[] = 'ORDER BY u_last_name ASC';
+
     // all user list sql
-    $user_list_sql = select_table_sql("user", $user_list_condition, null);
+    $user_list_sql = select_table_sql("user", $user_list_condition, $user_list_other_condition);
 
     // create page
     $sql = $user_list_sql;
