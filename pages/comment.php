@@ -80,7 +80,7 @@
                         </a>
                         <span class="dot mx-2">•</span>
                         <div>
-                            <span class="post-date"><?= $subject[0]['s_date'] ?></span>
+                            <span class="post-date"><?= duration($subject[0]['s_date']) ?></span>
                         </div>
                     </div>
                     <!-- post content -->
@@ -104,7 +104,7 @@
                         <p class="card-text"><?= $subject[0]['s_content'] ?></p>
                     </div>
                     <!-- comment number and button to comment -->
-                    <div class="post-comment mt-3 d-flex justify-content-between align-items-center">
+                    <div class="post-comment mt-3 mb-3 d-flex justify-content-between align-items-center">
                         <!-- link to comment  -->
                         <label class="d-flex align-items-center gap-2 rounded-pill comment-link" for="comment-textarea" style="cursor: pointer;">
                             <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
@@ -113,7 +113,7 @@
                     </div>
                     <!-- post parameter for selecting who can see/not the post -->
                     <?php if ($subject[0]['user_id'] == $current_user['user_id']) { ?>
-                        <div class="mt-3 mb-3">
+                        <div class="mb-3">
                             <?php $link_post_edit[$post_edit_index]['value'] = $subject[0]['subject_id']; ?>
                             <a href="<?= navigation_link($link_post_edit) ?>" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="position: relative;z-index: 1000;">
                                 Post permission
@@ -188,7 +188,7 @@
                                                 <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
                                             </a>
                                             <span class="dot my-0">•</span>
-                                            <span class="post-date"><?= $item['c_date'] ?></span>
+                                            <span class="post-date"><?= duration($item['c_date']) ?></span>
                                         </p>
                                     </div>
                                 </div>

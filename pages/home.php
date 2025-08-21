@@ -101,7 +101,7 @@
                                     </a>
                                     <span class="dot mx-2">•</span>
                                     <div>
-                                        <span class="post-date"><?= $item['s_date'] ?></span>
+                                        <span class="post-date"><?= duration($item['s_date']) ?></span>
                                     </div>
                                 </div>
                                 <!-- post content -->

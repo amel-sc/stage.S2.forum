@@ -34,19 +34,21 @@
                         <small class="badge rounded-pill text-bg-primary"><?= statut_name($user['u_statut']) ?></small>
                     </div>
                 </div>
-                <div>
-                    <div class="div-existence d-none d-md-block">
-                        <button class="rounded-pill btn btn-primary gap-1 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#change-profil">
-                            <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
-                            <span class="fw-bold" style="">Edit profile</span>
-                        </button>
+                <?php if ($current_user['user_id'] == $user['user_id']) { ?>
+                    <div>
+                        <div class="div-existence d-none d-md-block">
+                            <button class="rounded-pill btn btn-primary gap-1 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#change-profil">
+                                <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
+                                <span class="fw-bold" style="">Edit profile</span>
+                            </button>
+                        </div>
+                        <div class="div-ecistence d-md-none d-block">
+                            <button class="rounded-circle btn btn-primary fw-bold d-flex align-items-center" style="padding: 8px;" data-bs-toggle="modal" data-bs-target="#change-profil">
+                                <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
+                            </button>
+                        </div>
                     </div>
-                    <div class="div-ecistence d-md-none d-block">
-                        <button class="rounded-circle btn btn-primary fw-bold d-flex align-items-center" style="padding: 8px;" data-bs-toggle="modal" data-bs-target="#change-profil">
-                            <img src="../assets/images/write.png" alt="Edit" style="width: 18px; height: 18px;">
-                        </button>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
             <!-- privacy condition -->
             <?php if ($current_user['user_id'] == $user['user_id']) { ?>
@@ -151,7 +153,7 @@
                         <div class="col">
                             <div class="border border-dark-subtle rounded-3" style="padding: 5px 10px 5px 10px;">
                                 <p class="mb-1 opacity-75 fw-bold">Birthday</p>
-                                <input type="text" class="text-black bg-white" value="<?= $user['u_birth_date'] ?>" style="outline: none; border: none;" disabled>
+                                <input type="text" class="text-black bg-white" value="<?= date_letter($user['u_birth_date']) ?>" style="outline: none; border: none;" disabled>
                             </div>
                         </div>
                         <div class="col">

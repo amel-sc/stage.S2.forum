@@ -73,6 +73,11 @@
     $corbeille_link[] = array('key' => 'page', 'value' => 'traitement_corbeille.php');
     $corbeille_link[] = array('key' => 'user_id', 'value' => null);
     $corbeille_user_index = get_index($corbeille_link, "user_id");    
+    // navigation link for profil
+    $link_profil = array();
+    $link_profil[] = array('key' => 'page', 'value' => "profile.php");
+    $link_profil[] = array('key' => 'user_id', 'value' => null);
+    $user_id_index = get_index($link_profil, "user_id");
 ?>
 
 <section class="div-container">
@@ -206,15 +211,28 @@
                                     <td class="text-center">
                                         <img src="<?= $user['u_image'] ?>" alt="User profile" class="rounded-circle" style="width: 35px; height: 35px;">
                                     </td>
-                                    <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
-                                    <td><?= $user['u_email'] ?></td>
-                                    <td><?= $user['u_inscription_date'] ?></td>
-                                    <td><?= statut_name($user['u_statut']) ?></td>
+                                    <td>
+                                        <?php $link_profil[$user_id_index]['value'] = $user['user_id']; ?>
+                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
+                                            <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
+                                        </a>
+                                    </td>
+                                    <td class="table-text"><?= $user['u_email'] ?></td>
+                                    <td class="table-text"><?= date_letter($user['u_inscription_date']) ?></td>
+                                    <td>
+                                        <?php if ($user['u_statut'] == 1) { ?>
+                                            <span class="badge text-bg-primary rounded-pill"><?= statut_name($user['u_statut']) ?></span>
+                                        <?php } else if ($user['u_statut'] == 0) { ?>
+                                            <span class="badge text-bg-success rounded-pill"><?= statut_name($user['u_statut']) ?></span>
+                                        <?php } else { ?>
+                                            <span class="badge text-bg-danger rounded-pill"><?= statut_name($user['u_statut']) ?></span>
+                                        <?php } ?>
+                                    </td>
                                     <td class="">
                                         <?php if ($user['u_statut'] == -1) { ?>
                                             <div class="d-flex align-items-center justify-content-evenly">
                                                 <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
-                                                <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
+                                                <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-success fw-bold rounded-1" style="text-decoration: none; padding: 2px 12px 2px 12px;">
                                                     Restore
                                                 </a>
                                             </div>

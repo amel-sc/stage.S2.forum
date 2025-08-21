@@ -177,19 +177,20 @@
 
 
     // post duration
-    function duration($datetime) {
+    function duration($datetime) 
+    {
         $timestamp = strtotime($datetime);
         $now = strtotime(get_current_date()['date_now']);
         $diff = $now - $timestamp;
 
         if ($diff < 60) {
-            return $diff . ' sec.' . " ago";
+            return "Just now";
         } elseif ($diff < 3600) {
             $minutes = floor($diff / 60);
-            return $minutes . ' min.' . " ago";
+            return $minutes . ' minute' . ($minutes > 1 ? 's' : '') . " ago";
         } elseif ($diff < 86400) {
             $hours = floor($diff / 3600);
-            return $hours . ' hr.' . " ago";
+            return $hours . ' hour' . ($hours > 1 ? 's' : '') . " ago";
         } elseif ($diff < 604800) {
             $days = floor($diff / 86400);
             return $days . ' day' . ($days > 1 ? 's' : '') . " ago";
@@ -203,6 +204,22 @@
             $years = floor($diff / 29030400);
             return $years . ' year' . ($years > 1 ? 's' : '') . " ago";
         }
+    }
+
+    // date to letter
+    function date_letter($date)
+    {
+        // months list to letter
+        $months = [
+            1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr',
+            5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug',
+            9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'
+        ];
+
+        $date = explode('-', $date);
+        $result = $months[intval($date[1])] . ' ' . intval($date[2]) . ', ' . $date[0];
+        
+        return $result;
     }
 
     // mdp to dot

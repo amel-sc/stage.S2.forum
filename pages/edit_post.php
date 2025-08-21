@@ -75,7 +75,7 @@
                         </a>
                         <span class="dot mx-2">•</span>
                         <div>
-                            <span class="post-date"><?= $subject[0]['s_date'] ?></span>
+                            <span class="post-date"><?= duration($subject[0]['s_date']) ?></span>
                         </div>
                     </div>
                     <!-- post content -->
@@ -109,18 +109,11 @@
             </div>
             <!-- user list to check -->
             <div>
-                <div class="user_list_header border-bottom">
+                <div class="user_list_header">
                     <h5 class="fw-bold">Permission management</h5>
                 </div>
-                
-                <div class="mt-3 mb-3">
-                    <h5 class="fw-bold m-0">
-                        Users
-                        <span>(<?= count_request_result($user_list_sql) ?>)</span>
-                    </h5>
-                </div>
 
-                <div class="user_list_check" style="margin: 8px 0px 0px;">
+                <div class="user_list_check overflow-auto overflow-x-hidden" style="margin: 0px 0px 0px; max-height: 520px; overflow-y: auto; position: relative;">
                     <?php if(empty($user_list)) { ?>
                         <div class="text-center py-5">
                             <div class="d-flex flex-column align-items-center justify-content-center text-muted">
@@ -130,6 +123,12 @@
                             </div>
                         </div>
                     <?php } else { ?>
+                        <div class="mt-3 mb-3">
+                            <h5 class="fw-bold m-0">
+                                Users
+                                <span>(<?= count_request_result($user_list_sql) ?>)</span>
+                            </h5>
+                        </div>
                         <form action="traitement_edit_post.php" method="post">
                             <?php foreach($user_list as $user) { ?>
                                 <!-- checked permission if 1 not checked if 0 -->
@@ -167,7 +166,8 @@
                             <?php } ?>
                             <!-- send the subject id as hidden -->
                             <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
-                            <div class="d-flex flex-column flex-sm-row gap-3 gap-sm-0 align-items-center justify-content-sm-between mt-3">
+                            <div class="footer d-flex flex-column flex-sm-row gap-3 gap-sm-0 align-items-center justify-content-sm-between mt-3"
+                            style="position: sticky; bottom: 0; background: white; z-index: 10; padding-top: 10px;">
                                 <div class="" style="">
                                     <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
                                     <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
