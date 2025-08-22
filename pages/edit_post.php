@@ -191,8 +191,8 @@
                             style="position: sticky; bottom: 0; background: white; z-index: 10; padding-top: 10px;">
                                 <div class="" style="">
                                     <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
-                                    <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
-                                    <button class="btn btn-secondary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
+                                    <a href="<?= navigation_link($return_link) ?>" class="btn btn-secondary btn-sm rounded-pill fw-bold" type="button">Cancel</a>
+                                    <button class="btn btn-primary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
                                 </div>
                                 <!-- pagination -->
                                 <?php if ($total_page > 1) { ?>

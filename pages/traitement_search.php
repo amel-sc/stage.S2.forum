@@ -13,7 +13,6 @@
         $search = $_GET['search'];
     
         $link[] = array('key' => 'search', 'value' => $search);
-        $link[] = array('key' => 'index_pagination_post', 'value' => $index_pagination);
         $link[] = array('key' => 'subject_id', 'value' => $subject_id);
         $link[$page_index]['value'] = 'edit_post.php';
     
@@ -28,7 +27,6 @@
         $search = $_GET['search'];
 
         $link[] = array('key' => 'search', 'value' => $search);
-        $link[] = array('key' => 'index_pagination', 'value' => $index_pagination);
         $link[] = array('key' => 'user_statut', 'value' => $user_statut);
         $link[$page_index]['value'] = 'user_management.php';
     

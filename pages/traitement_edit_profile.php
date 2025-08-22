@@ -9,8 +9,6 @@
     $user_statut = $_SESSION['user_statut'];
     // lastest page (in pagination)
     $index_pagination = $_SESSION['index_pagination'];
-    // current user
-    $current_user = $_SESSION['current_user'];
     // latest search
     $search = $_SESSION['search_user_management'];
 
@@ -55,8 +53,9 @@
 
     else 
     {
+        $user_id_posted = $_POST['user_id_admin'];
         // old information
-        $old_info = get_user_by_id($current_user['user_id']);
+        $old_info = get_user_by_id($user_id_posted);
         // condition if general information or security is to update 
         if (isset($_POST['common_user']))
         {
@@ -90,12 +89,13 @@
 
             // update condition
             $condition = array();
-            $condition[] = array('key' => 'user_id', 'value' => $current_user['user_id']);
+            $condition[] = array('key' => 'user_id', 'value' => $user_id_posted);
             // update to table user
             $update_user = update_table('user', $column, $condition);
     
             // redirect to user_management page
             $link[$page_index]['value'] = 'profile.php';
+            $link[] = array('key' => 'user_id', 'value' => $user_id_posted);
             header('Location: ' . navigation_link($link));
         }
     }

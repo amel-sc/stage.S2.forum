@@ -34,7 +34,7 @@
                         <small class="badge rounded-pill text-bg-primary"><?= statut_name($user['u_statut']) ?></small>
                     </div>
                 </div>
-                <?php if ($current_user['user_id'] == $user['user_id']) { ?>
+                <?php if ($current_user['user_id'] == $user['user_id'] || $current_user['u_statut'] == 1) { ?>
                     <div>
                         <div class="div-existence d-none d-md-block">
                             <button class="rounded-pill btn btn-primary gap-1 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#change-profil">
@@ -91,6 +91,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="common_user" value="gen_info">
+                        <input type="hidden" name="user_id_admin" value="<?= $user['user_id'] ?>">
                         <!-- send or reset value -->
                         <div class="gap-1 d-flex justify-content-end mt-2" style="padding: 4px 8px;">
                             <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
@@ -123,11 +124,12 @@
                             </div>
                         </div>
                         <input type="hidden" name="common_user" value="security">
+                        <input type="hidden" name="user_id_admin" value="<?= $user['user_id'] ?>">
                         <!-- send or reset value -->
                         <div class="gap-1 d-flex justify-content-end mt-2" style="padding: 4px 8px;">
                             <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
                             <button class="btn btn-light btn-sm rounded-pill fw-bold" type="reset">Reset</button>
-                             <button class="btn btn-primary btn-sm rounded-pill fw-bold" type="submit">Save</button>
+                            <button class="btn btn-primary btn-sm rounded-pill fw-bold" type="submit">Save</button>
                         </div>
                     </form>
                 </div>

@@ -316,6 +316,7 @@
                         $pagination_link[] = array('key' => 'page', 'value' => 'user_management.php');
                         $pagination_link[] = array('key' => 'user_statut', 'value' => $user_statut);
                         $pagination_link[] = array('key' => 'index_pagination', 'value' => null);
+                        $pagination_link[] = array('key' => 'search', 'value' => $search);
                         $pagination_link_index = get_index($pagination_link, "index_pagination");
                     ?>
                     <?php include('../inc/pagination_web.php'); ?>
