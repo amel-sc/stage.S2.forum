@@ -51,7 +51,7 @@
                 <?php } ?>
             </div>
             <!-- privacy condition -->
-            <?php if ($current_user['user_id'] == $user['user_id']) { ?>
+            <?php if ($current_user['user_id'] == $user['user_id'] || $current_user['u_statut'] == 1) { ?>
                 <!-- user general information -->
                 <div class="general-info bg-white rounded-4 p-3">
                     <div class="mb-4">
