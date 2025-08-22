@@ -14,6 +14,18 @@
     $user_list_condition = [];
     $user_list_condition[] = array('key' => 'user_id', 'operation' => '!=', 'value' => $current_user['user_id']);
     $user_list_condition[] = array('key' => 'u_statut', 'operation' => '!=', 'value' => -1);
+
+    if (isset($_GET['search']))
+    {
+        $search = $_GET['search'];
+        $user_list_condition[] = array('key' => 'u_first_name', 'operation' => 'LIKE', 'value' => '%' . $search . '%');
+    }
+    else 
+    {
+        $search = '';
+        $user_list_condition[] = array('key' => 'u_first_name', 'operation' => 'LIKE', 'value' => '%' . $search . '%');
+    }
+
     // result
     $user_list_sql = select_table_operation_sql('user', $user_list_condition, $user_list_other_condition);
 
@@ -37,6 +49,7 @@
 
     // save the lastest value for header
     $_SESSION['index_pagination_post'] = $index_pagination;
+    $_SESSION['search_edit_post'] = $search;
 
     //return link 
     $return_link = array();
@@ -110,10 +123,18 @@
             <!-- user list to check -->
             <div>
                 <div class="user_list_header">
-                    <h5 class="fw-bold">Permission management</h5>
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">
+                        <h5 class="fw-bold">Permission management</h5>
+                        <form class="d-flex" action="traitement_search.php" method="get">
+                            <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                            <input type="hidden" name="edit_post" value="1">
+                            <input class="form-control me-2" type="search" name="search" value="<?= $search ?>" placeholder="Search (by first name)" aria-label="Search"/>
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    </div>
                 </div>
 
-                <div class="user_list_check overflow-auto overflow-x-hidden" style="margin: 0px 0px 0px; max-height: 520px; overflow-y: auto; position: relative;">
+                <div class="user_list_check overflow-auto overflow-x-hidden" style="margin: 0px 0px 0px; max-height: 490px; overflow-y: auto; position: relative;">
                     <?php if(empty($user_list)) { ?>
                         <div class="text-center py-5">
                             <div class="d-flex flex-column align-items-center justify-content-center text-muted">
@@ -182,6 +203,7 @@
                                             $pagination_link = array();
                                             $pagination_link[] = array('key' => 'page', 'value' => 'edit_post.php');
                                             $pagination_link[] = array('key' => 'subject_id', 'value' => $subject[0]['subject_id']);
+                                            $pagination_link[] = array('key' => 'search', 'value' => $search);
                                             $pagination_link[] = array('key' => 'index_pagination_post', 'value' => null);
                                             $pagination_link_index = get_index($pagination_link, "index_pagination_post");
                                         ?>

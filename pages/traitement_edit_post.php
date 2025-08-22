@@ -8,6 +8,7 @@
 
     $subject_id = $_POST['subject_id'];
     $index_pagination = $_SESSION['index_pagination_post'];
+    $search = $_SESSION['search_edit_post'];
 
     // condition if no user is restricted or else
     if (isset($_POST['user_id']))
@@ -45,6 +46,7 @@
         // header to edit_post
         $link[] = array('key' => 'subject_id', 'value' => $subject_id);
         $link[] = array('key' => 'index_pagination_post', 'value' => $index_pagination);
+        $link[] = array('key' => 'search', 'value' => $search);
         $link[$page_index]['value'] = 'edit_post.php';
         header('Location: ' . navigation_link($link));
     }
@@ -54,6 +56,7 @@
         // header to edit_post
         $link[] = array('key' => 'subject_id', 'value' => $subject_id);
         $link[] = array('key' => 'index_pagination_post', 'value' => $index_pagination);
+        $link[] = array('key' => 'search', 'value' => $search);
         $link[$page_index]['value'] = 'edit_post.php';
         header('Location: ' . navigation_link($link));
     }
