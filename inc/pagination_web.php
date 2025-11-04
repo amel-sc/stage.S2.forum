@@ -1,7 +1,7 @@
 <!-- pagination for big screen (>= 992px) -->
 <div class="d-none d-lg-block">
     <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
+        <ul class="pagination pagination-sm justify-content-end m-0">
             <!-- previous page -->
             <?php if ($index_pagination > 1) { ?>
                 <li class="page-item">
@@ -61,7 +61,7 @@
 <!-- pagination for small screen (< 992px)  -->
  <div class="d-block d-lg-none">
     <nav aria-label="Page navigation example">
-        <ul class="pagination pagination-sm justify-content-center">
+        <ul class="pagination pagination-sm justify-content-center m-0">
             <!-- previous page -->
             <?php if ($index_pagination > 1) { ?>
                 <li class="page-item">

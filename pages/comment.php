@@ -1,6 +1,7 @@
 <?php 
     if(isset($_GET['subject_id']))
     {
+        $current_user = $_SESSION['current_user'];
         // post clicked info
         // post clicked condition
         $subject_condition = array();
@@ -46,6 +47,11 @@
         $link_order[] = array('key' => 'subject_id', 'value' => $_GET['subject_id']);
         $link_order[] = array('key' => 'order', 'value' => null);
         $order_index = get_index($link_order, "order");
+        // post parameter link
+        $link_post_edit = array();
+        $link_post_edit[] = array('key' => 'page', 'value' => 'edit_post.php');
+        $link_post_edit[] = array('key' => 'subject_id', 'value' => null);
+        $post_edit_index = get_index($link_post_edit, "subject_id");
     }
 ?>
 
@@ -64,17 +70,17 @@
             <div class="card card-post-selected mb-1 border-0 rounded-4">
                 <div class="card-body" style="padding: 0;">
                     <!-- sender info (user img, name , sended_date) -->
-                    <div class="post-info d-flex align-items-center gap-2 mb-2">
-                        <img src="<?= $subject[0]['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
-                        <div class="">
-                            <p class="m-0">
-                                <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
-                                <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
-                                    <?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?>
-                                </a>
-                                <span class="dot my-0">•</span>
-                                <span class="post-date"><?= $subject[0]['s_date'] ?></span>
-                            </p>
+                    <div class="post-info d-flex align-items-center flex-wrap mb-3">
+                        <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
+                        <a class="profile-link d-flex align-items-center gap-2" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 1000;">
+                            <img src="<?= $subject[0]['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
+                            <div>
+                                <?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?>
+                            </div>
+                        </a>
+                        <span class="dot mx-2">•</span>
+                        <div>
+                            <span class="post-date"><?= duration($subject[0]['s_date']) ?></span>
                         </div>
                     </div>
                     <!-- post content -->
@@ -105,6 +111,15 @@
                             <span class="text-black fw-bold"><?= $comment_number ?></span>
                         </label>
                     </div>
+                    <!-- post parameter for selecting who can see/not the post -->
+                    <?php if ($subject[0]['user_id'] == $current_user['user_id']) { ?>
+                        <div class="mb-3">
+                            <?php $link_post_edit[$post_edit_index]['value'] = $subject[0]['subject_id']; ?>
+                            <a href="<?= navigation_link($link_post_edit) ?>" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="position: relative;z-index: 1000;">
+                                Post permission
+                            </a>
+                        </div>
+                    <?php } ?>
                     <!-- input comment -->
                     <div class="mb-3">
                         <div class="show-comment rounded-pill" id="show-comment">
@@ -173,7 +188,7 @@
                                                 <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
                                             </a>
                                             <span class="dot my-0">•</span>
-                                            <span class="post-date"><?= $item['c_date'] ?></span>
+                                            <span class="post-date"><?= duration($item['c_date']) ?></span>
                                         </p>
                                     </div>
                                 </div>

@@ -3,11 +3,6 @@
     $return_link = array();
     $return_link[] = array('key' => 'page', 'value' => null);
     $return_page_index = get_index($return_link, 'page');
-    // user / admin list navigation link
-    $user_controls_link = array();
-    $user_controls_link[] = array('key' => 'page', 'value' => "user_management.php");
-    $user_controls_link[] = array('key' => 'user_statut', 'value' => null);
-    $user_statut_index = get_index($user_controls_link, "user_statut");
     // get user type 
     $user_list_condition = [];
     if (isset($_GET['user_statut']))
@@ -15,20 +10,37 @@
         $user_statut = $_GET['user_statut'];
         if ($user_statut == "all")
         {
-            $suer_list_condition = null;
+            $user_list_condition[] = array('key' => 'u_statut', 'operation' => '<=' , 'value' => 1);
         }
         else 
         {
-            $user_list_condition[] = array('key' => 'u_statut', 'value' => $user_statut);
+            $user_list_condition[] = array('key' => 'u_statut', 'operation' => '=' , 'value' => $user_statut);
         }
     }
     else 
     {
         $user_statut = "all";
-        $user_list_condition = null;
+        $user_list_condition[] = array('key' => 'u_statut', 'operation' => '<=' , 'value' => 1);
     }
+
+    // search value
+    if (isset($_GET['search']))
+    {
+        $search = $_GET['search'];
+        $user_list_condition[] = array('key' => 'u_first_name', 'operation' => 'LIKE' , 'value' => '%' . $search . '%');
+    }
+    else 
+    {
+        $search = '';
+        $user_list_condition[] = array('key' => 'u_first_name', 'operation' => 'LIKE' , 'value' => '%' . $search . '%');
+    }
+
+    // user list other condition
+    $user_list_other_condition = [];
+    $user_list_other_condition[] = 'ORDER BY u_last_name ASC';
+
     // all user list sql
-    $user_list_sql = select_table_sql("user", $user_list_condition, null);
+    $user_list_sql = select_table_operation_sql("user", $user_list_condition, $user_list_other_condition);
 
     // create page
     $sql = $user_list_sql;
@@ -51,6 +63,7 @@
     // save the lastest value for header
     $_SESSION['user_statut'] = $user_statut;
     $_SESSION['index_pagination'] = $index_pagination;
+    $_SESSION['search_user_management'] = $search;
 
     // login user navigation link
     $login_link = array();
@@ -73,6 +86,17 @@
     $corbeille_link[] = array('key' => 'page', 'value' => 'traitement_corbeille.php');
     $corbeille_link[] = array('key' => 'user_id', 'value' => null);
     $corbeille_user_index = get_index($corbeille_link, "user_id");    
+    // navigation link for profil
+    $link_profil = array();
+    $link_profil[] = array('key' => 'page', 'value' => "profile.php");
+    $link_profil[] = array('key' => 'user_id', 'value' => null);
+    $user_id_index = get_index($link_profil, "user_id");
+    // user / admin list navigation link
+    $user_controls_link = array();
+    $user_controls_link[] = array('key' => 'page', 'value' => "user_management.php");
+    $user_controls_link[] = array('key' => 'search', 'value' => $search);
+    $user_controls_link[] = array('key' => 'user_statut', 'value' => null);
+    $user_statut_index = get_index($user_controls_link, "user_statut");
 ?>
 
 <section class="div-container">
@@ -140,43 +164,50 @@
             <div class="management-title d-flex align-items-center justify-content-between mb-3">
                 <h3 class="m-0 fw-bold">
                     Users
-                    <?php if ($total_page > 1) { ?>
-                        <span> <?= $index_pagination ?> / <?= $total_page ?></span> 
-                    <?php } ?>
+                    <span> (<?= count_request_result($user_list_sql) ?>) </span> 
                 </h3>
                 <div class="add-new">
                     <?php include("../inc/create-user_modal.php"); ?>
                 </div>
             </div>
             <!-- users type choice -->
-            <div class="d-flex align-items-center gap-1 mb-3">
-                <p class="m-0">Statut: </p>
-                <div class="d-block dropdown">
-                    <button class="header-link rounded-pill px-3 py-2 custom-btn d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
-                        <span><?= statut_name($user_statut) ?></span>
-                        <img src="../assets/images/down.png" alt="Dropdown toggle" style="width: 20px; height: 20px;">
-                    </button>
-                    <ul class="dropdown-menu" style="">
-                        <li>
-                            <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Statut</span>
-                        </li>
-                        <li>
-                            <?php $user_controls_link[$user_statut_index]['value'] = "all"; ?>
-                            <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">All</a>
-                        </li>
-                        <li>
-                            <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
-                            <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Common user</a>
-                        </li>
-                        <li>
-                            <?php $user_controls_link[$user_statut_index]['value'] = -1; ?>
-                            <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Deleted user</a>
-                        </li>
-                        <li>
-                            <?php $user_controls_link[$user_statut_index]['value'] = 1; ?>
-                            <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Admin</a>
-                        </li>
-                    </ul>
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">         
+                <div class="d-flex align-items-center gap-1">
+                    <p class="m-0">Statut: </p>
+                    <div class="d-block dropdown">
+                        <button class="header-link rounded-pill px-3 py-2 custom-btn d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
+                            <span><?= statut_name($user_statut) ?></span>
+                            <img src="../assets/images/down.png" alt="Dropdown toggle" style="width: 20px; height: 20px;">
+                        </button>
+                        <ul class="dropdown-menu" style="">
+                            <li>
+                                <span class="fw-bold" style="color:black; padding: 12px 0px 12px 20px; display: block;">Statut</span>
+                            </li>
+                            <li>
+                                <?php $user_controls_link[$user_statut_index]['value'] = "all"; ?>
+                                <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">All</a>
+                            </li>
+                            <li>
+                                <?php $user_controls_link[$user_statut_index]['value'] = 0; ?>
+                                <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Common user</a>
+                            </li>
+                            <li>
+                                <?php $user_controls_link[$user_statut_index]['value'] = -1; ?>
+                                <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Deleted user</a>
+                            </li>
+                            <li>
+                                <?php $user_controls_link[$user_statut_index]['value'] = 1; ?>
+                                <a href="<?= navigation_link($user_controls_link) ?>" class="header-link" style="color:black; padding: 12px 0px 12px 20px;">Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- search -->
+                <div>
+                    <form class="d-flex" action="traitement_search.php" method="get">
+                        <input class="form-control me-2" type="search" name="search" value='<?= $search ?>' placeholder="Search (by first name)" aria-label="Search"/>
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
             <!-- user list  -->
@@ -208,15 +239,28 @@
                                     <td class="text-center">
                                         <img src="<?= $user['u_image'] ?>" alt="User profile" class="rounded-circle" style="width: 35px; height: 35px;">
                                     </td>
-                                    <td><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></td>
-                                    <td><?= $user['u_email'] ?></td>
-                                    <td><?= $user['u_inscription_date'] ?></td>
-                                    <td><?= statut_name($user['u_statut']) ?></td>
+                                    <td>
+                                        <?php $link_profil[$user_id_index]['value'] = $user['user_id']; ?>
+                                        <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
+                                            <?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?>
+                                        </a>
+                                    </td>
+                                    <td class="table-text"><?= $user['u_email'] ?></td>
+                                    <td class="table-text"><?= date_letter($user['u_inscription_date']) ?></td>
+                                    <td>
+                                        <?php if ($user['u_statut'] == 1) { ?>
+                                            <span class="badge text-bg-primary rounded-pill"><?= statut_name($user['u_statut']) ?></span>
+                                        <?php } else if ($user['u_statut'] == 0) { ?>
+                                            <span class="badge text-bg-success rounded-pill"><?= statut_name($user['u_statut']) ?></span>
+                                        <?php } else { ?>
+                                            <span class="badge text-bg-danger rounded-pill"><?= statut_name($user['u_statut']) ?></span>
+                                        <?php } ?>
+                                    </td>
                                     <td class="">
                                         <?php if ($user['u_statut'] == -1) { ?>
                                             <div class="d-flex align-items-center justify-content-evenly">
                                                 <?php $reset_user_link[$reset_user_index]['value'] = $user['user_id']; ?>
-                                                <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-primary fw-bold rounded-1 text-white" style="text-decoration: none; padding: 2px 12px 2px 12px;">
+                                                <a href="<?= custom_navigation_link($reset_user_link) ?>" class="btn btn-success fw-bold rounded-1" style="text-decoration: none; padding: 2px 12px 2px 12px;">
                                                     Restore
                                                 </a>
                                             </div>
@@ -272,6 +316,7 @@
                         $pagination_link[] = array('key' => 'page', 'value' => 'user_management.php');
                         $pagination_link[] = array('key' => 'user_statut', 'value' => $user_statut);
                         $pagination_link[] = array('key' => 'index_pagination', 'value' => null);
+                        $pagination_link[] = array('key' => 'search', 'value' => $search);
                         $pagination_link_index = get_index($pagination_link, "index_pagination");
                     ?>
                     <?php include('../inc/pagination_web.php'); ?>

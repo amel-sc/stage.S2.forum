@@ -9,13 +9,47 @@
 
     // user list other condition
     $user_list_other_condition = [];
-    $user_list_other_condition[] = "ORDER BY u_last_name";
+    $user_list_other_condition[] = "ORDER BY u_last_name ASC";
     // user list condition
     $user_list_condition = [];
     $user_list_condition[] = array('key' => 'user_id', 'operation' => '!=', 'value' => $current_user['user_id']);
     $user_list_condition[] = array('key' => 'u_statut', 'operation' => '!=', 'value' => -1);
+
+    if (isset($_GET['search']))
+    {
+        $search = $_GET['search'];
+        $user_list_condition[] = array('key' => 'u_first_name', 'operation' => 'LIKE', 'value' => '%' . $search . '%');
+    }
+    else 
+    {
+        $search = '';
+        $user_list_condition[] = array('key' => 'u_first_name', 'operation' => 'LIKE', 'value' => '%' . $search . '%');
+    }
+
     // result
-    $user_list = select_table_operation('user', $user_list_condition, $user_list_other_condition);
+    $user_list_sql = select_table_operation_sql('user', $user_list_condition, $user_list_other_condition);
+
+    // create page
+    $sql = $user_list_sql;
+    $pagination = create_pagination($sql);
+    $total_page = count($pagination);
+
+    if (isset($_GET['index_pagination_post']))
+    {
+        // get one page result
+        $index_pagination = $_GET['index_pagination_post'];
+        $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
+    }
+    else 
+    {
+        // get first page result
+        $index_pagination = 1;
+        $user_list = one_page_result($user_list_sql, $pagination, $index_pagination);
+    }
+
+    // save the lastest value for header
+    $_SESSION['index_pagination_post'] = $index_pagination;
+    $_SESSION['search_edit_post'] = $search;
 
     //return link 
     $return_link = array();
@@ -44,17 +78,17 @@
             <div class="card card-post-selected mb-3 border-0 rounded-4">
                 <div class="card-body" style="padding: 0;">
                     <!-- sender info (user img, name , sended_date) -->
-                    <div class="post-info d-flex align-items-center gap-2 mb-2">
-                        <img src="<?= $subject[0]['u_image'] ?>" alt="" style="width: 40px; height: 40px">
-                        <div class="">
-                            <p class="m-0">
-                                <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
-                                <a class="profile-link" href="<?= navigation_link($link_profil) ?>">
-                                    <?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?>
-                                </a>
-                                <span class="dot my-0">•</span>
-                                <span class="post-date"><?= $subject[0]['s_date'] ?></span>
-                            </p>
+                    <div class="post-info d-flex align-items-center flex-wrap mb-3">
+                        <?php $link_profil[$user_id_index]['value'] = $subject[0]['user_id'] ?>
+                        <a class="profile-link d-flex align-items-center gap-2" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 1000;">
+                            <img src="<?= $subject[0]['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
+                            <div>
+                                <?= $subject[0]['u_last_name'] ?> <?= $subject[0]['u_first_name'] ?>
+                            </div>
+                        </a>
+                        <span class="dot mx-2">•</span>
+                        <div>
+                            <span class="post-date"><?= duration($subject[0]['s_date']) ?></span>
                         </div>
                     </div>
                     <!-- post content -->
@@ -88,59 +122,104 @@
             </div>
             <!-- user list to check -->
             <div>
-                <div class="user_list_header border-bottom">
-                    <h5 class="fw-bold">Permission management</h5>
+                <div class="user_list_header">
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">
+                        <h5 class="fw-bold">Permission management</h5>
+                        <form class="d-flex" action="traitement_search.php" method="get">
+                            <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                            <input type="hidden" name="edit_post" value="1">
+                            <input class="form-control me-2" type="search" name="search" value="<?= $search ?>" placeholder="Search (by first name)" aria-label="Search"/>
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    </div>
                 </div>
-                
-                <div class="user_list_check" style="margin: 8px 0px 0px;">
-                    <form action="traitement_edit_post.php" method="post">
-                        <?php foreach($user_list as $user) { ?>
-                            <!-- checked permission if 1 not checked if 0 -->
-                            <?php $permission = get_post_permission($user['user_id'], $subject[0]['subject_id']) ?>
-                            <?php if ($permission != null && $permission['p_statut'] == 1) { ?>
-                                <label class="form-check mt-3" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 0px 25px 40px; cursor: pointer;">
-                                    <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')" checked>
-                                    <div class="form-check-label d-block">
-                                        <div class="d-flex align-items-end gap-2 ms-4 mb-2">
-                                            <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
-                                            <div class="d-flex flex-column align-items-start justify-content-around">
-                                                <p class="m-0 fw-bold" style="white-space: nowrap"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-                                                <p class="m-0 text-muted fw-bold" style="white-space: nowrap; font-size: 14px;"><?= $user['u_email'] ?></p>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0 ms-4 fw-bold" style="font-size: 14px;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
-                                    </div>
-                                </label>
-                                <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
-                            <?php } else { ?>
-                                <label class="form-check mt-3" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 0px 25px 40px; cursor: pointer;">
-                                    <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')">
-                                    <div class="form-check-label d-block">
-                                        <div class="d-flex align-items-end gap-2 ms-4 mb-2">
-                                            <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
-                                            <div class="d-flex flex-column align-items-start justify-content-around">
-                                                <p class="m-0 fw-bold" style="white-space: nowrap"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
-                                                <p class="m-0 text-muted fw-bold" style="white-space: nowrap; font-size: 14px;"><?= $user['u_email'] ?></p>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0 ms-4 fw-bold" style="font-size: 14px;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
-                                    </div>
-                                </label>
-                            <?php } ?>
-                        <?php } ?>
-                        <!-- send the subject id as hidden -->
-                        <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
-                        <div class="gap-1 d-flex justify-content-end mt-2" style="padding: 4px 8px;">
-                            <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
-                            <a href="<?= navigation_link($return_link) ?>" class="btn btn-light btn-sm rounded-pill fw-bold" type="button">Cancel</a>
-                            <button class="btn btn-secondary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
+
+                <div class="user_list_check overflow-auto overflow-x-hidden" style="margin: 0px 0px 0px; max-height: 490px; overflow-y: auto; position: relative;">
+                    <?php if(empty($user_list)) { ?>
+                        <div class="text-center py-5">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-muted">
+                                <img src="../assets/images/empty.png" alt="No data" style="width: 80px; height: 80px; opacity: 0.5;">
+                                <h4 class="mt-3 fw-bold">No user found</h4>
+                                <p class="mb-0" style="font-size: large;">The user list is currently empty.</p>
+                            </div>
                         </div>
-                    </form>
+                    <?php } else { ?>
+                        <div class="mt-3 mb-3">
+                            <h5 class="fw-bold m-0">
+                                Users
+                                <span>(<?= count_request_result($user_list_sql) ?>)</span>
+                            </h5>
+                        </div>
+                        <form action="traitement_edit_post.php" method="post">
+                            <?php foreach($user_list as $user) { ?>
+                                <!-- checked permission if 1 not checked if 0 -->
+                                <?php $permission = get_post_permission($user['user_id'], $subject[0]['subject_id']) ?>
+                                <?php if ($permission != null && $permission['p_statut'] == 1) { ?>
+                                    <label class="form-check mt-3 w-100" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 40px 25px 40px; cursor: pointer;">
+                                        <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')" checked>
+                                        <div class="form-check-label d-block">
+                                            <div class="d-flex align-items-end gap-2 ms-2 mb-2 flex-wrap">
+                                                <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <p class="m-0 fw-bold text-truncate" style="font-size: 15px; max-width: 100%;"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+                                                    <p class="m-0 text-muted fw-bold text-truncate" style="font-size: 13px; max-width: 100%;"><?= $user['u_email'] ?></p>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0 ms-4 fw-bold" style="font-size: 13px; white-space: nowrap;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
+                                        </div>
+                                    </label>
+                                    <span class="small" id="check_value_<?= $user['user_id'] ?>"></span>
+                                <?php } else { ?>
+                                    <label class="form-check mt-3 w-100" for="check_<?= $user['user_id'] ?>" id="input_container_<?= $user['user_id'] ?>" style="padding: 10px 40px 25px 40px; cursor: pointer;">
+                                        <input class="form-check-input" style="width: 20px; height: 20px; cursor: pointer;" type="checkbox" value="<?= $user['user_id'] ?>-1" name="user_id[]" id="check_<?= $user['user_id'] ?>" onclick="checkbox_value('<?= $user['user_id'] ?>')">
+                                        <div class="form-check-label d-block">
+                                            <div class="d-flex align-items-end gap-2 ms-2 mb-2 flex-wrap">
+                                                <img src="<?= $user['u_image'] ?>" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px">
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <p class="m-0 fw-bold text-truncate" style="font-size: 15px; max-width: 100%;"><?= $user['u_last_name'] ?> <?= $user['u_first_name'] ?></p>
+                                                    <p class="m-0 text-muted fw-bold text-truncate" style="font-size: 13px; max-width: 100%;"><?= $user['u_email'] ?></p>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0 ms-4 fw-bold" style="font-size: 13px; white-space: nowrap;">Actual permission: <span class="fw-normal text-decoration-underline" id="check_value_<?= $user['user_id'] ?>"></span></p>
+                                        </div>
+                                    </label>
+                                <?php } ?>
+                            <?php } ?>
+                            <!-- send the subject id as hidden -->
+                            <input type="hidden" name="subject_id" value="<?= $subject[0]['subject_id'] ?>">
+                            <div class="footer d-flex flex-column flex-sm-row gap-3 gap-sm-0 align-items-center justify-content-sm-between mt-3"
+                            style="position: sticky; bottom: 0; background: white; z-index: 10; padding-top: 10px;">
+                                <div class="" style="">
+                                    <?php $return_link[$return_page_index]['value'] = 'home.php' ?>
+                                    <a href="<?= navigation_link($return_link) ?>" class="btn btn-secondary btn-sm rounded-pill fw-bold" type="button">Cancel</a>
+                                    <button class="btn btn-primary btn-sm rounded-pill fw-bold" type="submit">Validate</button>
+                                </div>
+                                <!-- pagination -->
+                                <?php if ($total_page > 1) { ?>
+                                    <!-- pagination div -->
+                                    <div class="pagination-div">
+                                        <!-- link for pagination -->
+                                        <?php 
+                                            $pagination_link = array();
+                                            $pagination_link[] = array('key' => 'page', 'value' => 'edit_post.php');
+                                            $pagination_link[] = array('key' => 'subject_id', 'value' => $subject[0]['subject_id']);
+                                            $pagination_link[] = array('key' => 'search', 'value' => $search);
+                                            $pagination_link[] = array('key' => 'index_pagination_post', 'value' => null);
+                                            $pagination_link_index = get_index($pagination_link, "index_pagination_post");
+                                        ?>
+                                        <?php include('../inc/pagination_web.php'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </form>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 <!-- script to load checkbox when load the page -->
 <script>
 window.onload = function() {

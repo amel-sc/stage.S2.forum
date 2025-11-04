@@ -301,3 +301,18 @@ th {
   cursor: pointer;
   color: #888;
 }
+
+.footer {
+    border-top: 2px solid #e2e8f0;
+}
+
+.user_list_header {
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table-text {
+    font-weight: bold !important;
+    color: #333d42 !important;
+    font-size: .95rem !important;
+    line-height: 1rem !important;
+}

@@ -59,7 +59,7 @@
                 </div>
             <?php } else { ?>
                 <!-- sort by -->
-                <div class="d-flex align-items-center gap-1 mb-3" style="position: relative; z-index: 2000;">
+                <div class="d-flex align-items-center gap-1 mb-3" style="position: relative; z-index: 200;">
                     <p class="m-0">Sort by : </p>
                     <div class="d-block dropdown">
                         <button class="dropdown-toggle header-link rounded-pill px-3 py-2 custom-btn" id="dropdown-show-button" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="border: none;">
@@ -91,17 +91,17 @@
                         <div onclick="as_link('<?= navigation_link($link_comment) ?>')" class="" style="cursor: pointer;">
                             <div class="card-body">
                                 <!-- sender info (user img, name , sended_date) -->
-                                <div class="post-info d-flex align-items-center gap-2 mb-3">
-                                    <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
-                                    <div class="">
-                                        <p class="m-0">
-                                            <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
-                                            <a class="profile-link" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 1000;">
-                                                <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
-                                            </a>
-                                            <span class="dot my-0">•</span>
-                                            <span class="post-date"><?= $item['s_date'] ?></span>
-                                        </p>
+                                <div class="post-info d-flex align-items-center flex-wrap mb-3">
+                                    <?php $link_profil[$user_id_index]['value'] = $item['user_id'] ?>
+                                    <a class="profile-link d-flex align-items-center gap-2" href="<?= navigation_link($link_profil) ?>" style="position: relative; z-index: 100;">
+                                        <img src="<?= $item['u_image'] ?>" alt="" class="rounded-circle" style="width: 40px; height: 40px">
+                                        <div>
+                                            <?= $item['u_last_name'] ?> <?= $item['u_first_name'] ?>
+                                        </div>
+                                    </a>
+                                    <span class="dot mx-2">•</span>
+                                    <div>
+                                        <span class="post-date"><?= duration($item['s_date']) ?></span>
                                     </div>
                                 </div>
                                 <!-- post content -->
@@ -111,11 +111,11 @@
                                     <?php if ($item['s_media'] != "empty") { ?>
                                         <?php if(strpos($item['s_media'], ".mp4") == false) { ?>
                                             <div class="media-wrapper" style="margin: auto;">
-                                                <img class="" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 1000;">
+                                                <img class="" src="<?= $item['s_media'] ?>" alt="..." style="z-index: 100;">
                                             </div>
                                         <?php } else { ?>
                                             <div class="media-wrapper" style="margin: auto;">
-                                                <video class="" controls style="z-index: 1000;">
+                                                <video class="" controls style="z-index: 100;">
                                                     <source src="<?= htmlspecialchars($item['s_media']) ?>" type="video/mp4">
                                                     Votre navigateur ne supporte pas la lecture vidéo.
                                                 </video>
@@ -128,7 +128,7 @@
                                 <div class="post-comment mt-3 d-flex align-items-start">
                                     <!-- commment number -->
                                     <?php $comments_number = get_comment_by_subject($item['subject_id']); ?>
-                                    <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 1000;">
+                                    <a href="<?= navigation_link($link_comment) ?>" class="d-flex align-items-center gap-2 rounded-pill comment-link" style="position: relative; z-index: 100;">
                                         <img src="../assets/images/comment.png" alt="" style="width: 20px; height: 20px">
                                         <span class="text-black fw-bold"><?= count($comments_number) ?></span>
                                     </a>
@@ -137,7 +137,7 @@
                                 <?php if ($item['user_id'] == $current_user['user_id']) { ?>
                                     <div class="mt-3">
                                         <?php $link_post_edit[$post_edit_index]['value'] = $item['subject_id']; ?>
-                                        <a href="<?= navigation_link($link_post_edit) ?>" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="position: relative;z-index: 1000;">
+                                        <a href="<?= navigation_link($link_post_edit) ?>" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="position: relative; z-index: 100;">
                                             Post permission
                                         </a>
                                     </div>
